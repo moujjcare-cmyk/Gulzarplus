@@ -1158,7 +1158,7 @@
           <label id="lblGeminiPromptStep1" class="block text-[11px] font-bold text-emerald-300">
             1. پودے کا نام لکھیں اور پرامپٹ کاپی کریں:
           </label>
-          <input id="geminiPromptPlantName" type="text" oninput="updateGeminiEncyclopediaPromptPreview()" placeholder="مثلاً David Austin Rose، Cassia Nodosa، کروندا، گلاب..." class="w-full theme-card border rounded-xl px-3 py-2 text-xs font-bold" />
+          <input id="geminiPromptPlantName" type="text" oninput="updateGeminiEncyclopediaPromptPreview()" placeholder="مثلاً Adenium، David Austin Rose، Cassia Nodosa، گلاب..." class="w-full theme-card border rounded-xl px-3 py-2 text-xs font-bold" />
           <button type="button" onclick="copyGeminiEncyclopediaPrompt()" class="w-full bg-amber-400 hover:bg-amber-300 active:scale-95 text-stone-950 py-2 px-3 rounded-xl text-xs font-black cursor-pointer shadow-xs flex items-center justify-center gap-1.5">
             <span>📋</span>
             <span id="btnCopyGeminiPromptTxt">پرامپٹ کاپی کریں (Copy Prompt for Gemini)</span>
@@ -1183,18 +1183,18 @@
             <span>📥</span>
             <span id="btnSaveGeminiGuideToEncycTxt">انسائیکلوپیڈیا اور پودے میں محفوظ کریں</span>
           </button>
-          <span id="geminiImportStatusText" class="block text-[10px] theme-muted text-center">✨ پیسٹ کر کے بٹن دباتے ہی یہ پودا انسائیکلوپیڈیا میں خودکار شامل ہو جائے گا۔</span>
+          <span id="geminiImportStatusText" class="block text-[10px] theme-muted text-center">✨ خام JSON کوڈ خودکار چھپ جائے گا اور تمام نکات الگ الگ صاف لائنوں میں محفوظ ہوں گے۔</span>
         </div>
       </div>
 
       <!-- ========================================================================= -->
-      <!-- CLEAN SINGLE-LEVEL 3-MODE DATABASE SAVE & RESTORE (DEVICE, PHONE, GITHUB) -->
+      <!-- ULTRA-SIMPLE 2-MODE DATABASE BACKUP (PHONE FOLDER + GOOGLE DRIVE UPDATE)  -->
       <!-- ========================================================================= -->
       <div class="theme-card-alt p-3.5 rounded-2xl border border-emerald-400/50 space-y-3 text-xs">
         <div class="flex items-center justify-between flex-wrap gap-1 border-b theme-border pb-2">
           <div>
-            <span id="settingsBackupLabel" class="text-xs sm:text-sm font-black text-emerald-300 block">🛡️ ڈیٹا بیس سیو اور ریسٹور (فون، ڈیوائس اور گٹ ہب)</span>
-            <span id="settingsBackupSub" class="text-[11px] theme-muted block">ایک ہی فائل (gulzar-database.json) میں مکمل محفوظ بیک اپ</span>
+            <span id="settingsBackupLabel" class="text-xs sm:text-sm font-black text-emerald-300 block">🛡️ سادہ ڈیٹا بیس بیک اپ (موبائل فولڈر + گوگل ڈرائیو)</span>
+            <span id="settingsBackupSub" class="text-[11px] theme-muted block">ہمیشہ ایک ہی فائل (gulzar-database.json) اپڈیٹ ہوتی ہے، نئی فائلیں جمع نہیں ہوتیں</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span id="localStorageLiveBadge" class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full font-black">Auto-Saved ✓</span>
@@ -1204,7 +1204,8 @@
 
         <span id="lblDbPart1Title" class="hidden">One-Click Master Database</span>
         <p id="lblDbPart1Desc" class="text-[11px] theme-muted leading-snug">
-          آپ کا ڈیٹا ایپ کے اندر خودکار محفوظ رہتا ہے، اور نیچے سے آپ اسے سیدھا موبائل فولڈر (<code>Documents/Gulzar/gulzar-database.json</code>) یا گٹ ہب کلاؤڈ پر سیو اور ریسٹور کر سکتے ہیں:
+          <strong>1) موبائل فولڈر:</strong> نیچے پیلا بٹن دبانے سے سیدھا فون کے <code>Documents/Gulzar/gulzar-database.json</code> میں وہی ایک فائل اپڈیٹ ہو جاتی ہے۔<br>
+          <strong>2) گوگل ڈرائیو:</strong> <code>Share DB (Drive)</code> دبا کر گوگل ڈرائیو یا اپنے فولڈر میں موجود پرانی <code>gulzar-database.json</code> پر کلک کریں تو وہی فائل اپڈیٹ ہو جائے گی۔
         </p>
 
         <!-- Restore Mode Selector: Replace vs Merge -->
@@ -1216,7 +1217,7 @@
           </select>
         </div>
 
-        <!-- Mode 1 & 2: Save to Phone & Restore from Phone -->
+        <!-- Mode 1: Phone Save & Restore (Phone Storage + Google Drive File Picker) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button type="button" onclick="oneClickMasterSaveDatabase()" class="bg-amber-400 hover:bg-amber-300 text-stone-950 py-2.5 px-3 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow-md active:scale-95">
             <span>💾</span>
@@ -1229,12 +1230,12 @@
           </label>
         </div>
 
-        <!-- Share .json File & Compress/Optimize DB Size -->
-        <div class="grid grid-cols-2 gap-2">
-          <button type="button" onclick="shareBackupFileNative()" id="btnShareBackupNative" class="theme-card hover:border-amber-400 border py-2 px-2.5 rounded-xl text-[11px] font-bold cursor-pointer flex items-center justify-center gap-1">
+        <!-- Mode 2: Google Drive / Folder Share & Photo Size Optimizer -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button type="button" onclick="shareBackupFileNative()" id="btnShareBackupNative" class="bg-blue-600 hover:bg-blue-500 text-white border border-blue-300/50 py-2.5 px-3 rounded-xl text-xs font-black cursor-pointer flex items-center justify-center gap-1.5 shadow-md active:scale-95">
             <span>☁️</span><span id="lblShareBackupBtn">Share DB (Drive / WhatsApp)</span>
           </button>
-          <button type="button" onclick="optimizeAndShrinkDatabaseNow()" class="theme-card hover:border-emerald-400 border border-emerald-400/50 text-emerald-300 py-2 px-2.5 rounded-xl text-[11px] font-bold cursor-pointer flex items-center justify-center gap-1">
+          <button type="button" onclick="optimizeAndShrinkDatabaseNow()" class="theme-card hover:border-emerald-400 border border-emerald-400/50 text-emerald-300 py-2.5 px-3 rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
             <span>⚡</span><span id="lblOptimizeDbBtn">Fix & Optimize DB Size</span>
           </button>
         </div>
@@ -1253,34 +1254,13 @@
           </div>
         </div>
 
-        <!-- Mode 3: Direct GitHub Cloud Sync (Clean, No Extra Nested Borders) -->
-        <div class="pt-2.5 border-t theme-border space-y-2">
-          <div class="flex items-center justify-between gap-2 flex-wrap">
-            <label class="text-[11px] font-bold text-amber-300">
-              🐙 گٹ ہب کلاؤڈ سنک (GitHub Cloud Sync — gulzar-database.json):
-            </label>
-            <button type="button" onclick="clearGithubTokenNow()" class="text-[10px] bg-red-600/25 hover:bg-red-600/40 text-red-200 border border-red-400/40 px-2 py-0.5 rounded-lg font-bold cursor-pointer">
-              🗑️ پرانا ٹوکن صاف کریں (Clear Token)
-            </button>
-          </div>
-          <div class="relative flex items-center">
-            <input id="githubTokenInput" type="password" oninput="saveGithubSyncSettings()" placeholder="نیا GitHub Token (gist) یہاں پیسٹ کریں..." class="w-full theme-card border rounded-xl pl-3 pr-10 py-1.5 text-[11px] font-mono" />
-            <button type="button" onclick="const el=document.getElementById('githubTokenInput'); el.type=el.type==='password'?'text':'password';" class="absolute right-2 text-xs px-1.5 py-0.5 rounded theme-card-alt border cursor-pointer" title="Show/Hide Token">👁️</button>
-          </div>
-          <input id="githubGistIdInput" type="text" value="bb572b6589e2e5ea0f95bf1cfff49fb9" oninput="saveGithubSyncSettings()" placeholder="Gist ID (مثلاً bb572b6589e2e5ea0f95bf1cfff49fb9)" class="w-full theme-card border rounded-xl px-3 py-1.5 text-[11px] font-mono" />
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="pushDatabaseToGithubGist()" class="bg-amber-400 hover:bg-amber-300 text-stone-950 py-2 px-3 rounded-xl text-xs font-black cursor-pointer shadow-xs">
-              🐙 Save to GitHub DB
-            </button>
-            <button type="button" onclick="pullDatabaseFromGithubGist()" class="bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-300/50 py-2 px-3 rounded-xl text-xs font-black cursor-pointer shadow-xs">
-              🔄 Restore from GitHub DB
-            </button>
-          </div>
-          <div id="cloudSyncStatusMsg" class="hidden text-[11px] font-bold p-2.5 rounded-xl border"></div>
-        </div>
-
-        <!-- Hidden Legacy Compatibility Elements -->
+        <!-- Hidden Legacy Compatibility Elements (Kept hidden so Settings stays 100% clean & clutter-free) -->
         <div class="hidden" aria-hidden="true">
+          <input id="githubTokenInput" type="password" oninput="saveGithubSyncSettings()" />
+          <input id="githubGistIdInput" type="text" oninput="saveGithubSyncSettings()" />
+          <button type="button" onclick="pushDatabaseToGithubGist()">🐙 Save to GitHub DB</button>
+          <button type="button" onclick="pullDatabaseFromGithubGist()">🔄 Restore from GitHub DB</button>
+          <div id="cloudSyncStatusMsg"></div>
           <div id="cloudSyncConfigBox"></div>
           <input id="cloudSyncUrlInput" type="hidden" />
           <input id="cloudSyncSecretInput" type="hidden" />
@@ -4593,8 +4573,6 @@
         badge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900';
       }
       updateGeminiEncyclopediaPromptPreview();
-      const gInp = document.getElementById('githubGistIdInput');
-      if (gInp && !gInp.value) gInp.value = gState.githubGistId || 'bb572b6589e2e5ea0f95bf1cfff49fb9';
       document.getElementById('settingsModal').classList.remove('hidden');
       resetModalScrollToTop('settingsModal');
       pushGulzarModalState('settingsModal');
@@ -6852,10 +6830,16 @@ function deletePlantRecord(plantId) {
               <div class="theme-card px-2.5 py-1 rounded-lg border text-amber-300">🪴 <strong>${isEn ? 'Pot & Soil:' : 'گملا و مٹی:'}</strong> <span class="theme-muted">${meta.potSoil}</span></div>
             </div>
             <p class="text-[11px] theme-muted leading-snug">👳‍♂️ ${totka}</p>
+            ${(prof.careTipsUr || prof.careTipsEn) ? `
+              <div class="theme-card rounded-xl p-2 border border-amber-400/40 text-[11px]">
+                <strong class="text-amber-300">💧 ${isEn ? 'Care Rule:' : 'خاص اصول:'}</strong>
+                <span class="theme-muted"> ${isEn ? (prof.careTipsEn || prof.careTipsUr) : (prof.careTipsUr || prof.careTipsEn)}</span>
+              </div>
+            ` : ''}
             ${(prof.detailedGuideUr || prof.detailedGuideEn) ? `
-              <div class="theme-card rounded-xl p-2.5 border border-emerald-400/50 text-[11px] space-y-1">
+              <div class="theme-card rounded-xl p-2.5 border border-emerald-400/50 text-[11px] space-y-1.5">
                 <strong class="text-emerald-300 block">🤖 ${isEn ? 'Detailed Gemini Chat Guide:' : 'جیمنائی چیٹ کی تفصیلی گائیڈ:'}</strong>
-                <div class="theme-muted whitespace-pre-line leading-relaxed max-h-36 overflow-y-auto">${isEn ? (prof.detailedGuideEn || prof.detailedGuideUr) : (prof.detailedGuideUr || prof.detailedGuideEn)}</div>
+                <div class="space-y-1 max-h-44 overflow-y-auto pr-1">${formatDetailedGuideHtml(isEn ? (prof.detailedGuideEn || prof.detailedGuideUr) : (prof.detailedGuideUr || prof.detailedGuideEn))}</div>
               </div>
             ` : ''}
             <div id="encycAiGuideBox_${key}" class="hidden theme-card rounded-xl p-2.5 border border-amber-400/50 text-xs leading-relaxed"></div>
@@ -9085,16 +9069,22 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
           </div>
         </div>
 
-        <div class="theme-card-alt p-3 rounded-2xl border text-xs space-y-1.5">
+        <div class="theme-card-alt p-3 rounded-2xl border text-xs space-y-2">
           <div class="flex items-center justify-between flex-wrap gap-1">
             <strong class="text-amber-500 block">${isEn ? '👳‍♂️ Gardener Secret Tip & Pot Info:' : '👳‍♂️ دیسی مالی کی موروثی رہنمائی اور گملا:'}</strong>
             ${(p.potSizeUr || p.potSizeEn) ? `<span class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/40 px-2 py-0.5 rounded-full font-bold">🪴 ${isEn ? (p.potSizeEn || p.potSizeUr) : (p.potSizeUr || p.potSizeEn)}</span>` : ''}
           </div>
           <p class="leading-relaxed">${totkaTxt}</p>
+          ${(p.careTipsUr || p.careTipsEn) ? `
+            <div class="theme-card p-2.5 rounded-xl border border-amber-400/40 space-y-0.5">
+              <strong class="text-amber-300 block text-[11px]">💧 ${isEn ? 'Crucial Care Rule:' : 'پانی اور نگہداشت کا خاص اصول:'}</strong>
+              <p class="text-[11px] theme-muted leading-relaxed">${isEn ? (p.careTipsEn || p.careTipsUr) : (p.careTipsUr || p.careTipsEn)}</p>
+            </div>
+          ` : ''}
           ${(p.detailedGuideUr || p.detailedGuideEn) ? `
-            <div class="mt-2 pt-2 border-t theme-border space-y-1">
-              <strong class="text-emerald-300 block">🤖 ${isEn ? 'Detailed Gemini Discussion & Master Guide:' : 'جیمنائی چیٹ کی تفصیلی گائیڈ اور خاص نوٹس:'}</strong>
-              <div class="text-[11px] theme-muted whitespace-pre-line leading-relaxed max-h-44 overflow-y-auto pr-1">${isEn ? (p.detailedGuideEn || p.detailedGuideUr) : (p.detailedGuideUr || p.detailedGuideEn)}</div>
+            <div class="mt-2 pt-2 border-t theme-border space-y-1.5">
+              <strong class="text-emerald-300 block text-xs">🤖 ${isEn ? 'Detailed Gemini Discussion & Master Guide:' : 'جیمنائی چیٹ کی تفصیلی گائیڈ اور خاص نوٹس:'}</strong>
+              <div class="space-y-1.5 max-h-60 overflow-y-auto pr-1">${formatDetailedGuideHtml(isEn ? (p.detailedGuideEn || p.detailedGuideUr) : (p.detailedGuideUr || p.detailedGuideEn))}</div>
             </div>
           ` : `
             <div class="pt-1 flex justify-end">
@@ -11542,8 +11532,6 @@ Return ONLY valid JSON:
       const modeSel = forceReplace ? 'replace' : (document.getElementById('restoreModeSelect')?.value || 'replace');
       const keepLang = gState.lang || 'en';
       const keepKey = getActiveGeminiKey() || parsed.aiApiKey || '';
-      const keepGhToken = gState.githubToken || '';
-      const keepGistId = gState.githubGistId || parsed.githubGistId || 'bb572b6589e2e5ea0f95bf1cfff49fb9';
       delete parsed.githubToken;
 
       if (modeSel === 'merge') {
@@ -11583,8 +11571,6 @@ Return ONLY valid JSON:
           stock: Array.isArray(parsed.stock) ? parsed.stock : DEFAULT_STATE.stock,
           recipes: Array.isArray(parsed.recipes) ? parsed.recipes : DEFAULT_STATE.recipes,
           aiApiKey: keepKey || parsed.aiApiKey || '',
-          githubToken: keepGhToken,
-          githubGistId: keepGistId,
           lang: keepLang,
           version: 30,
           _upgradedFullFertCatalogV30: true
@@ -11758,6 +11744,7 @@ Return ONLY valid JSON:
 
     async function exportBackupData() {
       const isEn = gState.lang === 'en';
+      // Always use the exact fixed filename gulzar-database.json so it updates the existing file in place!
       lastExportedFilename = 'gulzar-database.json';
       const safeClone = JSON.parse(JSON.stringify(gState));
       delete safeClone.githubToken;
@@ -11800,26 +11787,27 @@ Return ONLY valid JSON:
       if (pathEl) {
         const targetDest = savedNativePath || `Downloads/${lastExportedFilename}`;
         pathEl.innerHTML = isEn
-          ? `✅ <strong>1) Saved inside App Vault</strong><br>✅ <strong>2) Saved on Phone → ${targetDest}</strong>`
-          : `✅ <strong>1) ایپ کے اندر محفوظ ہو گیا</strong><br>✅ <strong>2) موبائل اسٹوریج میں سیو ہو گیا: ${targetDest}</strong>`;
+          ? `✅ <strong>1) Updated inside App Vault</strong><br>✅ <strong>2) Overwritten in Phone Folder → ${targetDest}</strong>`
+          : `✅ <strong>1) ایپ کے اندر اپڈیٹ ہو گیا</strong><br>✅ <strong>2) موبائل فولڈر میں وہی فائل اپڈیٹ ہو گئی: ${targetDest}</strong>`;
       }
 
       notify(
         savedNativePath
-          ? (isEn ? `Saved to Phone: ${savedNativePath}!` : `موبائل کے Documents/Gulzar فولڈر میں محفوظ ہو گیا!`)
-          : (isEn ? `Saved ${lastExportedFilename} (${sizeMb} MB)!` : `ڈیٹا بیس (${lastExportedFilename}) محفوظ ہو گئی!`),
+          ? (isEn ? `Updated single file: ${savedNativePath}!` : `موبائل کے Documents/Gulzar فولڈر میں وہی فائل اپڈیٹ ہو گئی!`)
+          : (isEn ? `Saved ${lastExportedFilename} (${sizeMb} MB)!` : `ڈیٹا بیس (${lastExportedFilename}) اپڈیٹ ہو گئی!`),
         '📁'
       );
     }
 
     async function shareBackupFileNative() {
       const isEn = gState.lang === 'en';
+      // Always use fixed filename gulzar-database.json (never add date suffixes!)
       lastExportedFilename = 'gulzar-database.json';
       const safeClone = JSON.parse(JSON.stringify(gState));
       delete safeClone.githubToken;
       lastExportedJsonString = JSON.stringify(safeClone, null, 2);
 
-      // 1. Native Capacitor Filesystem + Share (shares actual .json file to WhatsApp/Drive without clipboard crash!)
+      // 1. Native Capacitor Filesystem + Share (shares exact gulzar-database.json to Google Drive / Files)
       try {
         const capFs = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem;
         const capShare = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
@@ -11834,13 +11822,13 @@ Return ONLY valid JSON:
             title: lastExportedFilename,
             text: `Gulzar Garden Backup (${gState.plants.length} Plants)`,
             url: res.uri,
-            dialogTitle: isEn ? 'Share Database File' : 'ڈیٹا بیس فائل شیئر کریں'
+            dialogTitle: isEn ? 'Save / Update gulzar-database.json on Google Drive' : 'گوگل ڈرائیو یا فولڈر میں gulzar-database.json اپڈیٹ کریں'
           });
           return;
         }
       } catch (capErr) {}
 
-      // 2. Web Share API (File only — never dump multi-MB text onto Android clipboard!)
+      // 2. Web Share API (File only — fixed name gulzar-database.json)
       if (navigator.share) {
         try {
           const fileObj = new File([lastExportedJsonString], lastExportedFilename, { type: 'application/json' });
@@ -11855,16 +11843,7 @@ Return ONLY valid JSON:
         } catch (err) {}
       }
 
-      if (lastExportedJsonString.length > 450000) {
-        notify(
-          isEn
-            ? '⚠️ Database is too large for clipboard! Use "Save to Phone" (Documents/Gulzar/) or "Save to GitHub DB".'
-            : '⚠️ ڈیٹا بیس بڑا ہونے کی وجہ سے کلپ بورڈ پر کاپی نہیں کیا گیا تاکہ موبائل ہینگ نہ ہو۔ براہِ کرم Save to Phone یا Save to GitHub DB استعمال کریں!',
-          '⚠️'
-        );
-        return;
-      }
-      copyBackupJsonToClipboard();
+      exportBackupData();
     }
 
     function copyBackupJsonToClipboard() {
@@ -11923,6 +11902,14 @@ Return ONLY valid JSON:
         usedPlantIds.add(p.id);
         // Repair Araucaria heterophylla scientific name if attached to non-Araucaria plants (like Iexora / Ixora or Adinum)
         const nCheck = `${p.nameEn || ''} ${p.nameUr || ''}`.toLowerCase();
+        if (p.detailedGuideUr && p.detailedGuideUr.includes('"nameUr"')) {
+          p.detailedGuideUr = stripRawJsonFromGuideText(p.detailedGuideUr);
+          changed = true;
+        }
+        if (p.detailedGuideEn && p.detailedGuideEn.includes('"nameUr"')) {
+          p.detailedGuideEn = stripRawJsonFromGuideText(p.detailedGuideEn);
+          changed = true;
+        }
         if (p.sciName === 'Araucaria heterophylla' && !nCheck.includes('araucaria') && !nCheck.includes('اروکاریا') && !nCheck.includes('pine')) {
           if (nCheck.includes('iexora') || nCheck.includes('ixora') || nCheck.includes('lexora') || nCheck.includes('ایگزورا')) {
             p.sciName = 'Ixora coccinea';
@@ -13044,32 +13031,13 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       saveNewPlantToEncyclopediaModal();
     }
 
-    function clearGithubTokenNow() {
-      const isEn = gState.lang === 'en';
-      gState.githubToken = '';
-      try { localStorage.removeItem('gulzar_github_token'); } catch (e) {}
-      const el = document.getElementById('githubTokenInput');
-      if (el) el.value = '';
-      persist();
-      const msg = document.getElementById('cloudSyncStatusMsg');
-      if (msg) {
-        msg.classList.remove('hidden');
-        msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-emerald-950/80 border-emerald-400/50 text-emerald-200';
-        msg.textContent = isEn
-          ? '✅ Old token cleared! You can now paste a fresh GitHub Token (gist scope) or restore directly using Gist ID.'
-          : '✅ پرانا ٹوکن صاف کر دیا گیا! اب آپ نیا GitHub Token پیسٹ کر سکتے ہیں یا سیدھا Restore دبا سکتے ہیں۔';
-      }
-      notify(isEn ? 'Old GitHub token cleared!' : 'پرانا گٹ ہب ٹوکن صاف ہو گیا!', '🗑️');
-    }
-
     function saveGithubSyncSettings() {
       const tok = (document.getElementById('githubTokenInput')?.value || '').trim();
-      const gistId = (document.getElementById('githubGistIdInput')?.value || 'bb572b6589e2e5ea0f95bf1cfff49fb9').trim();
+      const gistId = (document.getElementById('githubGistIdInput')?.value || '').trim();
       gState.githubToken = tok;
       gState.githubGistId = gistId;
       try {
         if (tok) localStorage.setItem('gulzar_github_token', tok);
-        else localStorage.removeItem('gulzar_github_token');
         if (gistId) localStorage.setItem('gulzar_github_gist_id', gistId);
       } catch (e) {}
       persist();
@@ -13078,31 +13046,20 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     async function pushDatabaseToGithubGist() {
       const isEn = gState.lang === 'en';
       const tok = (document.getElementById('githubTokenInput')?.value || gState.githubToken || localStorage.getItem('gulzar_github_token') || '').trim();
-      let gistId = (document.getElementById('githubGistIdInput')?.value || gState.githubGistId || localStorage.getItem('gulzar_github_gist_id') || 'bb572b6589e2e5ea0f95bf1cfff49fb9').trim();
+      let gistId = (document.getElementById('githubGistIdInput')?.value || gState.githubGistId || localStorage.getItem('gulzar_github_gist_id') || '').trim();
       const msg = document.getElementById('cloudSyncStatusMsg');
       if (!tok) {
-        if (msg) {
-          msg.classList.remove('hidden');
-          msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-amber-950/80 border-amber-400/50 text-amber-200';
-          msg.textContent = isEn
-            ? '⚠️ To SAVE to GitHub, please paste a valid GitHub Personal Access Token (with gist permission) in the box above.'
-            : '⚠️ گٹ ہب پر سیو کرنے کے لیے اوپر خانے میں اپنا نیا GitHub Token (gist) پیسٹ کریں۔';
-        }
-        notify(isEn ? 'Please enter your GitHub Token first!' : 'پہلے اپنا نیا GitHub Token درج کریں!', '⚠️');
+        notify(isEn ? 'Please enter your GitHub Personal Access Token (with gist permission) first!' : 'پہلے اپنا GitHub Token درج کریں!', '⚠️');
         return;
       }
       if (msg) {
         msg.classList.remove('hidden');
-        msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-blue-950/80 border-blue-400/50 text-blue-200';
-        msg.textContent = isEn ? '🐙 Saving gulzar-database.json to GitHub...' : '🐙 گٹ ہب کی فائل (gulzar-database.json) میں ڈیٹا محفوظ ہو رہا ہے...';
+        msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-blue-950/80 border-blue-400/50 text-blue-200';
+        msg.textContent = isEn ? '🐙 Saving single gulzar-database.json to GitHub...' : '🐙 گٹ ہب کی ایک ہی فائل (gulzar-database.json) میں ڈیٹا محفوظ ہو رہا ہے...';
       }
       try {
         sanitizeExistingGardenPlants();
-        const safeExportClone = JSON.parse(JSON.stringify(gState));
-        delete safeExportClone.aiApiKey;
-        delete safeExportClone.githubToken;
-        delete safeExportClone.cloudSyncSecret;
-        const payloadStr = JSON.stringify(safeExportClone, null, 2);
+        const payloadStr = JSON.stringify(gState, null, 2);
         const bodyObj = {
           description: 'Gulzar Smart Home Garden — Single Master Database (gulzar-database.json)',
           public: false,
@@ -13121,18 +13078,6 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
           },
           body: JSON.stringify(bodyObj)
         });
-        if (res.status === 401) {
-          gState.githubToken = '';
-          try { localStorage.removeItem('gulzar_github_token'); } catch (e) {}
-          const el = document.getElementById('githubTokenInput');
-          if (el) el.value = '';
-          persist();
-          throw new Error(
-            isEn
-              ? 'Old token was revoked by GitHub (HTTP 401) and has been cleared. Please paste a fresh GitHub Token (gist scope) and tap Save again.'
-              : 'پرانا گٹ ہب ٹوکن بلاک ہو چکا تھا (HTTP 401) اس لیے صاف کر دیا گیا ہے۔ براہِ کرم نیا GitHub Token بنا کر پیسٹ کریں۔'
-          );
-        }
         if (!res.ok) throw new Error(`GitHub HTTP ${res.status}`);
         const data = await res.json();
         if (data && data.id) {
@@ -13143,16 +13088,16 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
           persist();
         }
         if (msg) {
-          msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-emerald-950/80 border-emerald-400/50 text-emerald-200';
+          msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-emerald-950/80 border-emerald-400/50 text-emerald-200';
           msg.innerHTML = isEn
-            ? `✅ Saved to GitHub <code>gulzar-database.json</code> (Gist ID: <code>${data.id}</code> • ${gState.plants.length} Plants)!`
-            : `✅ گٹ ہب کی فائل <code>gulzar-database.json</code> میں تمام ${gState.plants.length} پودے محفوظ ہو گئے!`;
+            ? `✅ Saved to single GitHub file <code>gulzar-database.json</code> (Gist ID: <code>${data.id}</code> • ${gState.plants.length} Plants)!`
+            : `✅ گٹ ہب کی ایک ہی فائل <code>gulzar-database.json</code> میں تمام ${gState.plants.length} پودے محفوظ ہو گئے (ID: <code>${data.id}</code>)!`;
         }
-        notify(isEn ? 'Saved to GitHub database!' : 'گٹ ہب ڈیٹا بیس میں محفوظ ہو گیا!', '🐙');
+        notify(isEn ? 'Saved to single GitHub database!' : 'گٹ ہب کی ایک ہی ڈیٹا بیس فائل میں محفوظ ہو گیا!', '🐙');
       } catch (err) {
         if (msg) {
-          msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-amber-950/80 border-amber-400/50 text-amber-200';
-          msg.textContent = isEn ? `⚠️ ${err.message}` : `⚠️ ${err.message}`;
+          msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-amber-950/80 border-amber-400/50 text-amber-200';
+          msg.textContent = isEn ? `⚠️ GitHub Sync Error: ${err.message}` : `⚠️ گٹ ہب سنک میں دشواری: ${err.message}`;
         }
       }
     }
@@ -13160,7 +13105,7 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     async function pullDatabaseFromGithubGist() {
       const isEn = gState.lang === 'en';
       const tok = (document.getElementById('githubTokenInput')?.value || gState.githubToken || localStorage.getItem('gulzar_github_token') || '').trim();
-      const gistId = (document.getElementById('githubGistIdInput')?.value || gState.githubGistId || localStorage.getItem('gulzar_github_gist_id') || 'bb572b6589e2e5ea0f95bf1cfff49fb9').trim();
+      const gistId = (document.getElementById('githubGistIdInput')?.value || gState.githubGistId || localStorage.getItem('gulzar_github_gist_id') || '').trim();
       const msg = document.getElementById('cloudSyncStatusMsg');
       if (!gistId) {
         notify(isEn ? 'Please enter your GitHub Gist ID first!' : 'پہلے اپنا GitHub Gist ID درج کریں!', '⚠️');
@@ -13168,23 +13113,13 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       }
       if (msg) {
         msg.classList.remove('hidden');
-        msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-blue-950/80 border-blue-400/50 text-blue-200';
+        msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-blue-950/80 border-blue-400/50 text-blue-200';
         msg.textContent = isEn ? '🐙 Restoring gulzar-database.json from GitHub...' : '🐙 گٹ ہب سے gulzar-database.json ریسٹور ہو رہی ہے...';
       }
       try {
         const headers = { 'Accept': 'application/vnd.github+json' };
         if (tok) headers['Authorization'] = `Bearer ${tok}`;
-        let res = await fetch(`https://api.github.com/gists/${gistId}`, { headers });
-        // If old token is revoked (401), automatically retry without Authorization header (Gist ID works without token for reading!)
-        if (res.status === 401 && tok) {
-          gState.githubToken = '';
-          try { localStorage.removeItem('gulzar_github_token'); } catch (e) {}
-          const el = document.getElementById('githubTokenInput');
-          if (el) el.value = '';
-          res = await fetch(`https://api.github.com/gists/${gistId}`, {
-            headers: { 'Accept': 'application/vnd.github+json' }
-          });
-        }
+        const res = await fetch(`https://api.github.com/gists/${gistId}`, { headers });
         if (!res.ok) throw new Error(`GitHub HTTP ${res.status}`);
         const data = await res.json();
         const fileObj = data?.files?.['gulzar-database.json'] || Object.values(data?.files || {})[0];
@@ -13197,15 +13132,15 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
         const parsed = JSON.parse(rawJson);
         if (applyRestoredDatabaseObject(parsed)) {
           if (msg) {
-            msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-emerald-950/80 border-emerald-400/50 text-emerald-200';
+            msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-emerald-950/80 border-emerald-400/50 text-emerald-200';
             msg.textContent = isEn
               ? `✅ Restored ${gState.plants.length} Plants from GitHub gulzar-database.json!`
-              : `✅ گٹ ہب کی gulzar-database.json سے تمام ${gState.plants.length} پودے کامیابی سے بحال ہو گئے!`;
+              : `✅ گٹ ہب کی gulzar-database.json سے تمام ${gState.plants.length} پودے بحال ہو گئے!`;
           }
         }
       } catch (err) {
         if (msg) {
-          msg.className = 'text-[11px] font-bold p-2.5 rounded-xl border bg-amber-950/80 border-amber-400/50 text-amber-200';
+          msg.className = 'text-[11px] font-bold p-2 rounded-lg border bg-amber-950/80 border-amber-400/50 text-amber-200';
           msg.textContent = isEn ? `⚠️ GitHub Restore Error: ${err.message}` : `⚠️ گٹ ہب سے ریسٹور کرنے میں دشواری: ${err.message}`;
         }
       }
@@ -13213,15 +13148,55 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
 
 
     // =========================================================================
-    // NEW REVAMP HELPERS: GEMINI ENCYCLOPEDIA PROMPT, HISTORY EDIT/DELETE,
-    // POT SIZE / COLOR CHIPS, SCROLL-TO-TOP & BACK/HOME NAVIGATION
+    // NEW REVAMP HELPERS: CLEAN JSON STRIPPER & LINE-BY-LINE GUIDE FORMATTER,
+    // GEMINI ENCYCLOPEDIA PROMPT, HISTORY EDIT/DELETE, AND BACK NAVIGATION
     // =========================================================================
+    function stripRawJsonFromGuideText(rawStr) {
+      if (!rawStr || typeof rawStr !== 'string') return '';
+      let s = rawStr;
+      // Remove fenced ```json ... ``` blocks
+      s = s.replace(/```(?:json)?[\s\S]*?```/gi, '');
+      // Remove bare JSON objects containing "nameUr" or "detailedGuide"
+      const idxBrace = s.indexOf('{');
+      if (idxBrace !== -1 && (s.includes('"nameUr"') || s.includes('"nameEn"') || s.includes('"waterDays"'))) {
+        const lastBrace = s.lastIndexOf('}');
+        if (lastBrace > idxBrace) {
+          s = (s.slice(0, idxBrace) + ' ' + s.slice(lastBrace + 1)).trim();
+        }
+      }
+      return s.trim();
+    }
+
+    function formatDetailedGuideHtml(rawText) {
+      const cleaned = stripRawJsonFromGuideText(rawText);
+      if (!cleaned) return '';
+      // Split numbered points like "1)", "2)", "3)", "4)", "5)" onto separate lines automatically
+      const withBreaks = cleaned
+        .replace(/\r\n/g, '\n')
+        .replace(/\s+(?=[1-9]\)\s)/g, '\n')
+        .replace(/\s+(?=[1-9]\.\s)/g, '\n');
+      const lines = withBreaks.split('\n').map(l => l.trim()).filter(Boolean);
+      return lines.map(line => {
+        const isNumbered = /^[1-9][\)\.]/.test(line);
+        if (isNumbered) {
+          const colonIdx = line.indexOf(':');
+          if (colonIdx > 1 && colonIdx < 45) {
+            const head = line.slice(0, colonIdx + 1);
+            const rest = line.slice(colonIdx + 1).trim();
+            return `<div class="theme-card-alt p-2 rounded-xl border border-white/10 text-[11px] leading-relaxed"><strong class="text-amber-300">${head}</strong> <span class="text-white/95">${rest}</span></div>`;
+          }
+          return `<div class="theme-card-alt p-2 rounded-xl border border-white/10 text-[11px] leading-relaxed text-white/95">${line}</div>`;
+        }
+        return `<div class="text-[11px] font-bold text-emerald-300 leading-relaxed">${line}</div>`;
+      }).join('');
+    }
+
     function buildStandardGeminiEncyclopediaPrompt(plantNameRaw) {
-      const pName = (plantNameRaw || '').trim() || 'David Austin Rose / گلاب';
+      const pName = (plantNameRaw || '').trim() || 'Adenium / ایڈینیم';
       return `آپ گلزار سمارٹ ہوم گارڈن (GULZAR Smart Home Garden — لاہور، پاکستان) کے ماہر نباتات اور دیسی مالی ہیں۔
 براہِ کرم پودے "${pName}" کے بارے میں لاہور کے موسم (گرمیوں کی 45°C تپش، حبس/مون سون، اور سردیوں کی دھند/کہر) کے مطابق مکمل اور تفصیلی رہنمائی فراہم کریں۔
 
-سب سے پہلے نیچے دیا گیا JSON بلاک بالکل اسی فارمیٹ میں مکمل کریں تاکہ میں اسے سیدھا اپنی گلزار ایپ کے انسائیکلوپیڈیا (Encyclopedia) میں پیسٹ کر سکوں:
+نیچے دیا گیا JSON بلاک بالکل اسی فارمیٹ میں مکمل کریں تاکہ میں اسے سیدھا اپنی گلزار ایپ کے انسائیکلوپیڈیا (Encyclopedia) میں پیسٹ کر سکوں:
 
 \`\`\`json
 {
@@ -13240,12 +13215,12 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
   "pruneEn": "Best pruning & pinching season and method",
   "totkaUr": "دیسی مالی کا خاص تجربہ کار ٹوٹکہ اور بیماریوں سے بچاؤ",
   "totkaEn": "Expert gardener secret tip & pest prevention",
-  "detailedGuideUr": "یہاں اردو میں مکمل تفصیلی مضمون لکھیں: 1) گملے کا سائز اور مٹی کا تناسب، 2) گرمیوں (مئی-جون) اور مون سون میں بچاؤ، 3) سردیوں کی دیکھ بھال، 4) کٹائی اور پنچنگ سے پودا گھنا کرنے کا طریقہ، 5) خاص خوراک اور اسپرے۔",
-  "detailedGuideEn": "Complete detailed guide in English covering: 1) Pot size & soil mix, 2) Lahore 45C summer & monsoon survival, 3) Winter care, 4) Pruning & pinching technique, 5) Feeding & pest control schedule."
+  "careTipsUr": "پانی دینے اور موسمی احتیاط کا سب سے اہم اصول",
+  "careTipsEn": "Crucial watering & seasonal protection rule",
+  "detailedGuideUr": "1) گملے کا سائز اور مٹی کا تناسب: ...\n2) گرمیوں (مئی-جون) اور مون سون میں بچاؤ: ...\n3) سردیوں کی دیکھ بھال: ...\n4) کٹائی اور پنچنگ کا طریقہ: ...\n5) خاص خوراک اور اسپرے: ...",
+  "detailedGuideEn": "1) Pot & Soil: ...\n2) Summer & Monsoon: ...\n3) Winter Care: ...\n4) Pruning & Pinching: ...\n5) Feeding & Spray: ..."
 }
-\`\`\`
-
-اس JSON بلاک کے بعد اگر کوئی مزید اہم نکات ہوں تو وہ بھی واضح اردو میں لکھ دیں۔`;
+\`\`\``;
     }
 
     function updateGeminiEncyclopediaPromptPreview() {
@@ -13324,7 +13299,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
 
       const fallbackName = nameHint || 'Custom Gemini Plant';
       const inferred = inferCompleteCareForAnyName(fallbackName);
-      const extraTextOutsideJson = rawPaste.replace(/```(?:json)?[\s\S]*?```/gi, '').trim();
+      // Cleanly strip BOTH fenced ```json blocks AND bare { ... } JSON blocks so raw JSON never pollutes the readable guide!
+      const extraTextOutsideJson = stripRawJsonFromGuideText(rawPaste);
 
       const nameUr = (parsedObj?.nameUr || (/[\u0600-\u06FF]/.test(fallbackName) ? fallbackName : translateCustomTerm(fallbackName, 'ur'))).trim();
       const nameEn = (parsedObj?.nameEn || (!/[\u0600-\u06FF]/.test(fallbackName) ? fallbackName : translateCustomTerm(fallbackName, 'en'))).trim();
@@ -13340,12 +13316,14 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       const pruneEn = parsedObj?.pruneEn || inferred.pruneEn;
       const totkaUr = parsedObj?.totkaUr || inferred.totkaUr;
       const totkaEn = parsedObj?.totkaEn || inferred.totkaEn;
+      const careTipsUr = parsedObj?.careTipsUr || '';
+      const careTipsEn = parsedObj?.careTipsEn || '';
       const detailedGuideUr = parsedObj?.detailedGuideUr
-        ? (extraTextOutsideJson ? `${parsedObj.detailedGuideUr}\n\n${extraTextOutsideJson}` : parsedObj.detailedGuideUr)
-        : rawPaste;
+        ? (extraTextOutsideJson ? `${parsedObj.detailedGuideUr}\n${extraTextOutsideJson}` : parsedObj.detailedGuideUr)
+        : extraTextOutsideJson;
       const detailedGuideEn = parsedObj?.detailedGuideEn
-        ? (extraTextOutsideJson ? `${parsedObj.detailedGuideEn}\n\n${extraTextOutsideJson}` : parsedObj.detailedGuideEn)
-        : rawPaste;
+        ? (extraTextOutsideJson ? `${parsedObj.detailedGuideEn}\n${extraTextOutsideJson}` : parsedObj.detailedGuideEn)
+        : extraTextOutsideJson;
 
       const matches = findBestFlexiblePlantMatches(nameEn || nameUr);
       let targetKey = (matches.length > 0 && matches[0].score >= 88)
@@ -13370,6 +13348,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
         pruneEn,
         totkaUr,
         totkaEn,
+        careTipsUr,
+        careTipsEn,
         detailedGuideUr,
         detailedGuideEn,
         img: existingProf.img || IMG_INDOOR
@@ -13380,14 +13360,18 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       BOTANICAL_DB[targetKey] = updatedEntry;
 
       let syncedGardenCount = 0;
-      const normTargetEn = normalizeSearchText(nameEn);
-      const normTargetUr = normalizeSearchText(nameUr);
+      const normTargetEn = normalizeSearchText(nameEn.split('(')[0]);
+      const normTargetUr = normalizeSearchText(nameUr.split('(')[0]);
+      const sciNorm = normalizeSearchText(parsedObj?.sciName || '');
       (gState.plants || []).forEach(p => {
         const pNormEn = normalizeSearchText((p.nameEn || '').replace(/\s+\d+$/, ''));
         const pNormUr = normalizeSearchText((p.nameUr || '').replace(/\s+\d+$/, ''));
+        const pSci = normalizeSearchText(p.sciName || '');
         if (
           (normTargetEn && pNormEn && (pNormEn.includes(normTargetEn) || normTargetEn.includes(pNormEn))) ||
-          (normTargetUr && pNormUr && (pNormUr.includes(normTargetUr) || normTargetUr.includes(pNormUr)))
+          (normTargetUr && pNormUr && (pNormUr.includes(normTargetUr) || normTargetUr.includes(pNormUr))) ||
+          (sciNorm && pSci && pSci === sciNorm) ||
+          (normTargetEn.includes('adenium') && pNormEn.includes('adinum'))
         ) {
           p.waterDays = waterDays;
           p.sunUr = sunUr;
@@ -13398,6 +13382,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
           p.pruneEn = pruneEn;
           p.totkaUr = totkaUr;
           p.totkaEn = totkaEn;
+          if (careTipsUr) p.careTipsUr = careTipsUr;
+          if (careTipsEn) p.careTipsEn = careTipsEn;
           p.detailedGuideUr = detailedGuideUr;
           p.detailedGuideEn = detailedGuideEn;
           syncedGardenCount++;
@@ -13410,8 +13396,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       if (statusEl) {
         statusEl.className = 'block text-[11px] font-bold text-emerald-300 text-center';
         statusEl.textContent = isEn
-          ? `✅ Saved "${nameEn}" to Encyclopedia (${syncedGardenCount} garden plant(s) updated)!`
-          : `✅ "${nameUr}" انسائیکلوپیڈیا میں محفوظ ہو گیا (باغ کے ${syncedGardenCount} پودے بھی اپڈیٹ ہو گئے)!`;
+          ? `✅ Saved "${nameEn}" to Encyclopedia (${syncedGardenCount} garden plant(s) updated cleanly)!`
+          : `✅ "${nameUr}" انسائیکلوپیڈیا میں محفوظ ہو گیا (باغ کے ${syncedGardenCount} پودے بھی صاف فارمیٹ میں اپڈیٹ ہو گئے)!`;
       }
       document.getElementById('geminiPasteGuideInput').value = '';
       notify(
