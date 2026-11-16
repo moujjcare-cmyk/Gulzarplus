@@ -32,7 +32,7 @@ jobs:
             yes | "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager" --licenses || true
           fi
 
-      - name: Prepare Web Assets & Install Capacitor
+      - name: Prepare Web Assets & Install Capacitor + Native Plugins
         run: |
           mkdir -p www
           cp index.html www/index.html
@@ -40,9 +40,9 @@ jobs:
           if [ -f sw.js ]; then cp sw.js www/; fi
           if [ -f icon-192.png ]; then cp icon-192.png www/; fi
           if [ -f icon-512.png ]; then cp icon-512.png www/; fi
-          npm install @capacitor/core@^6.0.0 @capacitor/cli@^6.0.0 @capacitor/android@^6.0.0
+          npm install @capacitor/core@^6.0.0 @capacitor/cli@^6.0.0 @capacitor/android@^6.0.0 @capacitor/filesystem@^6.0.0 @capacitor/share@^6.0.0
 
-      - name: Add Android Platform & Apply Red Rose App Icon
+      - name: Add Android Platform & Apply Compressed Red Rose App Icons
         run: |
           if [ ! -d "android" ]; then
             npx cap add android
@@ -51,15 +51,20 @@ jobs:
           fi
           rm -rf android/app/src/main/res/mipmap-anydpi-v26
           rm -f android/app/src/main/res/drawable*/ic_launcher*
-          if [ -f "icon-512.png" ]; then
-            for dir in android/app/src/main/res/mipmap-*; do
-              if [ -d "$dir" ]; then
-                cp icon-512.png "$dir/ic_launcher.png" || true
-                cp icon-512.png "$dir/ic_launcher_round.png" || true
-                cp icon-512.png "$dir/ic_launcher_foreground.png" || true
-              fi
-            done
-          fi
+          for dir in android/app/src/main/res/mipmap-mdpi android/app/src/main/res/mipmap-hdpi android/app/src/main/res/mipmap-xhdpi; do
+            if [ -d "$dir" ] && [ -f "icon-192.png" ]; then
+              cp icon-192.png "$dir/ic_launcher.png" || true
+              cp icon-192.png "$dir/ic_launcher_round.png" || true
+              cp icon-192.png "$dir/ic_launcher_foreground.png" || true
+            fi
+          done
+          for dir in android/app/src/main/res/mipmap-xxhdpi android/app/src/main/res/mipmap-xxxhdpi; do
+            if [ -d "$dir" ] && [ -f "icon-512.png" ]; then
+              cp icon-512.png "$dir/ic_launcher.png" || true
+              cp icon-512.png "$dir/ic_launcher_round.png" || true
+              cp icon-512.png "$dir/ic_launcher_foreground.png" || true
+            fi
+          done
 
       - name: Build Debug APK with Gradle
         working-directory: ./android
