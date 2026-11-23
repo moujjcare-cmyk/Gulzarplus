@@ -705,6 +705,10 @@
             <span>🤖</span>
             <span id="btnHeroGeminiPromptLabel">جیمنائی پرامپٹ و گائیڈ پیسٹ</span>
           </button>
+          <button type="button" onclick="openGeminiLiveSyncModal()" class="bg-blue-600 hover:bg-blue-500 text-white border border-blue-300/60 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95">
+            <span>🎥</span>
+            <span id="btnHeroGeminiLiveLabel">جیمینائی لائیو سنک (Live Sync)</span>
+          </button>
           <button type="button" onclick="openMultiPlantCareModal('feed')" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md border border-emerald-200 active:scale-95">
             <span>✅</span>
             <span id="btnMultiPlantCareHeroLabel">کھاد / اسپرے ٹک لسٹ (پودے چنیں)</span>
@@ -776,10 +780,10 @@
 
       <!-- Highlighted Search & Location Quick Filter -->
       <div class="theme-card rounded-2xl p-2.5 border-2 border-amber-400/80 shadow-lg bg-gradient-to-r from-emerald-950/90 via-stone-900/90 to-emerald-950/90 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
-        <div class="relative flex-1 flex items-center">
-          <span class="absolute left-3 text-amber-300 text-sm pointer-events-none">🔍</span>
-          <input id="plantSearch" type="text" oninput="renderPlantsList()" placeholder="🔎 پودے کا نام، نمبر (مثلاً Ixora 1، Adenium)، ورائٹی یا لوکیشن تلاش کریں..." class="w-full theme-card-alt rounded-xl pl-9 pr-8 py-2.5 text-xs sm:text-sm font-extrabold text-amber-200 placeholder-amber-200/70 border-2 border-amber-400/60 focus:border-amber-300 focus:outline-none shadow-inner" />
-          <button type="button" onclick="const el=document.getElementById('plantSearch');if(el){el.value='';renderPlantsList();}" class="absolute right-2.5 text-[11px] bg-amber-400/20 hover:bg-amber-400/40 text-amber-200 px-1.5 py-0.5 rounded-md font-black cursor-pointer" title="Clear Search">✕</button>
+        <div class="flex-1 flex items-center gap-2 theme-card-alt rounded-xl px-3 py-2 border-2 border-amber-400/60 focus-within:border-amber-300 shadow-inner">
+          <span class="text-amber-300 text-sm shrink-0 pointer-events-none" aria-hidden="true">🔍</span>
+          <input id="plantSearch" type="text" oninput="renderPlantsList()" placeholder="پودے کا نام، نمبر (مثلاً Ixora 1، Adenium)، ورائٹی یا لوکیشن تلاش کریں..." class="flex-1 min-w-0 bg-transparent text-xs sm:text-sm font-extrabold text-amber-200 placeholder-amber-200/70 focus:outline-none" style="border:none;outline:none;padding:0.2rem 0;" />
+          <button type="button" onclick="const el=document.getElementById('plantSearch');if(el){el.value='';el.focus();renderPlantsList();}" class="text-[11px] bg-amber-400/25 hover:bg-amber-400/45 text-amber-200 px-2 py-1 rounded-lg font-black cursor-pointer shrink-0" title="Clear Search">✕</button>
         </div>
         <select id="locationFilterSelect" onchange="renderPlantsList()" class="theme-card-alt border-2 border-emerald-400/60 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-extrabold text-emerald-300 shadow-xs cursor-pointer">
           <option value="all">📍 تمام لوکیشنز (All Locations)</option>
@@ -1350,6 +1354,8 @@
         <div id="aiModalStatusBanner" class="hidden rounded-xl px-3 py-2 text-xs font-bold border space-y-1.5 backdrop-blur-md"></div>
         <!-- Duplicate Plant Prevention Warning Banner -->
         <div id="plantDuplicateWarningBanner" class="hidden rounded-xl px-3 py-2 text-xs font-bold border bg-amber-950/90 border-amber-400/60 text-amber-200 space-y-1.5"></div>
+        <!-- Proven Species Care Memory Banner -->
+        <div id="plantSpeciesMemoryBanner" class="hidden rounded-xl px-3 py-2 text-xs font-bold border bg-emerald-950/90 border-emerald-400/60 text-emerald-200 space-y-1.5"></div>
       </div>
 
       <!-- Step 2: Smart Auto-Matching Name Input & 370+ Encyclopedia Selector -->
@@ -1600,15 +1606,16 @@
   <!-- ============================================== -->
   <!-- MODAL: CHOOSE FERTILIZER OR SPRAY FROM STOCK   -->
   <!-- ============================================== -->
-  <div id="careSupplyPickerModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 overflow-y-auto">
-    <div class="theme-card rounded-3xl max-w-md w-full p-5 border shadow-2xl space-y-3.5 my-auto">
-      <div class="flex items-center justify-between border-b theme-border pb-2.5">
+  <div id="careSupplyPickerModal" onclick="if(event.target===this)closeCareSupplyPickerModal()" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-3 overflow-y-auto">
+    <div class="theme-card rounded-3xl max-w-md w-full p-4 sm:p-5 border shadow-2xl space-y-3 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="sticky top-0 z-20 theme-card flex items-center justify-between border-b theme-border pb-2.5 pt-1 -mt-1">
         <h3 id="carePickerModalTitle" class="text-base font-bold">🌿 پودے کے لیے کھاد یا اسپرے منتخب کریں</h3>
-        <button type="button" onclick="closeCareSupplyPickerModal()" class="w-8 h-8 rounded-full theme-card-alt border flex items-center justify-center text-sm font-bold cursor-pointer">✕</button>
+        <button type="button" onclick="closeCareSupplyPickerModal()" class="w-8 h-8 rounded-full bg-red-600/90 text-white border border-white/20 flex items-center justify-center text-sm font-black cursor-pointer shrink-0">✕</button>
       </div>
       <p id="carePickerModalSub" class="text-xs theme-muted">Select the fertilizer or spray below — tracks 1st feed, 2nd feed, and exact day intervals:</p>
       <div id="careScheduleGuardBanner" class="hidden rounded-2xl p-3 border-2 border-amber-400 bg-amber-950/90 text-amber-100 text-xs space-y-1.5 shadow-lg"></div>
       <div id="carePickerPrevFeedBox" class="hidden theme-card-alt p-2.5 rounded-xl border border-amber-400/40 text-[11px] space-y-1"></div>
+      <div id="carePickerSpeciesMemoryBox" class="hidden theme-card-alt p-2.5 rounded-xl border border-emerald-400/60 text-[11px] space-y-1"></div>
       <div class="theme-card-alt p-2.5 rounded-xl border border-emerald-400/40 space-y-2 text-xs">
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <span id="lblCareActionDate" class="font-bold text-emerald-300">📅 تاریخ اور وقت:</span>
@@ -1650,7 +1657,7 @@
           </div>
         </details>
       </div>
-      <div id="carePickerOptionsList" class="space-y-2 max-h-60 overflow-y-auto"></div>
+      <div id="carePickerOptionsList" class="space-y-2"></div>
       <div class="flex items-center justify-between pt-2 border-t theme-border gap-2">
         <button type="button" id="btnCarePickerAddNewStock" onclick="closeCareSupplyPickerModal(); switchMainTab('stock'); openAddStockModal();" class="text-xs font-bold text-amber-400 hover:underline cursor-pointer">+ نئی کھاد / اسپرے شامل کریں</button>
         <button type="button" id="btnCarePickerClose" onclick="closeCareSupplyPickerModal()" class="px-4 py-1.5 rounded-xl text-xs font-bold theme-card-alt border cursor-pointer">بند کریں</button>
@@ -1669,62 +1676,66 @@
   <!-- MODAL: MULTI-PLANT INTERACTIVE FEED / SPRAY CHECKLIST                 -->
   <!-- ("بس پودے کے اوپر کلک کرتے جائیں اور کھاد/اسپرے اس کے اندر جاتی جائے") -->
   <!-- ===================================================================== -->
-  <div id="multiPlantCareModal" onclick="if(event.target===this)closeMultiPlantCareModal()" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 overflow-y-auto">
-    <div class="theme-card rounded-3xl max-w-xl w-full p-4 sm:p-5 border-2 border-emerald-400/60 shadow-2xl space-y-3.5 my-auto max-h-[92vh] flex flex-col">
-      <div class="flex items-center justify-between border-b theme-border pb-2.5 shrink-0">
-        <div>
+  <div id="multiPlantCareModal" onclick="if(event.target===this)closeMultiPlantCareModal()" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-3 overflow-y-auto">
+    <div class="theme-card rounded-3xl max-w-xl w-full p-4 sm:p-5 border-2 border-emerald-400/60 shadow-2xl space-y-3 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="sticky top-0 z-20 theme-card flex items-center justify-between border-b theme-border pb-2.5 pt-1 -mt-1">
+        <div class="min-w-0">
           <h3 id="multiPlantModalTitle" class="text-base sm:text-lg font-extrabold text-emerald-300 flex items-center gap-1.5">
             <span>✅</span><span>کھاد اور اسپرے ٹک لسٹ (پودے منتخب کریں)</span>
           </h3>
-          <p id="multiPlantModalSub" class="text-[11px] theme-muted">جن پودوں کو کھاد یا اسپرے دے آئے ہیں ان پر کلک کرتے جائیں — ہر پودے کی ہسٹری شیٹ میں وقت اور طریقہ خودکار درج ہو جائے گا!</p>
+          <p id="multiPlantModalSub" class="text-[11px] theme-muted leading-snug">اوپر سیٹنگز طے کر کے نیچے اسکرول کریں — پودوں کی پوری فہرست کھل کر سامنے آ جائے گی!</p>
         </div>
         <button type="button" onclick="closeMultiPlantCareModal()" class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-sm font-black cursor-pointer shrink-0">✕</button>
       </div>
 
-      <!-- Step A: Choose Action Type + Supply/Recipe + Date/Time + Method -->
-      <div class="theme-card-alt p-3 rounded-2xl border border-emerald-400/40 space-y-2.5 text-xs shrink-0">
-        <div class="flex flex-wrap items-center gap-1.5">
-          <button type="button" onclick="setMultiPlantCareType('feed')" id="mpTypeBtn-feed" class="px-3 py-1.5 rounded-xl font-black bg-emerald-500 text-stone-950 cursor-pointer text-xs">🌿 کھاد دی (Fertilizer)</button>
-          <button type="button" onclick="setMultiPlantCareType('spray')" id="mpTypeBtn-spray" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">🐛 اسپرے کیا (Spray/Mix)</button>
-          <button type="button" onclick="setMultiPlantCareType('water')" id="mpTypeBtn-water" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">💧 پانی دیا (Water)</button>
-          <button type="button" onclick="setMultiPlantCareType('till')" id="mpTypeBtn-till" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">⛏️ گوڈی کی (Hoeing)</button>
-          <button type="button" onclick="setMultiPlantCareType('prune')" id="mpTypeBtn-prune" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">✂️ کٹائی / پنچنگ (Prune)</button>
-        </div>
+      <details id="mpConfigDetails" open class="theme-card-alt p-3 rounded-2xl border border-emerald-400/40 text-xs">
+        <summary id="lblMpConfigSummary" class="font-black text-amber-300 cursor-pointer select-none flex items-center justify-between gap-2">
+          <span>⚙️ 1. کھاد / اسپرے، طریقہ اور تاریخ (بند کر کے زیادہ پودے دیکھیں)</span>
+          <span class="text-[10px] theme-badge px-2 py-0.5 rounded-md">▼</span>
+        </summary>
+        <div class="space-y-2.5 pt-2.5 mt-2 border-t theme-border">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button type="button" onclick="setMultiPlantCareType('feed')" id="mpTypeBtn-feed" class="px-3 py-1.5 rounded-xl font-black bg-emerald-500 text-stone-950 cursor-pointer text-xs">🌿 کھاد دی (Fertilizer)</button>
+            <button type="button" onclick="setMultiPlantCareType('spray')" id="mpTypeBtn-spray" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">🐛 اسپرے کیا (Spray/Mix)</button>
+            <button type="button" onclick="setMultiPlantCareType('water')" id="mpTypeBtn-water" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">💧 پانی دیا (Water)</button>
+            <button type="button" onclick="setMultiPlantCareType('till')" id="mpTypeBtn-till" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">⛏️ گوڈی کی (Hoeing)</button>
+            <button type="button" onclick="setMultiPlantCareType('prune')" id="mpTypeBtn-prune" class="px-3 py-1.5 rounded-xl font-bold theme-card border cursor-pointer text-xs">✂️ کٹائی / پنچنگ (Prune)</button>
+          </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <div>
-            <label id="lblMpSupplySelect" class="block text-[11px] font-bold text-amber-300 mb-0.5">🧪 کون سی کھاد / اسپرے / ریسپی دی؟</label>
-            <select id="mpSupplySelect" onchange="onMpSupplyDropdownChange(this.value)" class="w-full theme-card border border-amber-400/50 rounded-xl px-2.5 py-1.5 font-bold text-xs"></select>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label id="lblMpSupplySelect" class="block text-[11px] font-bold text-amber-300 mb-0.5">🧪 کون سی کھاد / اسپرے / ریسپی دی؟</label>
+              <select id="mpSupplySelect" onchange="onMpSupplyDropdownChange(this.value)" class="w-full theme-card border border-amber-400/50 rounded-xl px-2.5 py-1.5 font-bold text-xs"></select>
+            </div>
+            <div>
+              <label id="lblMpMethodSelect" class="block text-[11px] font-bold text-emerald-300 mb-0.5">🛠️ طریقہ کار (Method Used):</label>
+              <select id="mpMethodSelect" class="w-full theme-card border border-emerald-400/50 rounded-xl px-2.5 py-1.5 font-bold text-xs">
+                <option value="گوڈی کر کے مٹی میں ملائی|Mixed into topsoil with hoeing">⛏️ گوڈی کر کے مٹی میں ملائی (Soil Hoeing)</option>
+                <option value="پانی میں حل کر کے جڑوں میں دی|Dissolved in water (Root Drench)">💧 پانی میں حل کر کے جڑوں میں دی (Liquid Drench)</option>
+                <option value="پتوں پر اچھی طرح اسپرے کیا|Foliar mist sprayed on leaves">🚿 پتوں پر اچھی طرح اسپرے کیا (Foliar Spray)</option>
+                <option value="گملے کے کناروں پر دانے ڈالے|Granules applied around pot rim">⭕ گملے کے کناروں پر دانے ڈالے (Pot Rim)</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label id="lblMpMethodSelect" class="block text-[11px] font-bold text-emerald-300 mb-0.5">🛠️ طریقہ کار (Method Used):</label>
-            <select id="mpMethodSelect" class="w-full theme-card border border-emerald-400/50 rounded-xl px-2.5 py-1.5 font-bold text-xs">
-              <option value="گوڈی کر کے مٹی میں ملائی|Mixed into topsoil with hoeing">⛏️ گوڈی کر کے مٹی میں ملائی (Soil Hoeing)</option>
-              <option value="پانی میں حل کر کے جڑوں میں دی|Dissolved in water (Root Drench)">💧 پانی میں حل کر کے جڑوں میں دی (Liquid Drench)</option>
-              <option value="پتوں پر اچھی طرح اسپرے کیا|Foliar mist sprayed on leaves">🚿 پتوں پر اچھی طرح اسپرے کیا (Foliar Spray)</option>
-              <option value="گملے کے کناروں پر دانے ڈالے|Granules applied around pot rim">⭕ گملے کے کناروں پر دانے ڈالے (Pot Rim)</option>
-            </select>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[10px] theme-muted font-bold mb-0.5">📅 تاریخ (Date):</label>
+              <input id="mpDateInput" type="date" class="w-full theme-card border rounded-xl px-2.5 py-1 font-latin-num font-bold text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] theme-muted font-bold mb-0.5">⏰ وقت (Time):</label>
+              <input id="mpTimeInput" type="time" class="w-full theme-card border rounded-xl px-2.5 py-1 font-latin-num font-bold text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] theme-muted font-bold mb-0.5">📊 رزلٹ / نوٹ (Result Note):</label>
+              <input id="mpResultNoteInput" type="text" placeholder="مثلاً شام کو دی / اچھی گروتھ..." class="w-full theme-card border rounded-xl px-2.5 py-1 text-xs" />
+            </div>
           </div>
         </div>
+      </details>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <div>
-            <label class="block text-[10px] theme-muted font-bold mb-0.5">📅 تاریخ (Date):</label>
-            <input id="mpDateInput" type="date" class="w-full theme-card border rounded-xl px-2.5 py-1 font-latin-num font-bold text-xs" />
-          </div>
-          <div>
-            <label class="block text-[10px] theme-muted font-bold mb-0.5">⏰ وقت (Time):</label>
-            <input id="mpTimeInput" type="time" class="w-full theme-card border rounded-xl px-2.5 py-1 font-latin-num font-bold text-xs" />
-          </div>
-          <div>
-            <label class="block text-[10px] theme-muted font-bold mb-0.5">📊 رزلٹ / نوٹ (Result Note):</label>
-            <input id="mpResultNoteInput" type="text" placeholder="مثلاً شام کو دی / اچھی گروتھ..." class="w-full theme-card border rounded-xl px-2.5 py-1 text-xs" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Step B: Quick Selection Bar & Instant Tap Mode Toggle -->
-      <div class="flex items-center justify-between gap-2 flex-wrap text-xs shrink-0 px-1">
+      <div class="flex items-center justify-between gap-2 flex-wrap text-xs px-1">
         <div class="flex items-center gap-1.5 flex-wrap">
           <button type="button" onclick="selectMultiPlantGroup('all')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 font-bold cursor-pointer">☑️ سب پودے (Select All)</button>
           <button type="button" onclick="selectMultiPlantGroup('due')" class="px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-300 border border-amber-400/40 font-bold cursor-pointer">🚨 صرف ضرورت والے (Due Only)</button>
@@ -1732,20 +1743,18 @@
         </div>
         <label class="flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/40 px-2.5 py-1 rounded-xl cursor-pointer">
           <input id="mpInstantTapToggle" type="checkbox" class="accent-amber-400 w-3.5 h-3.5 cursor-pointer" />
-          <span class="text-[11px] font-black text-amber-300">⚡ کلک کرتے ہی فوری کھاد لاگ کریں (1-Tap Instant Mode)</span>
+          <span class="text-[11px] font-black text-amber-300">⚡ کلک کرتے ہی فوری لاگ کریں (1-Tap Instant Mode)</span>
         </label>
       </div>
 
-      <!-- Step C: Scrollable Interactive Plant Cards Checklist -->
-      <div id="multiPlantChecklistContainer" class="flex-1 overflow-y-auto space-y-1.5 pr-1 min-h-[210px]"></div>
+      <div id="multiPlantChecklistContainer" class="space-y-2 pb-2"></div>
 
-      <!-- Footer Save Button -->
-      <div class="flex items-center justify-between gap-2 pt-2.5 border-t theme-border shrink-0">
+      <div class="sticky bottom-0 z-20 theme-card flex items-center justify-between gap-2 pt-2.5 pb-1 border-t theme-border">
         <span id="mpSelectedCountBadge" class="text-xs font-extrabold text-emerald-300">0 پودے منتخب ہیں</span>
         <div class="flex items-center gap-2">
-          <button type="button" onclick="closeMultiPlantCareModal()" class="px-4 py-2 rounded-xl text-xs font-bold theme-card-alt border cursor-pointer">بند کریں</button>
-          <button type="button" onclick="applyMultiPlantCareSelection()" id="btnMpApplySelected" class="theme-btn-primary px-5 py-2 rounded-xl text-xs sm:text-sm font-black cursor-pointer shadow-lg">
-            ✅ منتخب پودوں کی ہسٹری میں درج کریں
+          <button type="button" onclick="closeMultiPlantCareModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold theme-card-alt border cursor-pointer">بند کریں</button>
+          <button type="button" onclick="applyMultiPlantCareSelection()" id="btnMpApplySelected" class="theme-btn-primary px-4 py-2 rounded-xl text-xs sm:text-sm font-black cursor-pointer shadow-lg">
+            ✅ منتخب پودوں میں درج کریں
           </button>
         </div>
       </div>
@@ -2141,7 +2150,11 @@
       <!-- Search + Category Filter + Add Custom Plant to Encyclopedia Toggle -->
       <div class="space-y-2 shrink-0">
         <div class="flex flex-col sm:flex-row gap-2">
-          <input id="encycSearchInput" type="text" oninput="renderEncyclopediaModalList()" placeholder="پودے کا نام تلاش کریں (اردو، انگریزی، مثلاً گیندا، نرگس، پٹونیا، ٹماٹر، کنو)..." class="flex-1 theme-card-alt border border-emerald-400/50 rounded-xl px-3 py-2 text-xs sm:text-sm font-bold" />
+          <div class="flex-1 flex items-center gap-2 theme-card-alt border border-emerald-400/50 rounded-xl px-3 py-1.5">
+            <span class="text-emerald-300 text-sm shrink-0 pointer-events-none" aria-hidden="true">🔍</span>
+            <input id="encycSearchInput" type="text" oninput="renderEncyclopediaModalList()" placeholder="پودے کا نام تلاش کریں (اردو، انگریزی، مثلاً گیندا، نرگس، پٹونیا، ٹماٹر، کنو)..." class="flex-1 min-w-0 bg-transparent text-xs sm:text-sm font-bold focus:outline-none" style="border:none;outline:none;padding:0.2rem 0;" />
+            <button type="button" onclick="const el=document.getElementById('encycSearchInput');if(el){el.value='';el.focus();renderEncyclopediaModalList();}" class="text-[11px] bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-200 px-2 py-0.5 rounded-lg font-black cursor-pointer shrink-0" title="Clear">✕</button>
+          </div>
           <button type="button" onclick="openGeminiPromptBoxFromAnywhere()" id="btnOpenGeminiPromptFromEncyc" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-3 py-2 rounded-xl text-xs font-black cursor-pointer shrink-0 flex items-center justify-center gap-1 shadow-xs">
             <span>🤖</span>
             <span id="btnOpenGeminiPromptFromEncycTxt">جیمنائی پرامپٹ و گائیڈ پیسٹ</span>
@@ -2244,6 +2257,74 @@
         </button>
         <button id="confirmModalActionBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-black cursor-pointer shadow-lg shadow-red-600/30 transition flex items-center justify-center gap-1.5">
           <span>🗑️ ہاں، حذف کریں</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GEMINI LIVE VIDEO/CHAT -> GARDEN DATABASE AUTO-SYNC -->
+  <div id="geminiLiveSyncModal" onclick="if(event.target===this)closeGeminiLiveSyncModal()" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto">
+    <div class="theme-card rounded-3xl max-w-xl w-full p-4 sm:p-5 border-2 border-blue-400/60 shadow-2xl space-y-3.5 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="sticky top-0 z-20 theme-card flex items-center justify-between border-b theme-border pb-2.5 pt-1 -mt-1">
+        <div>
+          <h3 id="liveSyncModalTitle" class="text-base sm:text-lg font-black text-blue-300 flex items-center gap-1.5">
+            <span>🎥</span><span>جیمینائی لائیو سنک (Gemini Live → App)</span>
+          </h3>
+          <p id="liveSyncModalSub" class="text-[11px] theme-muted">جیمینائی لائیو ویڈیو میں پودوں پر کی گئی بات چیت، کھاد، پانی، گوڈی، کٹائی، بیماری یا نئے پودے سیدھا ایپ اور ہسٹری شیٹ میں شامل کریں</p>
+        </div>
+        <button type="button" onclick="closeGeminiLiveSyncModal()" class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-sm font-black cursor-pointer shrink-0">✕</button>
+      </div>
+
+      <div class="theme-card-alt p-3 rounded-2xl border border-amber-400/50 space-y-2 text-xs">
+        <strong id="lblLiveSyncStep1" class="block text-amber-300">1. جیمینائی لائیو سیشن کے بعد یہ پرامپٹ کاپی کر کے جیمینائی میں بھیجیں:</strong>
+        <p id="lblLiveSyncStep1Sub" class="text-[11px] theme-muted leading-snug">جیمینائی آپ کی پوری لائیو ویڈیو گفتگو (کھاد، گوڈی، پانی، کٹائی، بیماری اور نئے پودے) کو تیار فارمیٹ میں بدل دے گا جسے آپ ایک کلک پر نیچے پیسٹ کر سکیں گے۔</p>
+        <button type="button" onclick="copyGeminiLiveSessionPrompt()" class="w-full bg-amber-400 hover:bg-amber-300 text-stone-950 py-2.5 px-3 rounded-xl text-xs font-black cursor-pointer shadow-md flex items-center justify-center gap-1.5 active:scale-95">
+          <span>📋</span><span id="btnCopyLivePromptTxt">جیمینائی لائیو پرامپٹ کاپی کریں (Copy Live Prompt)</span>
+        </button>
+      </div>
+
+      <div class="theme-card-alt p-3 rounded-2xl border border-emerald-400/50 space-y-2 text-xs">
+        <div class="flex items-center justify-between flex-wrap gap-1">
+          <strong id="lblLiveSyncStep2" class="text-emerald-300">2. جیمینائی لائیو کا جواب (JSON یا سادہ اردو/انگریزی نوٹ) پیسٹ کریں:</strong>
+          <div class="flex items-center gap-1">
+            <button type="button" onclick="pasteFromClipboardToInput('geminiLivePasteInput')" class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/50 px-2.5 py-1 rounded-lg font-black cursor-pointer">📋 پیسٹ</button>
+            <button type="button" onclick="document.getElementById('geminiLivePasteInput').value=''; document.getElementById('geminiLivePreviewBox').classList.add('hidden');" class="text-[10px] theme-badge px-2 py-1 rounded-lg font-bold cursor-pointer">صاف کریں</button>
+          </div>
+        </div>
+        <textarea id="geminiLivePasteInput" rows="5" placeholder="جیمینائی سے کاپی کیا گیا JSON یا سادہ نوٹ پیسٹ کریں (مثلاً: French Marigold کو آج SOP کھاد دی، Rose کی کٹائی کی، نیا Adenium لگایا)..." class="w-full theme-card border rounded-xl p-2.5 text-xs leading-relaxed resize-y"></textarea>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button type="button" onclick="previewGeminiLiveImport()" class="theme-card hover:border-amber-400 border border-amber-400/60 text-amber-300 py-2.5 px-3 rounded-xl text-xs font-black cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
+            <span>👁️</span><span id="btnPreviewLiveSyncTxt">پری ویو چیک کریں (Preview)</span>
+          </button>
+          <button type="button" onclick="applyGeminiLiveImport()" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 py-2.5 px-3 rounded-xl text-xs font-black cursor-pointer shadow-md flex items-center justify-center gap-1.5 active:scale-95">
+            <span>✅</span><span id="btnApplyLiveSyncTxt">ڈیٹا بیس اور ہسٹری میں درج کریں</span>
+          </button>
+        </div>
+        <div id="geminiLivePreviewBox" class="hidden theme-card rounded-xl p-3 border border-blue-400/50 text-[11px] space-y-1.5 leading-relaxed"></div>
+      </div>
+
+      <div class="flex justify-end pt-1">
+        <button type="button" onclick="closeGeminiLiveSyncModal()" class="theme-btn-primary px-5 py-2 rounded-xl text-xs font-bold cursor-pointer">بند کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: EXIT APP CONFIRMATION (BACK BUTTON / BACK GESTURE GUARD) -->
+  <div id="exitConfirmModal" onclick="if(event.target===this)cancelGulzarExit()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="theme-card border-2 border-amber-400/60 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl text-center my-auto">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-400/20 border-2 border-amber-400/60 flex items-center justify-center text-3xl shadow-lg">
+        🌹
+      </div>
+      <div class="space-y-1.5">
+        <h3 id="exitModalTitle" class="text-base font-black text-white">گلزار ایپ بند کریں؟</h3>
+        <p id="exitModalMsg" class="text-xs text-stone-300 leading-relaxed">کیا آپ واقعی گلزار ایپ سے باہر نکلنا چاہتے ہیں؟ آپ کا تمام ڈیٹا محفوظ ہے۔</p>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button type="button" onclick="cancelGulzarExit()" id="btnExitCancel" class="flex-1 py-2.5 rounded-xl border border-emerald-400/50 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black cursor-pointer">
+          نہیں، رہنے دیں
+        </button>
+        <button type="button" onclick="confirmGulzarExit()" id="btnExitConfirm" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-black cursor-pointer shadow-lg">
+          ہاں، بند کریں
         </button>
       </div>
     </div>
@@ -4033,7 +4114,8 @@
 
       setTxt('appHeaderBrand', t.brand);
       setTxt('moujFooterTitle', isEn ? 'Powered & Controlled by MOUJ SYNC' : 'پیشکش و کنٹرولڈ بائے: موج سِنک (MOUJ SYNC)');
-      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v34.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v34.0 (GULZAR Smart Home Garden)');
+      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v35.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v35.0 (GULZAR Smart Home Garden)');
+      setTxt('btnHeroGeminiLiveLabel', isEn ? 'Gemini Live Sync' : 'جیمینائی لائیو سنک (Live Sync)');
       setTxt('btnHeroGeminiPromptLabel', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('btnOpenGeminiPromptFromEncycTxt', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('lblGeminiPromptBoxTitle', isEn ? '🤖 Gemini Chat Prompt & Encyclopedia Paste Box' : '🤖 جیمنائی چیٹ پرامپٹ اور انسائیکلوپیڈیا پیسٹ باکس');
@@ -4592,6 +4674,8 @@
       if (tId === 'recipes') renderRecipesList();
       if (tId === 'calendar') renderPruningCalendar();
       if (tId === 'help') renderHelpAndQaSection();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
     }
 
     function openSettingsModal() {
@@ -5082,7 +5166,7 @@
                   const sName = latestS ? (isEn ? latestS.sprayEn : latestS.sprayUr) : (isEn ? 'Protective Spray' : 'حفاظتی اسپرے');
                   const sDate = latestS ? (isEn ? latestS.dateEn : latestS.dateUr) : formatPlantedDateDisplay(p.lastSprayedDate, isEn).dateText;
                   barsHtml += `<div onclick="openPlantDetailModal('${p.id}')" class="theme-card-alt px-2.5 py-1.5 rounded-xl border border-teal-500/30 text-[10px] flex items-center justify-between gap-1 flex-wrap cursor-pointer hover:border-teal-400">
-                    <span class="text-teal-300 font-bold truncate max-w-[70%]">🐛 ${isEn ? `Spray #${sprayCount}:` : `اسپرے #${sprayCount}:`} ${sName}</span>
+                    <span class="text-teal-300 font-bold truncate max-w-[70%]">🐛 ${isEn ? `Spray #${sprayCount}:` : `اسپرے #${sprayCount}:`} ${String(sName || '').replace(/^(?:Spray\s*#\d+:\s*|اسپرے\s*#\d+:\s*)+/i, '')}</span>
                     <span class="text-[9px] theme-muted font-latin-num">${sDate}</span>
                   </div>`;
                 }
@@ -5303,6 +5387,9 @@
       setCareActionDateOffset(0);
       populateCareMethodOptionsForType(typeKey);
       updateCareScheduleGuardBanner();
+      if (typeof renderSpeciesCareMemoryBanner === 'function') {
+        renderSpeciesCareMemoryBanner('carePickerSpeciesMemoryBox', p.nameEn || p.nameUr, p.id);
+      }
 
       const lblDate = document.getElementById('lblCareActionDate');
       if (lblDate) lblDate.textContent = isEn ? '📅 Action Date & Time:' : '📅 تاریخ اور وقت:';
@@ -8061,6 +8148,9 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       }
       const isEn = gState.lang === 'en';
       const rawName = (document.getElementById('formPlantNameInput')?.value || '').trim();
+      if (typeof renderSpeciesCareMemoryBanner === 'function') {
+        renderSpeciesCareMemoryBanner('plantSpeciesMemoryBanner', rawName, editingPlantId);
+      }
       if (!rawName) {
         warnBox.classList.add('hidden');
         warnBox.innerHTML = '';
@@ -9925,6 +10015,9 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
         const sh = p.sprayHistory.find(s => s.historyRefId === historyId);
         if (sh) { sh.resultUr = valUr; sh.resultEn = valEn; }
       }
+      if (typeof rememberSpeciesCareOutcome === 'function') {
+        rememberSpeciesCareOutcome(p, hItem?.noteUr || p.lastFertUr || p.fertUr, hItem?.noteEn || p.lastFertEn || p.fertEn, hItem?.methodUr || '', hItem?.methodEn || '', valUr, valEn);
+      }
       persist();
       openPlantDetailModal(plantId);
       notify(isEn ? 'Plant result & observation saved!' : 'پودے کی ہسٹری شیٹ میں رزلٹ محفوظ ہو گیا!', '📊');
@@ -10693,10 +10786,18 @@ Return ONLY valid JSON:
       closeAddRecipeModal();
       notify(isEn ? `Unique recipe "${titleEn}" saved!` : `منفرد ریسپی "${titleUr}" بمعہ تاریخ محفوظ ہو گئی!`, '🍶');
     }
+    function detectRecipeCareType(r) {
+      if (!r) return 'feed';
+      const txt = `${r.titleEn || ''} ${r.titleUr || ''} ${r.targetEn || ''} ${r.targetUr || ''} ${r.stepsEn || ''} ${r.stepsUr || ''}`.toLowerCase();
+      const isPestSpray = /(neem|fungicide|insect|pest|mealybug|aphid|mite|کیڑے|فنگس|ملی بگ|نیم آئل|فنگسائڈ)/i.test(txt) && !/(bloom|booster|potash|sop|npk|dap|manure|compost|drench|seaweed|humic|root|tonic|کھاد|بلوم|پوٹاش)/i.test(txt);
+      return isPestSpray ? 'spray' : 'feed';
+    }
+
     function applyRecipeToSelectedPlants(recId) {
       const r = gState.recipes.find(x => x.id === recId);
       if (!r) return;
-      openMultiPlantCareModal('spray', 'recipe:' + recId);
+      const smartType = detectRecipeCareType(r);
+      openMultiPlantCareModal(smartType, 'recipe:' + recId);
     }
 
     // =========================================================================
@@ -10867,7 +10968,9 @@ Return ONLY valid JSON:
       const resUr = rawRes ? translateCustomTerm(rawRes, 'ur') : '';
       const resEn = rawRes ? translateCustomTerm(rawRes, 'en') : '';
 
-      recordPlantAction(plantId, _mpCareType, noteUr, noteEn, dateIso, methodUr, methodEn, resUr, resEn, timeStr, false);
+      const isSoilOrRootMethod = /(hoeing|drench|rim|گوڈی|جڑوں|کناروں)/i.test(`${methodEn} ${methodUr}`);
+      const effectiveType = (_mpCareType === 'spray' && isSoilOrRootMethod) ? 'feed' : _mpCareType;
+      recordPlantAction(plantId, effectiveType, noteUr, noteEn, dateIso, methodUr, methodEn, resUr, resEn, timeStr, false);
       syncRecipeUsageIfMatched(noteUr, noteEn, [plantId], dateIso, timeStr, methodUr, methodEn, resUr, resEn);
       _mpJustLoggedTodayPlantIds.add(plantId);
       _mpSelectedPlantIds.add(plantId);
@@ -10942,14 +11045,17 @@ Return ONLY valid JSON:
       const resUr = rawRes ? translateCustomTerm(rawRes, 'ur') : '';
       const resEn = rawRes ? translateCustomTerm(rawRes, 'en') : '';
 
-      ids.forEach(pid => {
-        if (!_mpJustLoggedTodayPlantIds.has(pid)) {
-          recordPlantAction(pid, _mpCareType, noteUr, noteEn, dateIso, methodUr, methodEn, resUr, resEn, timeStr, true);
-        }
+      const isSoilOrRootMethod = /(hoeing|drench|rim|گوڈی|جڑوں|کناروں)/i.test(`${methodEn} ${methodUr}`);
+      const effectiveType = (_mpCareType === 'spray' && isSoilOrRootMethod) ? 'feed' : _mpCareType;
+      const newlyLoggedIds = ids.filter(pid => !_mpJustLoggedTodayPlantIds.has(pid));
+      newlyLoggedIds.forEach(pid => {
+        recordPlantAction(pid, effectiveType, noteUr, noteEn, dateIso, methodUr, methodEn, resUr, resEn, timeStr, true);
       });
 
-      syncRecipeUsageIfMatched(noteUr, noteEn, ids, dateIso, timeStr, methodUr, methodEn, resUr, resEn);
-      deductStockUsageForCare(noteUr, noteEn, ids.length);
+      if (newlyLoggedIds.length > 0) {
+        syncRecipeUsageIfMatched(noteUr, noteEn, newlyLoggedIds, dateIso, timeStr, methodUr, methodEn, resUr, resEn);
+        deductStockUsageForCare(noteUr, noteEn, newlyLoggedIds.length);
+      }
       persist();
       renderPlantsList();
       renderStockList();
@@ -13821,11 +13927,496 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       }
     }
 
-    // Android Hardware Back Gesture, Scroll-to-Top & Floating Back/Dashboard Handler
+    // =========================================================================
+    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v35.0)
+    // =========================================================================
+    function getSpeciesMemoryKey(nameStr) {
+      const cleaned = normalizeSearchText(String(nameStr || '').replace(/\s+\d+$/, '').split('(')[0]);
+      if (!cleaned) return '';
+      const matches = findBestFlexiblePlantMatches(cleaned);
+      if (matches.length > 0 && matches[0].score >= 65) return matches[0].key;
+      return cleaned.slice(0, 32);
+    }
+
+    function rememberSpeciesCareOutcome(plantObj, fertUr, fertEn, methodUr, methodEn, resultUr, resultEn) {
+      if (!plantObj) return;
+      const key = getSpeciesMemoryKey(plantObj.nameEn || plantObj.nameUr || '');
+      if (!key) return;
+      if (!gState.speciesMemory || typeof gState.speciesMemory !== 'object') gState.speciesMemory = {};
+      const prev = gState.speciesMemory[key] || {};
+      gState.speciesMemory[key] = {
+        speciesUr: plantObj.nameUr || prev.speciesUr || '',
+        speciesEn: plantObj.nameEn || prev.speciesEn || '',
+        fertUr: fertUr || prev.fertUr || plantObj.fertUr || '',
+        fertEn: fertEn || prev.fertEn || plantObj.fertEn || '',
+        methodUr: methodUr || prev.methodUr || '',
+        methodEn: methodEn || prev.methodEn || '',
+        bestResultUr: resultUr || prev.bestResultUr || '',
+        bestResultEn: resultEn || prev.bestResultEn || '',
+        careRuleUr: plantObj.totkaUr || prev.careRuleUr || '',
+        careRuleEn: plantObj.totkaEn || prev.careRuleEn || '',
+        updatedAt: getLocalTodayISO()
+      };
+    }
+
+    function hydrateSpeciesMemoryFromExistingGarden() {
+      if (!gState.speciesMemory || typeof gState.speciesMemory !== 'object') gState.speciesMemory = {};
+      (gState.plants || []).forEach(p => {
+        const key = getSpeciesMemoryKey(p.nameEn || p.nameUr || '');
+        if (!key) return;
+        const fLogs = Array.isArray(p.feedHistory) ? p.feedHistory : [];
+        const withRes = fLogs.find(f => f.resultUr || f.resultEn) || (Array.isArray(p.history) ? p.history.find(h => h.resultUr || h.resultEn) : null);
+        const latestF = fLogs[0];
+        if (!gState.speciesMemory[key] && (latestF || withRes)) {
+          gState.speciesMemory[key] = {
+            speciesUr: p.nameUr || '',
+            speciesEn: p.nameEn || '',
+            fertUr: (withRes?.fertUr || latestF?.fertUr || p.fertUr || ''),
+            fertEn: (withRes?.fertEn || latestF?.fertEn || p.fertEn || ''),
+            methodUr: (withRes?.methodUr || latestF?.methodUr || ''),
+            methodEn: (withRes?.methodEn || latestF?.methodEn || ''),
+            bestResultUr: withRes?.resultUr || '',
+            bestResultEn: withRes?.resultEn || '',
+            careRuleUr: p.totkaUr || '',
+            careRuleEn: p.totkaEn || '',
+            updatedAt: latestF?.dateIso || getLocalTodayISO()
+          };
+        }
+      });
+    }
+
+    function applySpeciesMemoryToAddForm(specKey) {
+      const mem = gState.speciesMemory && gState.speciesMemory[specKey];
+      if (!mem) return;
+      const isEn = gState.lang === 'en';
+      const fertInp = document.getElementById('formFertInput');
+      const totkaInp = document.getElementById('formTotkaInput');
+      if (fertInp && (mem.fertEn || mem.fertUr)) fertInp.value = isEn ? (mem.fertEn || mem.fertUr) : (mem.fertUr || mem.fertEn);
+      if (totkaInp && (mem.careRuleEn || mem.careRuleUr)) totkaInp.value = isEn ? (mem.careRuleEn || mem.careRuleUr) : (mem.careRuleUr || mem.careRuleEn);
+      notify(isEn ? '🧠 Applied your previous proven care rule for this species!' : '🧠 اس پودے کا پچھلا کامیاب اصول اور خوراک خودکار بھر دی گئی!', '🧠');
+    }
+
+    function renderSpeciesCareMemoryBanner(containerId, plantNameRaw, excludePlantId = null) {
+      const box = document.getElementById(containerId);
+      if (!box) return;
+      const key = getSpeciesMemoryKey(plantNameRaw);
+      if (!key) { box.classList.add('hidden'); return; }
+      hydrateSpeciesMemoryFromExistingGarden();
+      const mem = gState.speciesMemory && gState.speciesMemory[key];
+      if (!mem || (!mem.fertEn && !mem.fertUr && !mem.bestResultEn && !mem.bestResultUr)) {
+        box.classList.add('hidden');
+        return;
+      }
+      const isEn = gState.lang === 'en';
+      const fertTxt = isEn ? (mem.fertEn || mem.fertUr) : (mem.fertUr || mem.fertEn);
+      const methTxt = isEn ? (mem.methodEn || mem.methodUr) : (mem.methodUr || mem.methodEn);
+      const resTxt = isEn ? (mem.bestResultEn || mem.bestResultUr) : (mem.bestResultUr || mem.bestResultEn);
+      const showApplyBtn = containerId === 'plantSpeciesMemoryBanner';
+      box.classList.remove('hidden');
+      box.innerHTML = `
+        <div class="flex items-start justify-between gap-2">
+          <div class="space-y-0.5">
+            <strong class="text-emerald-300 block">🧠 ${isEn ? 'Previous Proven Care & Success Memory:' : 'پچھلا کامیاب اصول اور تجربہ (یاد دہانی):'}</strong>
+            ${fertTxt ? `<div>🌿 <strong>${isEn ? 'Last Method/Feed:' : 'پچھلی خوراک و طریقہ:'}</strong> ${escapeGuideHtml(fertTxt)}${methTxt ? ` (${escapeGuideHtml(methTxt)})` : ''}</div>` : ''}
+            ${resTxt ? `<div class="text-amber-300">✨ <strong>${isEn ? 'Past Improvement:' : 'پچھلی بہتری / رزلٹ:'}</strong> ${escapeGuideHtml(resTxt)}</div>` : ''}
+          </div>
+          ${showApplyBtn ? `<button type="button" onclick="applySpeciesMemoryToAddForm('${key.replace(/'/g, "\\'")}')" class="bg-emerald-500 text-stone-950 px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer shrink-0">✨ ${isEn ? 'Apply Rule' : 'اصول لاگو کریں'}</button>` : ''}
+        </div>`;
+    }
+
+    // =========================================================================
+    // GEMINI LIVE VIDEO / CHAT SESSION -> GARDEN DATABASE AUTO-SYNC ENGINE
+    // =========================================================================
+    function openGeminiLiveSyncModal() {
+      const m = document.getElementById('geminiLiveSyncModal');
+      if (!m) return;
+      m.classList.remove('hidden');
+      const prevBox = document.getElementById('geminiLivePreviewBox');
+      if (prevBox) prevBox.classList.add('hidden');
+      pushGulzarModalState('geminiLiveSyncModal');
+      resetModalScrollToTop('geminiLiveSyncModal');
+    }
+
+    function closeGeminiLiveSyncModal() {
+      const m = document.getElementById('geminiLiveSyncModal');
+      if (m) m.classList.add('hidden');
+      updateFloatingNavButtons();
+    }
+
+    function buildGeminiLiveSessionPrompt() {
+      const plantNames = (gState.plants || []).map(p => `${p.nameEn || p.nameUr}`).slice(0, 40).join(', ');
+      const today = getLocalTodayISO();
+      const nowT = getNowTimeHHMM();
+      return `آپ گلزار سمارٹ ہوم گارڈن (GULZAR — لاہور) کے اسمارٹ اسسٹنٹ ہیں۔
+ابھی میں نے آپ کے ساتھ جیمینائی لائیو (Gemini Live) ویڈیو/گفتگو میں اپنے باغ کے پودوں پر کام اور مشورہ کیا ہے۔
+براہِ کرم اس پوری گفتگو کا خلاصہ نیچے دیے گئے JSON فارمیٹ میں تیار کر دیں تاکہ میں اسے سیدھا گلزار ایپ میں پیسٹ کر کے تمام پودوں کی ہسٹری، کھاد، پانی، گوڈی، اسپرے، کٹائی، تبدیلیوں اور نئے پودوں کو خودکار اپ ڈیٹ کر سکوں۔
+
+میرے موجودہ پودے: ${plantNames || 'Garden Plants'}
+آج کی تاریخ: ${today} | وقت: ${nowT}
+
+صرف یہ JSON بلاک مکمل کریں:
+\`\`\`json
+{
+  "sessionDate": "${today}",
+  "sessionTime": "${nowT}",
+  "actions": [
+    {
+      "plantName": "پودے کا نام (مثلاً French Marigold یا Adenium)",
+      "actionType": "feed | water | till | spray | prune | note",
+      "itemName": "کھاد / اسپرے / ریسپی یا عمل کا نام",
+      "method": "طریقہ کار (مثلاً Root Drench / Soil Hoeing / Foliar Spray)",
+      "notes": "بیماری، حالت یا جیمینائی لائیو میں کیا گیا خاص مشورہ",
+      "result": "اگر کوئی بہتری یا مشاہدہ ہو"
+    }
+  ],
+  "newPlants": [
+    {
+      "nameEn": "New Plant English Name",
+      "nameUr": "نئے پودے کا اردو نام",
+      "location": "لوکیشن (مثلاً Garage 10 A)",
+      "potSize": "12-inch Clay Pot",
+      "variant": "رنگ یا ورائٹی",
+      "waterDays": 3,
+      "fert": "کھاد کا اصول",
+      "totka": "لائیو مشورہ"
+    }
+  ],
+  "updates": [
+    {
+      "plantName": "پرانے پودے کا نام",
+      "newLocation": "",
+      "potSize": "",
+      "variant": "",
+      "careRule": "طے شدہ نیا اصول یا مشورہ"
+    }
+  ]
+}
+\`\`\``;
+    }
+
+    async function copyGeminiLiveSessionPrompt() {
+      const isEn = gState.lang === 'en';
+      const txt = buildGeminiLiveSessionPrompt();
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(txt);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = txt;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        notify(
+          isEn
+            ? '📋 Gemini Live Prompt copied! Paste it in your Gemini Live chat, then paste Gemini\'s reply below.'
+            : '📋 جیمینائی لائیو پرامپٹ کاپی ہو گیا! اسے اپنی جیمینائی لائیو چیٹ میں بھیجیں اور جواب نیچے پیسٹ کر دیں۔',
+          '🎥'
+        );
+      } catch (e) {}
+    }
+
+    function parseGeminiLiveInput(rawInput) {
+      const raw = (rawInput || '').trim();
+      const today = getLocalTodayISO();
+      const nowT = getNowTimeHHMM();
+      if (!raw) return null;
+
+      const norm = raw.replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'");
+      const m = norm.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/i) || norm.match(/(\{[\s\S]*"(?:actions|newPlants|updates)"[\s\S]*\})/);
+      if (m) {
+        try {
+          const obj = JSON.parse(m[1].replace(/,\s*([}\]])/g, '$1'));
+          return {
+            sessionDate: parseFlexibleDateToISO(obj.sessionDate || today),
+            sessionTime: obj.sessionTime || nowT,
+            actions: Array.isArray(obj.actions) ? obj.actions : [],
+            newPlants: Array.isArray(obj.newPlants) ? obj.newPlants : [],
+            updates: Array.isArray(obj.updates) ? obj.updates : []
+          };
+        } catch (e) {}
+      }
+
+      const lines = raw.split(/\n|[۔\.](?=\s)/).map(x => x.trim()).filter(x => x.length > 3);
+      const actions = [];
+      const detectAction = (line) => {
+        const l = line.toLowerCase();
+        if (/(کھاد|خوراک|feed|fert|sop|npk|dap|booster|manure|compost|potash|بلوم)/i.test(l)) return 'feed';
+        if (/(اسپرے|spray|neem|fungicide|کیڑے|فنگس|نیم)/i.test(l)) return 'spray';
+        if (/(گوڈی|گوٹی|till|hoe)/i.test(l)) return 'till';
+        if (/(کٹائی|پروننگ|پنچنگ|prune|pinch|cut)/i.test(l)) return 'prune';
+        if (/(پانی|water)/i.test(l)) return 'water';
+        return 'note';
+      };
+
+      lines.forEach(line => {
+        const matchedPlant = (gState.plants || []).find(p => {
+          const en = normalizeSearchText(p.nameEn || '');
+          const ur = normalizeSearchText(p.nameUr || '');
+          const lNorm = normalizeSearchText(line);
+          return (en && en.length > 2 && lNorm.includes(en.split('(')[0].trim())) || (ur && ur.length > 2 && lNorm.includes(ur.split('(')[0].trim()));
+        });
+        if (matchedPlant) {
+          actions.push({
+            plantName: matchedPlant.nameEn || matchedPlant.nameUr,
+            actionType: detectAction(line),
+            itemName: 'Gemini Live Care',
+            method: '',
+            notes: line,
+            result: ''
+          });
+        }
+      });
+
+      return { sessionDate: today, sessionTime: nowT, actions, newPlants: [], updates: [] };
+    }
+
+    function findGardenPlantForLiveName(nameRaw) {
+      const q = normalizeSearchText(nameRaw || '');
+      if (!q) return null;
+      const plants = gState.plants || [];
+      let best = null;
+      let bestScore = 0;
+      for (const p of plants) {
+        const en = normalizeSearchText(p.nameEn || '');
+        const ur = normalizeSearchText(p.nameUr || '');
+        const baseEn = en.split('(')[0].trim();
+        const baseUr = ur.split('(')[0].trim();
+        let score = 0;
+        if (en === q || ur === q || baseEn === q || baseUr === q) score = 100;
+        else if ((baseEn && q.includes(baseEn)) || (baseEn && baseEn.includes(q))) score = 85;
+        else if ((baseUr && q.includes(baseUr)) || (baseUr && baseUr.includes(q))) score = 85;
+        else {
+          const toks = q.split(' ').filter(t => t.length >= 3);
+          const hits = toks.filter(t => en.includes(t) || ur.includes(t)).length;
+          if (hits > 0) score = Math.round((hits / Math.max(1, toks.length)) * 75);
+        }
+        if (score > bestScore) { bestScore = score; best = p; }
+      }
+      return bestScore >= 55 ? best : null;
+    }
+
+    function previewGeminiLiveImport() {
+      const isEn = gState.lang === 'en';
+      const raw = document.getElementById('geminiLivePasteInput')?.value || '';
+      const box = document.getElementById('geminiLivePreviewBox');
+      if (!box) return;
+      const parsed = parseGeminiLiveInput(raw);
+      if (!parsed || (parsed.actions.length === 0 && parsed.newPlants.length === 0 && parsed.updates.length === 0)) {
+        box.classList.remove('hidden');
+        box.innerHTML = `<span class="text-amber-300 font-bold">⚠️ ${isEn ? 'Could not detect any plant actions or updates. Please paste the JSON block from Gemini Live or include your plant names.' : 'کوئی پودا یا عمل شناخت نہیں ہو سکا۔ براہِ کرم جیمینائی لائیو سے حاصل کردہ JSON یا اپنے پودوں کے ناموں کے ساتھ نوٹ پیسٹ کریں۔'}</span>`;
+        return;
+      }
+      box.classList.remove('hidden');
+      let htmlOut = `<strong class="text-emerald-300 block">✅ ${isEn ? 'Ready to Apply from Gemini Live:' : 'جیمینائی لائیو سے درج ہونے والی تفصیل:'} (${parsed.sessionDate} • ${formatTime12Hour(parsed.sessionTime)})</strong>`;
+      if (parsed.actions.length > 0) {
+        htmlOut += `<div class="space-y-1">`;
+        parsed.actions.forEach(a => {
+          const matched = findGardenPlantForLiveName(a.plantName);
+          const badge = matched ? `✅ ${matched.nameEn || matched.nameUr}` : `⚠️ ${a.plantName} (${isEn ? 'Will auto-create' : 'نیا بنے گا'})`;
+          htmlOut += `<div class="theme-card-alt p-1.5 rounded-lg border border-white/10">🎥 <strong>[${(a.actionType || 'note').toUpperCase()}]</strong> ${escapeGuideHtml(badge)} — ${escapeGuideHtml(a.itemName || a.notes || '')}</div>`;
+        });
+        htmlOut += `</div>`;
+      }
+      if (parsed.newPlants.length > 0) {
+        htmlOut += `<div class="text-amber-300">🌱 <strong>${isEn ? 'New Plants:' : 'نئے پودے:'}</strong> ${parsed.newPlants.map(np => escapeGuideHtml(np.nameEn || np.nameUr)).join(', ')}</div>`;
+      }
+      if (parsed.updates.length > 0) {
+        htmlOut += `<div class="text-blue-300">🔄 <strong>${isEn ? 'Plant Updates:' : 'پودوں کی تبدیلیاں:'}</strong> ${parsed.updates.map(u => escapeGuideHtml(u.plantName)).join(', ')}</div>`;
+      }
+      box.innerHTML = htmlOut;
+    }
+
+    function applyGeminiLiveImport() {
+      const isEn = gState.lang === 'en';
+      const raw = document.getElementById('geminiLivePasteInput')?.value || '';
+      const parsed = parseGeminiLiveInput(raw);
+      if (!parsed || (parsed.actions.length === 0 && parsed.newPlants.length === 0 && parsed.updates.length === 0)) {
+        notify(isEn ? 'Paste a Gemini Live summary first!' : 'پہلے جیمینائی لائیو کا خلاصہ یا JSON پیسٹ کریں!', '⚠️');
+        return;
+      }
+
+      let addedCount = 0;
+      let actionCount = 0;
+      let updateCount = 0;
+
+      parsed.newPlants.forEach((np, i) => {
+        const nEn = (np.nameEn || np.nameUr || '').trim();
+        if (!nEn) return;
+        const inf = inferCompleteCareForAnyName(nEn);
+        const newPlant = {
+          id: 'p-live-' + Date.now() + '-' + i,
+          nameEn: np.nameEn || inf.nameEn || nEn,
+          nameUr: np.nameUr || inf.nameUr || translateCustomTerm(nEn, 'ur'),
+          sciName: np.sciName || inf.sciName || 'Botanical sp.',
+          variantEn: np.variant || inf.variantEn || 'Garden Variety',
+          variantUr: translateCustomTerm(np.variant || inf.variantUr || 'باغیچہ ورائٹی', 'ur'),
+          locationEn: np.location || (gState.locations[0]?.en || 'Front Lawn'),
+          locationUr: translateCustomTerm(np.location || (gState.locations[0]?.ur || 'فرنٹ لان'), 'ur'),
+          potSizeEn: np.potSize || '12-inch Clay Pot',
+          potSizeUr: translateCustomTerm(np.potSize || '12 انچ مٹی کا گملا', 'ur'),
+          plantedDate: parsed.sessionDate,
+          locationDate: parsed.sessionDate,
+          waterDays: parseInt(np.waterDays, 10) || inf.waterDays || 3,
+          daysSinceWater: 0,
+          daysSinceHoeing: 0,
+          daysSinceFeed: 0,
+          sunEn: np.sun || inf.sunEn,
+          sunUr: translateCustomTerm(np.sun || inf.sunUr, 'ur'),
+          fertEn: np.fert || inf.fertEn,
+          fertUr: translateCustomTerm(np.fert || inf.fertUr, 'ur'),
+          pruneEn: np.prune || inf.pruneEn,
+          pruneUr: translateCustomTerm(np.prune || inf.pruneUr, 'ur'),
+          totkaEn: np.totka || inf.totkaEn,
+          totkaUr: translateCustomTerm(np.totka || inf.totkaUr, 'ur'),
+          image: inf.img || IMG_INDOOR,
+          history: [{
+            id: 'h-live-init-' + Date.now() + '-' + i,
+            typeKey: 'note',
+            actionEn: '🎥 Added via Gemini Live',
+            actionUr: '🎥 جیمینائی لائیو سے شامل کیا گیا',
+            dateIso: parsed.sessionDate,
+            timeStr: formatTime12Hour(parsed.sessionTime),
+            dateEn: `${formatPlantedDateDisplay(parsed.sessionDate, true).dateText}, ${formatTime12Hour(parsed.sessionTime)}`,
+            dateUr: `${formatPlantedDateDisplay(parsed.sessionDate, false).dateText}، ${formatTime12Hour(parsed.sessionTime)}`,
+            noteEn: np.totka || 'Added from Gemini Live video discussion',
+            noteUr: translateCustomTerm(np.totka || 'جیمینائی لائیو ویڈیو گفتگو سے شامل کیا گیا', 'ur')
+          }],
+          feedHistory: [],
+          sprayHistory: []
+        };
+        gState.plants.unshift(newPlant);
+        addedCount++;
+      });
+
+      parsed.updates.forEach(u => {
+        const p = findGardenPlantForLiveName(u.plantName);
+        if (!p) return;
+        if (u.newLocation) {
+          p.locationEn = translateCustomTerm(u.newLocation, 'en');
+          p.locationUr = translateCustomTerm(u.newLocation, 'ur');
+          p.locationDate = parsed.sessionDate;
+        }
+        if (u.potSize) {
+          p.potSizeEn = translateCustomTerm(u.potSize, 'en');
+          p.potSizeUr = translateCustomTerm(u.potSize, 'ur');
+        }
+        if (u.variant) {
+          p.variantEn = translateCustomTerm(u.variant, 'en');
+          p.variantUr = translateCustomTerm(u.variant, 'ur');
+        }
+        if (u.careRule) {
+          p.totkaEn = translateCustomTerm(u.careRule, 'en');
+          p.totkaUr = translateCustomTerm(u.careRule, 'ur');
+          rememberSpeciesCareOutcome(p, p.fertUr, p.fertEn, '', '', '', '');
+        }
+        updateCount++;
+      });
+
+      parsed.actions.forEach(a => {
+        let p = findGardenPlantForLiveName(a.plantName);
+        if (!p && a.plantName) {
+          const inf = inferCompleteCareForAnyName(a.plantName);
+          p = {
+            id: 'p-live-auto-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+            nameEn: inf.nameEn || a.plantName,
+            nameUr: inf.nameUr || translateCustomTerm(a.plantName, 'ur'),
+            sciName: inf.sciName || 'Botanical sp.',
+            variantEn: inf.variantEn || 'Garden Variety',
+            variantUr: inf.variantUr || 'باغیچہ ورائٹی',
+            locationEn: gState.locations[0]?.en || 'Front Lawn',
+            locationUr: gState.locations[0]?.ur || 'فرنٹ لان',
+            plantedDate: parsed.sessionDate,
+            locationDate: parsed.sessionDate,
+            waterDays: inf.waterDays || 3,
+            daysSinceWater: 0, daysSinceHoeing: 0, daysSinceFeed: 0,
+            sunEn: inf.sunEn, sunUr: inf.sunUr, fertEn: inf.fertEn, fertUr: inf.fertUr,
+            pruneEn: inf.pruneEn, pruneUr: inf.pruneUr, totkaEn: inf.totkaEn, totkaUr: inf.totkaUr,
+            image: inf.img || IMG_INDOOR, history: [], feedHistory: [], sprayHistory: []
+          };
+          gState.plants.unshift(p);
+          addedCount++;
+        }
+        if (!p) return;
+
+        const aType = (a.actionType || 'note').toLowerCase();
+        const aDate = parseFlexibleDateToISO(a.date || parsed.sessionDate);
+        const aTime = a.time || parsed.sessionTime;
+        const itemEn = a.itemName ? translateCustomTerm(a.itemName, 'en') : '';
+        const itemUr = a.itemName ? translateCustomTerm(a.itemName, 'ur') : '';
+        const noteBodyEn = [itemEn, a.notes ? translateCustomTerm(a.notes, 'en') : ''].filter(Boolean).join(' — ');
+        const noteBodyUr = [itemUr, a.notes ? translateCustomTerm(a.notes, 'ur') : ''].filter(Boolean).join(' — ');
+        const methEn = a.method ? `🎥 Gemini Live • ${translateCustomTerm(a.method, 'en')}` : '🎥 Gemini Live Session';
+        const methUr = a.method ? `🎥 جیمینائی لائیو • ${translateCustomTerm(a.method, 'ur')}` : '🎥 جیمینائی لائیو گفتگو';
+        const resEn = a.result ? translateCustomTerm(a.result, 'en') : '';
+        const resUr = a.result ? translateCustomTerm(a.result, 'ur') : '';
+
+        if (['feed', 'water', 'till', 'spray', 'prune'].includes(aType)) {
+          recordPlantAction(
+            p.id,
+            aType,
+            `🎥 ${noteBodyUr || 'جیمینائی لائیو عمل'}`,
+            `🎥 ${noteBodyEn || 'Gemini Live Care'}`,
+            aDate,
+            methUr,
+            methEn,
+            resUr,
+            resEn,
+            aTime,
+            true
+          );
+          if (aType === 'feed' || aType === 'spray') {
+            rememberSpeciesCareOutcome(p, itemUr || noteBodyUr, itemEn || noteBodyEn, methUr, methEn, resUr, resEn);
+          }
+        } else {
+          if (!Array.isArray(p.history)) p.history = [];
+          const dUr = formatPlantedDateDisplay(aDate, false);
+          const dEn = formatPlantedDateDisplay(aDate, true);
+          const t12 = formatTime12Hour(aTime);
+          p.history.unshift({
+            id: 'h-live-note-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+            typeKey: 'note',
+            actionEn: '🎥 Gemini Live Discussion',
+            actionUr: '🎥 جیمینائی لائیو مشورہ / نوٹ',
+            dateIso: aDate,
+            timeStr: t12,
+            dateEn: `${dEn.dateText}, ${t12}`,
+            dateUr: `${dUr.dateText}، ${t12}`,
+            noteEn: noteBodyEn || 'Discussed in Gemini Live',
+            noteUr: noteBodyUr || 'جیمینائی لائیو میں اس پودے پر بات چیت ہوئی',
+            methodEn: methEn,
+            methodUr: methUr,
+            resultEn: resEn,
+            resultUr: resUr
+          });
+        }
+        actionCount++;
+      });
+
+      persist();
+      renderPlantsList();
+      renderRecipesList();
+      updateDbStatsBadge();
+      document.getElementById('geminiLivePasteInput').value = '';
+      closeGeminiLiveSyncModal();
+      notify(
+        isEn
+          ? `🎥 Gemini Live Synced! ${actionCount} action(s), ${addedCount} new plant(s), ${updateCount} update(s) saved!`
+          : `🎥 جیمینائی لائیو ڈیٹا محفوظ! ${actionCount} عمل/نوٹس، ${addedCount} نئے پودے اور ${updateCount} تبدیلیاں ہسٹری شیٹ میں درج ہو گئیں!`,
+        '🎥'
+      );
+    }
+
+    // =========================================================================
+    // ANDROID HARDWARE BACK GESTURE, EXIT CONFIRMATION & SCROLL-TO-TOP HANDLER
+    // =========================================================================
     const GULZAR_MODAL_IDS = [
+      'exitConfirmModal',
       'unifiedConfirmModal',
       'photoLightboxModal',
       'liveCameraModal',
+      'geminiLiveSyncModal',
       'careSupplyPickerModal',
       'multiPlantCareModal',
       'plantDetailModal',
@@ -13871,7 +14462,7 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       if (topTxt) topTxt.textContent = isEn ? 'Top' : 'اوپر (Top)';
       if (!backBtn) return;
 
-      if (openModal) {
+      if (openModal && openModal.id !== 'exitConfirmModal') {
         backBtn.classList.remove('hidden');
         backBtn.classList.add('flex');
         if (backTxt) backTxt.textContent = isEn ? 'Close / Back' : 'واپس بند کریں';
@@ -13894,17 +14485,63 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       setTimeout(updateFloatingNavButtons, 30);
     }
 
-    function handleGulzarBackOrHome() {
+    function openGulzarExitConfirm() {
+      const isEn = gState.lang === 'en';
+      const m = document.getElementById('exitConfirmModal');
+      if (!m) return;
+      const t = document.getElementById('exitModalTitle');
+      const msg = document.getElementById('exitModalMsg');
+      const bC = document.getElementById('btnExitCancel');
+      const bY = document.getElementById('btnExitConfirm');
+      if (t) t.textContent = isEn ? 'Exit GULZAR App?' : 'گلزار ایپ بند کریں؟';
+      if (msg) msg.textContent = isEn ? 'Are you sure you want to exit? All your garden data is auto-saved.' : 'کیا آپ واقعی گلزار ایپ سے باہر نکلنا چاہتے ہیں؟ آپ کا تمام ڈیٹا محفوظ ہے۔';
+      if (bC) bC.textContent = isEn ? 'Stay in App' : 'نہیں، رہنے دیں';
+      if (bY) bY.textContent = isEn ? 'Yes, Exit' : 'ہاں، بند کریں';
+      m.classList.remove('hidden');
+      updateFloatingNavButtons();
+    }
+
+    function cancelGulzarExit() {
+      const m = document.getElementById('exitConfirmModal');
+      if (m) m.classList.add('hidden');
+      try { window.history.pushState({ gulzarSentinel: true }, ''); } catch (e) {}
+      updateFloatingNavButtons();
+    }
+
+    function confirmGulzarExit() {
+      const m = document.getElementById('exitConfirmModal');
+      if (m) m.classList.add('hidden');
+      try {
+        const capApp = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+        if (capApp && typeof capApp.exitApp === 'function') {
+          capApp.exitApp();
+          return;
+        }
+      } catch (e) {}
+      try { window.history.go(-2); } catch (e) {}
+    }
+
+    function handleGulzarBackOrHome(isHardwareBack = false) {
       const openModal = getOpenGulzarModalElement();
       if (openModal) {
+        if (openModal.id === 'exitConfirmModal') {
+          cancelGulzarExit();
+          return true;
+        }
         openModal.classList.add('hidden');
+        try { window.history.pushState({ gulzarSentinel: true }, ''); } catch (e) {}
         updateFloatingNavButtons();
         return true;
       }
       if (gState.activeTab && gState.activeTab !== 'plants') {
         switchMainTab('plants');
         scrollGulzarToTop();
+        try { window.history.pushState({ gulzarSentinel: true }, ''); } catch (e) {}
         updateFloatingNavButtons();
+        return true;
+      }
+      if (isHardwareBack) {
+        openGulzarExitConfirm();
         return true;
       }
       scrollGulzarToTop();
@@ -13912,14 +14549,13 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     }
 
     function handleGulzarBackButton() {
-      return handleGulzarBackOrHome();
+      return handleGulzarBackOrHome(true);
     }
 
     window.addEventListener('popstate', function() {
-      handleGulzarBackOrHome();
+      handleGulzarBackOrHome(true);
     });
 
-    // Edge-Swipe Gesture to go Back to Dashboard / Close Modal on Mobile
     let _touchStartX = 0;
     let _touchStartY = 0;
     window.addEventListener('touchstart', function(e) {
@@ -13932,10 +14568,10 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       if (!e.changedTouches || e.changedTouches.length !== 1) return;
       const dx = e.changedTouches[0].clientX - _touchStartX;
       const dy = Math.abs(e.changedTouches[0].clientY - _touchStartY);
-      const fromLeftEdge = _touchStartX <= 28 && dx >= 85 && dy < 60;
-      const fromRightEdge = _touchStartX >= (window.innerWidth - 28) && dx <= -85 && dy < 60;
+      const fromLeftEdge = _touchStartX <= 32 && dx >= 80 && dy < 65;
+      const fromRightEdge = _touchStartX >= (window.innerWidth - 32) && dx <= -80 && dy < 65;
       if (fromLeftEdge || fromRightEdge) {
-        handleGulzarBackOrHome();
+        handleGulzarBackOrHome(true);
       }
     }, { passive: true });
 
@@ -14029,6 +14665,11 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
         const sPrev = document.getElementById('stockFormImgPreview');
         if (sPrev) sPrev.src = IMG_STOCK;
         setLanguage('en');
+        hydrateSpeciesMemoryFromExistingGarden();
+        try {
+          window.history.replaceState({ gulzarRoot: true }, '');
+          window.history.pushState({ gulzarSentinel: true }, '');
+        } catch (histErr) {}
         // Check if Gemini Android container just refreshed the iframe after user clicked "Allow" on the camera permission dialog!
         try {
           const rawResume = sessionStorage.getItem('gulzar_cam_perm_resume');
