@@ -1,4 +1,4 @@
-name: Build Gulzar Android APK (MOUJ SYNC)
+name: Build Gulzar Android APK (MOUJ SYNC v34.0)
 
 on:
   push:
@@ -32,23 +32,25 @@ jobs:
             yes | "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager" --licenses || true
           fi
 
-      - name: Prepare Web Assets & Install Capacitor + Native Plugins
+      - name: Prepare Web Assets & Auto-Verify App Icons
         run: |
           mkdir -p www
           cp index.html www/index.html
           if [ -f manifest.json ]; then cp manifest.json www/; fi
           if [ -f sw.js ]; then cp sw.js www/; fi
+          if [ ! -f icon-192.png ] && [ -f icon-512.png ]; then
+            python3 -c "from PIL import Image; Image.open('icon-512.png').resize((192,192)).save('icon-192.png')" || cp icon-512.png icon-192.png
+          fi
           if [ -f icon-192.png ]; then cp icon-192.png www/; fi
           if [ -f icon-512.png ]; then cp icon-512.png www/; fi
           npm install @capacitor/core@^6.0.0 @capacitor/cli@^6.0.0 @capacitor/android@^6.0.0 @capacitor/filesystem@^6.0.0 @capacitor/share@^6.0.0
 
-      - name: Add Android Platform & Apply Compressed Red Rose App Icons
+      - name: Add Android Platform, Sync Capacitor Plugins & Apply Red Rose Icons
         run: |
           if [ ! -d "android" ]; then
             npx cap add android
-          else
-            npx cap sync android
           fi
+          npx cap sync android
           rm -rf android/app/src/main/res/mipmap-anydpi-v26
           rm -f android/app/src/main/res/drawable*/ic_launcher*
           for dir in android/app/src/main/res/mipmap-mdpi android/app/src/main/res/mipmap-hdpi android/app/src/main/res/mipmap-xhdpi; do
@@ -72,8 +74,8 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
 
-      - name: Upload Gulzar APK Artifact
+      - name: Upload Gulzar v34.0 APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Gulzar-Smart-Garden-Debug-APK
+          name: Gulzar-Smart-Garden-v34-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
