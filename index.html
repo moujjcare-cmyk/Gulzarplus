@@ -1176,7 +1176,10 @@
             <label id="lblGeminiPromptStep2" class="block text-[11px] font-bold text-emerald-300">
               2. جیمنائی چیٹ سے ملنے والا جواب (JSON یا تفصیل) یہاں پیسٹ کریں:
             </label>
-            <button type="button" onclick="document.getElementById('geminiPasteGuideInput').value=''" class="text-[10px] theme-badge px-2 py-0.5 rounded-md font-bold cursor-pointer">صاف کریں</button>
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="pasteFromClipboardToInput('geminiPasteGuideInput')" class="text-[10px] bg-amber-400/20 text-amber-300 border border-amber-400/50 px-2 py-0.5 rounded-md font-bold cursor-pointer">📋 <span id="btnPasteGeminiGuideTxt">پیسٹ کریں</span></button>
+              <button type="button" onclick="document.getElementById('geminiPasteGuideInput').value=''" class="text-[10px] theme-badge px-2 py-0.5 rounded-md font-bold cursor-pointer"><span id="btnClearGeminiGuideTxt">صاف کریں</span></button>
+            </div>
           </div>
           <textarea id="geminiPasteGuideInput" rows="3" placeholder="جیمنائی سے کاپی کیا گیا جواب یہاں پیسٹ کریں..." class="w-full theme-card border rounded-xl p-2.5 text-xs leading-relaxed"></textarea>
           <button type="button" onclick="importGeminiResponseToEncyclopedia()" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-stone-950 py-2 px-3 rounded-xl text-xs font-black cursor-pointer shadow-xs flex items-center justify-center gap-1.5">
@@ -1204,24 +1207,24 @@
 
         <span id="lblDbPart1Title" class="hidden">One-Click Master Database</span>
         <p id="lblDbPart1Desc" class="text-[11px] theme-muted leading-snug">
-          <strong>1) موبائل فولڈر:</strong> نیچے پیلا بٹن دبانے سے سیدھا فون کے <code>Documents/Gulzar/gulzar-database.json</code> میں وہی ایک فائل اپڈیٹ ہو جاتی ہے۔<br>
-          <strong>2) گوگل ڈرائیو:</strong> <code>Share DB (Drive)</code> دبا کر گوگل ڈرائیو یا اپنے فولڈر میں موجود پرانی <code>gulzar-database.json</code> پر کلک کریں تو وہی فائل اپڈیٹ ہو جائے گی۔
+          <strong>1) موبائل فولڈر:</strong> پیلا بٹن دبانے سے سیدھا فون کے <code>Documents/Gulzar/gulzar-database.json</code> میں وہی ایک فائل محفوظ و اپڈیٹ ہو جاتی ہے۔<br>
+          <strong>2) گوگل ڈرائیو / شیئر:</strong> <code>Share DB (Drive)</code> دبا کر گوگل ڈرائیو یا واٹس ایپ پر اپنی بیک اپ فائل محفوظ کریں۔
         </p>
 
         <!-- Restore Mode Selector: Replace vs Merge -->
         <div class="flex items-center justify-between gap-2 theme-card p-2 rounded-xl border flex-wrap">
-          <span class="text-[11px] font-bold text-amber-300">🛡️ ریسٹور موڈ (Restore Mode):</span>
+          <span id="lblRestoreModeShort" class="text-[11px] font-bold text-amber-300">🛡️ ریسٹور موڈ (Restore Mode):</span>
           <select id="restoreModeSelect" class="theme-card-alt border border-amber-400/60 rounded-lg px-2.5 py-1 text-[11px] font-bold cursor-pointer text-amber-300">
             <option value="replace" selected>🔄 مکمل بیک اپ ریسٹور (Replace with Backup)</option>
             <option value="merge">➕ موجودہ ڈیٹا میں نئے پودے ملائیں (Merge Both)</option>
           </select>
         </div>
 
-        <!-- Mode 1: Phone Save & Restore (Phone Storage + Google Drive File Picker) -->
+        <!-- Mode 1: Phone Folder Save & File Picker Restore -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button type="button" onclick="oneClickMasterSaveDatabase()" class="bg-amber-400 hover:bg-amber-300 text-stone-950 py-2.5 px-3 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow-md active:scale-95">
             <span>💾</span>
-            <span id="btnDownloadBackupLabel">Save Database (.json)</span>
+            <span id="btnDownloadBackupLabel">Save to Folder (.json)</span>
           </button>
           <label class="bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-300/60 py-2.5 px-3 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 cursor-pointer shadow-md active:scale-95">
             <span>📂</span>
@@ -1230,7 +1233,12 @@
           </label>
         </div>
 
-        <!-- Mode 2: Google Drive / Folder Share & Photo Size Optimizer -->
+        <!-- Direct 1-Tap Phone Folder Restore (Reads Documents/Gulzar/gulzar-database.json directly on Android APK!) -->
+        <button type="button" onclick="restoreFromPhoneFolderNative()" class="w-full theme-card hover:border-amber-400 border border-amber-400/50 text-amber-300 py-2 px-3 rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
+          <span>📱</span><span id="lblRestoreFromFolderBtn">فون فولڈر (Documents/Gulzar) سے براہِ راست بحال کریں</span>
+        </button>
+
+        <!-- Mode 2: Google Drive / WhatsApp Share & Photo Size Optimizer -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button type="button" onclick="shareBackupFileNative()" id="btnShareBackupNative" class="bg-blue-600 hover:bg-blue-500 text-white border border-blue-300/50 py-2.5 px-3 rounded-xl text-xs font-black cursor-pointer flex items-center justify-center gap-1.5 shadow-md active:scale-95">
             <span>☁️</span><span id="lblShareBackupBtn">Share DB (Drive / WhatsApp)</span>
@@ -1239,6 +1247,23 @@
             <span>⚡</span><span id="lblOptimizeDbBtn">Fix & Optimize DB Size</span>
           </button>
         </div>
+
+        <!-- Optional Collapsed Drawer: Google Drive Apps Script Sync (Only if user ever sets up on PC/Laptop) -->
+        <details class="theme-card rounded-xl p-2.5 border border-white/15">
+          <summary id="lblOptionalDriveScriptTitle" class="text-[11px] font-bold theme-muted cursor-pointer select-none">
+            ☁️ اختیاری: گوگل ڈرائیو آٹو سنک لنک (صرف لیپ ٹاپ سیٹ اپ کے لیے — موبائل پر ضروری نہیں)
+          </summary>
+          <div class="space-y-2 pt-2 mt-2 border-t theme-border">
+            <div class="flex items-center gap-1.5">
+              <input id="driveScriptUrlInput" type="url" oninput="saveDriveScriptUrl(this.value)" placeholder="https://script.google.com/macros/s/.../exec" class="flex-1 theme-card-alt border rounded-lg px-2.5 py-1.5 text-[11px] font-mono" />
+              <button type="button" onclick="pasteFromClipboardToInput('driveScriptUrlInput', true)" class="px-2.5 py-1.5 rounded-lg bg-amber-400 text-stone-950 text-[10px] font-black cursor-pointer shrink-0">📋 پیسٹ</button>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5">
+              <button type="button" onclick="pushDatabaseToGoogleDriveScript(false)" class="bg-blue-600 hover:bg-blue-500 text-white py-1.5 px-2.5 rounded-lg text-[11px] font-bold cursor-pointer">⬆️ Drive پر محفوظ کریں</button>
+              <button type="button" onclick="pullDatabaseFromGoogleDriveScript()" class="bg-emerald-600 hover:bg-emerald-500 text-white py-1.5 px-2.5 rounded-lg text-[11px] font-bold cursor-pointer">⬇️ Drive سے بحال کریں</button>
+            </div>
+          </div>
+        </details>
 
         <!-- Visible Confirmation Status Card -->
         <div id="backupStatusCard" class="hidden theme-card rounded-xl p-2.5 border border-emerald-400/60 space-y-1 text-xs">
@@ -4008,7 +4033,7 @@
 
       setTxt('appHeaderBrand', t.brand);
       setTxt('moujFooterTitle', isEn ? 'Powered & Controlled by MOUJ SYNC' : 'پیشکش و کنٹرولڈ بائے: موج سِنک (MOUJ SYNC)');
-      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden' : '🌹 گلزار سمارٹ ہوم گارڈن (GULZAR Smart Home Garden)');
+      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v34.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v34.0 (GULZAR Smart Home Garden)');
       setTxt('btnHeroGeminiPromptLabel', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('btnOpenGeminiPromptFromEncycTxt', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('lblGeminiPromptBoxTitle', isEn ? '🤖 Gemini Chat Prompt & Encyclopedia Paste Box' : '🤖 جیمنائی چیٹ پرامپٹ اور انسائیکلوپیڈیا پیسٹ باکس');
@@ -4068,7 +4093,18 @@
       setTxt('btnSysCamDirectTxt', isEn ? 'Phone Cam' : 'فون کیمرہ');
       setTxt('lblFormGrowthStage', isEn ? '📈 Current Growth Plan Stage (Auto or Manual):' : '📈 پودے کا موجودہ گروتھ اسٹیج (خودکار یا دستی):');
       setTxt('lblFormGrowthHint', isEn ? 'Stage photos can be added anytime on card' : 'ہر اسٹیج کی تصاویر کارڈ سے شامل کریں');
-      setTxt('settingsBackupSub', isEn ? 'Simple 3-way protection so your plants, photos & locations are never lost' : 'آسان 3 طریقے: فون میموری، گوگل ڈرائیو/واٹس ایپ کلاؤڈ اور فائل بیک اپ');
+      setTxt('settingsBackupSub', isEn ? 'Single file (gulzar-database.json) updates in place — no duplicate backup clutter!' : 'ہمیشہ ایک ہی فائل (gulzar-database.json) اپڈیٹ ہوتی ہے، نئی فائلیں جمع نہیں ہوتیں');
+      setTxt('lblRestoreFromFolderBtn', isEn ? 'Direct Restore from Phone Folder (Documents/Gulzar)' : 'فون فولڈر (Documents/Gulzar) سے براہِ راست بحال کریں');
+      setTxt('lblOptimizeDbBtn', isEn ? 'Fix & Optimize DB Size' : 'تصاویر ہلکی اور ڈیٹا بیس صاف کریں');
+      setTxt('btnPasteGeminiGuideTxt', isEn ? 'Paste' : 'پیسٹ کریں');
+      setTxt('btnClearGeminiGuideTxt', isEn ? 'Clear' : 'صاف کریں');
+      setTxt('lblOptionalDriveScriptTitle', isEn ? '☁️ Optional: Google Drive Auto-Sync Link (PC Setup Only — Not Needed on Mobile)' : '☁️ اختیاری: گوگل ڈرائیو آٹو سنک لنک (صرف لیپ ٹاپ سیٹ اپ کے لیے — موبائل پر ضروری نہیں)');
+      const lblPart1Desc = document.getElementById('lblDbPart1Desc');
+      if (lblPart1Desc) {
+        lblPart1Desc.innerHTML = isEn
+          ? '<strong>1) Phone Folder:</strong> Tap the yellow button to save & overwrite <code>Documents/Gulzar/gulzar-database.json</code> directly.<br><strong>2) Drive / Share:</strong> Tap <code>Share DB (Drive / WhatsApp)</code> to send your backup anywhere.'
+          : '<strong>1) موبائل فولڈر:</strong> پیلا بٹن دبانے سے سیدھا فون کے <code>Documents/Gulzar/gulzar-database.json</code> میں وہی ایک فائل محفوظ و اپڈیٹ ہو جاتی ہے۔<br><strong>2) گوگل ڈرائیو / شیئر:</strong> <code>Share DB (Drive)</code> دبا کر گوگل ڈرائیو یا واٹس ایپ پر اپنی بیک اپ فائل محفوظ کریں۔';
+      }
       setTxt('lblDbPart1Title', isEn ? '1️⃣ 📱 Phone Local Storage (Auto-Save):' : '1️⃣ 📱 فون لوکل اسٹوریج (خودکار محفوظ):');
       setTxt('lblDbPart2Title', isEn ? '2️⃣ ☁️ Cloud Backup (Google Drive / WhatsApp / Cloud Sync):' : '2️⃣ ☁️ کلاؤڈ بیک اپ (گوگل ڈرائیو / واٹس ایپ / آن لائن سنک):');
       setTxt('lblDbPart3Title', isEn ? '3️⃣ 📂 Phone File Download & Restore (.json):' : '3️⃣ 📂 فائل ڈاؤن لوڈ اور ریسٹور (.json):');
@@ -11744,7 +11780,7 @@ Return ONLY valid JSON:
 
     async function exportBackupData() {
       const isEn = gState.lang === 'en';
-      // Always use the exact fixed filename gulzar-database.json so it updates the existing file in place!
+      // Always use the exact fixed filename gulzar-database.json so it updates the SAME file in place!
       lastExportedFilename = 'gulzar-database.json';
       const safeClone = JSON.parse(JSON.stringify(gState));
       delete safeClone.githubToken;
@@ -11755,27 +11791,62 @@ Return ONLY valid JSON:
       try {
         const capFs = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem;
         if (capFs && typeof capFs.writeFile === 'function') {
-          await capFs.writeFile({
-            path: 'Gulzar/' + lastExportedFilename,
-            data: lastExportedJsonString,
-            directory: 'DOCUMENTS',
-            encoding: 'utf8',
-            recursive: true
-          });
-          savedNativePath = 'Documents/Gulzar/gulzar-database.json';
+          try {
+            if (typeof capFs.mkdir === 'function') {
+              await capFs.mkdir({ path: 'Gulzar', directory: 'DOCUMENTS', recursive: true }).catch(() => {});
+            }
+            await capFs.writeFile({
+              path: 'Gulzar/' + lastExportedFilename,
+              data: lastExportedJsonString,
+              directory: 'DOCUMENTS',
+              encoding: 'utf8',
+              recursive: true
+            });
+            savedNativePath = 'Documents/Gulzar/gulzar-database.json';
+          } catch (docErr) {
+            // Android Scoped Storage fallback if an older app signature owns Documents/Gulzar/gulzar-database.json
+            try {
+              await capFs.writeFile({
+                path: 'Gulzar/' + lastExportedFilename,
+                data: lastExportedJsonString,
+                directory: 'EXTERNAL',
+                encoding: 'utf8',
+                recursive: true
+              });
+              savedNativePath = 'Android/data/com.moujsync.gulzar/files/Gulzar/gulzar-database.json';
+            } catch (extErr) {
+              await capFs.writeFile({
+                path: 'Gulzar/' + lastExportedFilename,
+                data: lastExportedJsonString,
+                directory: 'DATA',
+                encoding: 'utf8',
+                recursive: true
+              });
+              savedNativePath = 'App Folder/Gulzar/gulzar-database.json';
+            }
+          }
         }
       } catch (fsErr) {}
 
+      // If on desktop/mobile browser (not native APK), try linked folder handle or browser download
       if (!savedNativePath) {
-        try {
-          const blob = new Blob([lastExportedJsonString], { type: 'application/json;charset=utf-8' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = lastExportedFilename;
-          document.body.appendChild(a);
-          a.click();
-          setTimeout(() => document.body.removeChild(a), 400);
-        } catch (e) {}
+        const wroteLinked = await tryAutoWriteToLinkedFileHandle(lastExportedJsonString);
+        if (wroteLinked) {
+          savedNativePath = _linkedDbFileHandle?.name || 'gulzar-database.json';
+        } else {
+          try {
+            const blob = new Blob([lastExportedJsonString], { type: 'application/json;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = lastExportedFilename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              try { URL.revokeObjectURL(a.href); } catch (e) {}
+              try { document.body.removeChild(a); } catch (e) {}
+            }, 600);
+          } catch (e) {}
+        }
       }
 
       const sizeMb = (lastExportedJsonString.length / (1024 * 1024)).toFixed(2);
@@ -11787,16 +11858,147 @@ Return ONLY valid JSON:
       if (pathEl) {
         const targetDest = savedNativePath || `Downloads/${lastExportedFilename}`;
         pathEl.innerHTML = isEn
-          ? `✅ <strong>1) Updated inside App Vault</strong><br>✅ <strong>2) Overwritten in Phone Folder → ${targetDest}</strong>`
-          : `✅ <strong>1) ایپ کے اندر اپڈیٹ ہو گیا</strong><br>✅ <strong>2) موبائل فولڈر میں وہی فائل اپڈیٹ ہو گئی: ${targetDest}</strong>`;
+          ? `✅ <strong>1) Auto-saved inside App Vault</strong><br>✅ <strong>2) Overwritten in Phone Folder → ${targetDest}</strong>`
+          : `✅ <strong>1) ایپ کے اندر محفوظ ہو گیا</strong><br>✅ <strong>2) موبائل فولڈر میں وہی فائل اپڈیٹ ہو گئی: ${targetDest}</strong>`;
       }
 
       notify(
         savedNativePath
-          ? (isEn ? `Updated single file: ${savedNativePath}!` : `موبائل کے Documents/Gulzar فولڈر میں وہی فائل اپڈیٹ ہو گئی!`)
-          : (isEn ? `Saved ${lastExportedFilename} (${sizeMb} MB)!` : `ڈیٹا بیس (${lastExportedFilename}) اپڈیٹ ہو گئی!`),
+          ? (isEn ? `Updated single file: ${savedNativePath}!` : `موبائل فولڈر (${savedNativePath}) میں وہی فائل محفوظ ہو گئی!`)
+          : (isEn ? `Saved ${lastExportedFilename} (${sizeMb} MB)!` : `ڈیٹا بیس (${lastExportedFilename}) محفوظ ہو گئی!`),
         '📁'
       );
+    }
+
+    async function restoreFromPhoneFolderNative() {
+      const isEn = gState.lang === 'en';
+      const capFs = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem;
+      if (capFs && typeof capFs.readFile === 'function') {
+        const dirsToTry = [
+          { dir: 'DOCUMENTS', label: 'Documents/Gulzar/gulzar-database.json' },
+          { dir: 'EXTERNAL', label: 'App External/Gulzar/gulzar-database.json' },
+          { dir: 'DATA', label: 'App Folder/Gulzar/gulzar-database.json' }
+        ];
+        for (const item of dirsToTry) {
+          try {
+            const res = await capFs.readFile({
+              path: 'Gulzar/gulzar-database.json',
+              directory: item.dir,
+              encoding: 'utf8'
+            });
+            if (res && res.data) {
+              const parsed = JSON.parse(res.data);
+              if (applyRestoredDatabaseObject(parsed)) {
+                const card = document.getElementById('backupStatusCard');
+                const nameEl = document.getElementById('backupFileCardName');
+                const pathEl = document.getElementById('backupFileCardPath');
+                if (card) card.classList.remove('hidden');
+                if (nameEl) nameEl.textContent = `📂 gulzar-database.json (${gState.plants.length} Plants)`;
+                if (pathEl) {
+                  pathEl.innerHTML = isEn
+                    ? `✅ <strong>Restored directly from ${item.label}</strong>`
+                    : `✅ <strong>سیدھا موبائل فولڈر (${item.label}) سے ڈیٹا بحال ہو گیا!</strong>`;
+                }
+                return;
+              }
+            }
+          } catch (e) {}
+        }
+        notify(
+          isEn
+            ? 'No saved file found in Documents/Gulzar yet — opening file picker...'
+            : 'Documents/Gulzar فولڈر میں ابھی فائل نہیں ملی — فائل پکر کھول رہے ہیں...',
+          '📂'
+        );
+      }
+      // Browser or fallback: open standard file picker
+      const fileInp = document.getElementById('restoreDbFileInput');
+      if (fileInp) fileInp.click();
+    }
+
+    async function pasteFromClipboardToInput(inputId, isDriveUrl = false) {
+      const isEn = gState.lang === 'en';
+      const el = document.getElementById(inputId);
+      if (!el) return;
+      try {
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          const clipText = await navigator.clipboard.readText();
+          if (clipText && clipText.trim()) {
+            el.value = clipText.trim();
+            if (isDriveUrl) saveDriveScriptUrl(el.value);
+            notify(isEn ? '📋 Pasted from clipboard!' : '📋 کلپ بورڈ سے پیسٹ ہو گیا!', '📋');
+            return;
+          }
+        }
+      } catch (e) {}
+      el.focus();
+      notify(isEn ? 'Long-press the box and tap Paste' : 'خانے پر انگلی دبا کر Paste منتخب کریں', '📋');
+    }
+
+    function saveDriveScriptUrl(urlVal) {
+      const cleanUrl = (urlVal || '').trim();
+      gState.driveScriptUrl = cleanUrl;
+      try { localStorage.setItem('gulzar_drive_script_url', cleanUrl); } catch (e) {}
+      persist();
+    }
+
+    async function pushDatabaseToGoogleDriveScript(isSilent = false) {
+      const isEn = gState.lang === 'en';
+      const scriptUrl = (gState.driveScriptUrl || localStorage.getItem('gulzar_drive_script_url') || '').trim();
+      if (!scriptUrl || !scriptUrl.startsWith('https://script.google.com/')) {
+        if (!isSilent) {
+          notify(isEn ? 'Please paste your Google Apps Script URL first!' : 'پہلے گوگل ایپس اسکرپٹ کا ویب لنک پیسٹ کریں!', '⚠️');
+        }
+        return false;
+      }
+      try {
+        const safeClone = JSON.parse(JSON.stringify(gState));
+        delete safeClone.githubToken;
+        const res = await fetch(scriptUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ state: safeClone })
+        });
+        const data = await res.json();
+        if (data && data.ok) {
+          if (!isSilent) {
+            notify(
+              isEn
+                ? `✅ Updated gulzar-database.json on Google Drive (${data.plantsCount} Plants)!`
+                : `✅ گوگل ڈرائیو پر ایک ہی فائل gulzar-database.json اپڈیٹ ہو گئی (${data.plantsCount} پودے)!`,
+              '☁️'
+            );
+          }
+          return true;
+        }
+        throw new Error(data?.error || 'Drive sync error');
+      } catch (err) {
+        if (!isSilent) {
+          notify(isEn ? `⚠️ Google Drive Sync Error: ${err.message}` : `⚠️ گوگل ڈرائیو سنک میں دشواری: ${err.message}`, '⚠️');
+        }
+        return false;
+      }
+    }
+
+    async function pullDatabaseFromGoogleDriveScript() {
+      const isEn = gState.lang === 'en';
+      const scriptUrl = (gState.driveScriptUrl || localStorage.getItem('gulzar_drive_script_url') || '').trim();
+      if (!scriptUrl || !scriptUrl.startsWith('https://script.google.com/')) {
+        notify(isEn ? 'Please paste your Google Apps Script URL first!' : 'پہلے گوگل ایپس اسکرپٹ کا ویب لنک پیسٹ کریں!', '⚠️');
+        return false;
+      }
+      try {
+        notify(isEn ? '☁️ Restoring gulzar-database.json from Google Drive...' : '☁️ گوگل ڈرائیو سے gulzar-database.json بحال ہو رہی ہے...', '☁️');
+        const res = await fetch(scriptUrl, { method: 'GET' });
+        const parsed = await res.json();
+        if (parsed && Array.isArray(parsed.plants)) {
+          return applyRestoredDatabaseObject(parsed);
+        }
+        throw new Error('Empty or invalid database on Google Drive');
+      } catch (err) {
+        notify(isEn ? `⚠️ Restore Error: ${err.message}` : `⚠️ ریسٹور کرنے میں دشواری: ${err.message}`, '⚠️');
+        return false;
+      }
     }
 
     async function shareBackupFileNative() {
@@ -12082,6 +12284,14 @@ Return ONLY valid JSON:
             continue;
           }
           if (normName) seenLearnedNames.add(normName);
+          if (lp && lp.detailedGuideUr && /"(?:nameUr|nameEn|waterDays)"/.test(lp.detailedGuideUr)) {
+            lp.detailedGuideUr = stripRawJsonFromGuideText(lp.detailedGuideUr);
+            changed = true;
+          }
+          if (lp && lp.detailedGuideEn && /"(?:nameUr|nameEn|waterDays)"/.test(lp.detailedGuideEn)) {
+            lp.detailedGuideEn = stripRawJsonFromGuideText(lp.detailedGuideEn);
+            changed = true;
+          }
           if (lp && lp.img && lp.img.length > 5000 && lp.img !== IMG_INDOOR) {
             lp.img = IMG_INDOOR;
             changed = true;
@@ -13154,40 +13364,58 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     function stripRawJsonFromGuideText(rawStr) {
       if (!rawStr || typeof rawStr !== 'string') return '';
       let s = rawStr;
-      // Remove fenced ```json ... ``` blocks
+      // 1. Remove fenced code blocks
       s = s.replace(/```(?:json)?[\s\S]*?```/gi, '');
-      // Remove bare JSON objects containing "nameUr" or "detailedGuide"
-      const idxBrace = s.indexOf('{');
-      if (idxBrace !== -1 && (s.includes('"nameUr"') || s.includes('"nameEn"') || s.includes('"waterDays"'))) {
+      // 2. Remove bare JSON objects containing botanical schema keys
+      const jsonKeyRegex = /"(?:nameUr|nameEn|sciName|waterDays|detailedGuideUr|detailedGuideEn|careTipsUr|totkaUr)"/;
+      let guard = 0;
+      while (jsonKeyRegex.test(s) && guard < 4) {
+        guard++;
+        const idxBrace = s.indexOf('{');
         const lastBrace = s.lastIndexOf('}');
-        if (lastBrace > idxBrace) {
+        if (idxBrace !== -1 && lastBrace > idxBrace) {
           s = (s.slice(0, idxBrace) + ' ' + s.slice(lastBrace + 1)).trim();
+        } else {
+          break;
         }
       }
-      return s.trim();
+      // 3. Clean leftover markdown fences or empty braces
+      s = s.replace(/```/g, '').replace(/^\s*json\s*$/gmi, '').trim();
+      return s;
+    }
+
+    function escapeGuideHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     }
 
     function formatDetailedGuideHtml(rawText) {
       const cleaned = stripRawJsonFromGuideText(rawText);
       if (!cleaned) return '';
-      // Split numbered points like "1)", "2)", "3)", "4)", "5)" onto separate lines automatically
+      // Split English & Urdu numbered points (1), 1., ۱), ۱.) and bullets onto separate clean cards
       const withBreaks = cleaned
         .replace(/\r\n/g, '\n')
-        .replace(/\s+(?=[1-9]\)\s)/g, '\n')
-        .replace(/\s+(?=[1-9]\.\s)/g, '\n');
+        .replace(/\\n/g, '\n')
+        .replace(/\s+(?=(?:[1-9]|1[0-9]|[۱-۹])[\)\.]\s)/g, '\n');
       const lines = withBreaks.split('\n').map(l => l.trim()).filter(Boolean);
       return lines.map(line => {
-        const isNumbered = /^[1-9][\)\.]/.test(line);
-        if (isNumbered) {
-          const colonIdx = line.indexOf(':');
-          if (colonIdx > 1 && colonIdx < 45) {
-            const head = line.slice(0, colonIdx + 1);
-            const rest = line.slice(colonIdx + 1).trim();
+        const safeLine = escapeGuideHtml(line)
+          .replace(/^#{1,4}\s*/, '')
+          .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-amber-300">$1</strong>');
+        const isNumberedOrBullet = /^(?:[1-9]|1[0-9]|[۱-۹])[\)\.]|^[\-\*\•]\s/.test(line);
+        if (isNumberedOrBullet) {
+          const cleanLineNoBullet = safeLine.replace(/^[\-\*\•]\s+/, '• ');
+          const colonIdx = cleanLineNoBullet.indexOf(':');
+          if (colonIdx > 1 && colonIdx < 60 && !cleanLineNoBullet.slice(0, colonIdx).includes('<strong')) {
+            const head = cleanLineNoBullet.slice(0, colonIdx + 1);
+            const rest = cleanLineNoBullet.slice(colonIdx + 1).trim();
             return `<div class="theme-card-alt p-2 rounded-xl border border-white/10 text-[11px] leading-relaxed"><strong class="text-amber-300">${head}</strong> <span class="text-white/95">${rest}</span></div>`;
           }
-          return `<div class="theme-card-alt p-2 rounded-xl border border-white/10 text-[11px] leading-relaxed text-white/95">${line}</div>`;
+          return `<div class="theme-card-alt p-2 rounded-xl border border-white/10 text-[11px] leading-relaxed text-white/95">${cleanLineNoBullet}</div>`;
         }
-        return `<div class="text-[11px] font-bold text-emerald-300 leading-relaxed">${line}</div>`;
+        return `<div class="text-[11px] font-bold text-emerald-300 leading-relaxed">${safeLine}</div>`;
       }).join('');
     }
 
@@ -13290,11 +13518,21 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       }
 
       let parsedObj = null;
-      const jsonFenceMatch = rawPaste.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/i) || rawPaste.match(/(\{[\s\S]*"nameUr"[\s\S]*\})/);
+      const normalizedPaste = rawPaste
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/[\u2018\u2019]/g, "'");
+      const jsonFenceMatch =
+        normalizedPaste.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/i) ||
+        normalizedPaste.match(/(\{[\s\S]*"(?:nameUr|nameEn|detailedGuideUr|waterDays)"[\s\S]*\})/);
       if (jsonFenceMatch) {
+        const candidateJson = jsonFenceMatch[1].replace(/,\s*([}\]])/g, '$1');
         try {
-          parsedObj = JSON.parse(jsonFenceMatch[1]);
-        } catch (e) {}
+          parsedObj = JSON.parse(candidateJson);
+        } catch (e) {
+          try {
+            parsedObj = parseFaultTolerantGeminiJson(candidateJson);
+          } catch (e2) {}
+        }
       }
 
       const fallbackName = nameHint || 'Custom Gemini Plant';
@@ -13713,6 +13951,9 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
         const ghGistEl = document.getElementById('githubGistIdInput');
         if (ghTokEl && ghTok) ghTokEl.value = ghTok;
         if (ghGistEl && ghGist) ghGistEl.value = ghGist;
+        const dsUrl = gState.driveScriptUrl || localStorage.getItem('gulzar_drive_script_url') || '';
+        const dsEl = document.getElementById('driveScriptUrlInput');
+        if (dsEl && dsUrl) dsEl.value = dsUrl;
 
         if (typeof indexedDB !== 'undefined') {
           const req = indexedDB.open('GulzarGardenUnlimitedDB', 1);
