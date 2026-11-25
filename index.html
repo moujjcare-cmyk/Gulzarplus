@@ -621,6 +621,37 @@
     .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.35); }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
+  
+    /* === GULZAR v36.0 UI & TEXT FIXES === */
+    @keyframes gulzarPulseGreen {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.75); opacity: 1; }
+      50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); opacity: 0.65; }
+    }
+    .gulzar-restore-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background-color: #34d399;
+      animation: gulzarPulseGreen 1.8s infinite;
+      margin-inline-end: 5px;
+      vertical-align: middle;
+    }
+    /* Fix vertical 2-word wrapping in Gemini Live Sync & Chat preview boxes */
+    #geminiLiveSyncModal textarea,
+    #geminiLiveSyncModal pre,
+    #geminiLivePreviewBox,
+    #geminiLiveSyncModal .whitespace-pre-wrap,
+    .gemini-live-text-fix {
+      width: 100% !important;
+      min-width: 0 !important;
+      white-space: pre-wrap !important;
+      word-break: normal !important;
+      overflow-wrap: break-word !important;
+      unicode-bidi: plaintext !important;
+      line-height: 1.65 !important;
+    }
+
   </style>
 </head>
 <body class="min-h-screen pb-32" style="overflow-x:clip;">
@@ -629,45 +660,54 @@
   <!-- TOP HEADER + CALLIGRAPHIC BISMILLAH PLAQUE     -->
   <!-- ============================================== -->
   <header id="gulzarMainHeader" class="sticky top-0 z-40 theme-header text-white shadow-md border-b border-white/15" style="position:sticky;position:-webkit-sticky;top:0;z-index:45;">
-    <!-- Ornate Calligraphic Bismillah Top Note Plaque -->
-    <div class="bismillah-calligraphy-bar py-1 px-3 text-center">
-      <div class="bismillah-plaque mx-auto" dir="rtl" title="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ">
-        <span class="text-amber-400 text-xs">۞</span>
-        <span class="text-sm sm:text-base font-bold tracking-wide">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
-        <span class="text-amber-400 text-xs">۞</span>
-      </div>
-    </div>
-    <div class="max-w-5xl mx-auto px-3.5 py-2 flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2 shrink-0" onclick="switchMainTab('plants'); scrollGulzarToTop();" style="cursor:pointer;">
-        <div class="w-8 h-8 rounded-xl bg-white/20 border border-amber-300/70 flex items-center justify-center overflow-hidden shadow-xs shrink-0" style="width:30px;height:30px;min-width:30px;max-width:30px;">
-          <img id="appHeaderRoseIcon" src="data:image/jpeg;base64,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" alt="Gulzar" style="width:30px;height:30px;object-fit:cover;display:block;border-radius:10px;" />
-        </div>
-        <div>
-          <span id="appHeaderBrand" class="font-bold text-lg sm:text-xl tracking-wide text-white block leading-snug" style="white-space:nowrap;">GULZAR</span>
-        </div>
+    <!-- Row 1: EN/Urdu Toggle (Left) | Bismillah (Center) | Theme & Settings (Right) -->
+    <div class="bismillah-calligraphy-bar py-1 px-2.5 flex items-center justify-between gap-1.5 max-w-5xl mx-auto">
+      <button type="button" id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center bg-black/40 hover:bg-black/55 p-0.5 rounded-xl border border-white/25 transition-all cursor-pointer shadow-xs active:scale-95 shrink-0" title="Switch Language / زبان تبدیل کریں">
+        <span id="langPillEn" class="px-1.5 py-0.5 rounded-lg text-[11px] font-bold font-latin-num transition-all bg-emerald-400 text-stone-950 shadow-xs">EN</span>
+        <span id="langPillUr" class="px-1.5 py-0.5 rounded-lg text-[11px] font-bold transition-all text-white/75">اردو</span>
+      </button>
+
+      <div class="bismillah-plaque mx-auto px-2 py-0.5 truncate" dir="rtl" title="بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ">
+        <span class="text-amber-400 text-[10px]">۞</span>
+        <span class="text-xs sm:text-sm font-bold tracking-wide">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+        <span class="text-amber-400 text-[10px]">۞</span>
       </div>
 
-      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
-        <button type="button" id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center bg-black/40 hover:bg-black/55 p-0.5 rounded-xl border border-white/25 transition-all cursor-pointer shadow-xs active:scale-95" title="Switch Language / زبان تبدیل کریں">
-          <span id="langPillEn" class="px-2 py-1 rounded-lg text-xs font-bold font-latin-num transition-all bg-emerald-400 text-stone-950 shadow-xs">EN</span>
-          <span id="langPillUr" class="px-2 py-1 rounded-lg text-xs font-bold transition-all text-white/75">اردو</span>
-        </button>
-
-        <button type="button" id="headerGeminiPromptIconBtn" onclick="openGeminiPromptBoxFromAnywhere()" class="flex items-center justify-center w-8 h-8 rounded-xl bg-amber-400/20 hover:bg-amber-400/35 text-amber-300 border border-amber-400/60 text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95" title="Gemini Encyclopedia Prompt & Paste / جیمنائی انسائیکلوپیڈیا پرامپٹ">
-          <span>🤖</span>
-        </button>
-
-        <button type="button" id="headerHelpIconBtn" onclick="switchMainTab('help')" class="flex items-center justify-center w-8 h-8 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-400/50 text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95" title="Interactive Help & Smart Mali Q&A">
-          <span>❓</span>
-        </button>
-
-        <button type="button" id="themeModeToggleBtn" onclick="toggleDarkLight()" class="flex items-center justify-center w-8 h-8 rounded-xl bg-white/20 hover:bg-white/30 text-white border border-white/25 transition-all cursor-pointer shadow-xs" title="Dark / Light Mode">
+      <div class="flex items-center gap-1 shrink-0">
+        <button type="button" id="themeModeToggleBtn" onclick="toggleDarkLight()" class="flex items-center justify-center w-7 h-7 rounded-xl bg-white/20 hover:bg-white/30 text-white border border-white/25 transition-all cursor-pointer shadow-xs text-xs" title="Dark / Light Mode">
           <span id="themeModeIcon">🌙</span>
         </button>
-
-        <button type="button" onclick="openSettingsModal()" class="flex items-center justify-center w-8 h-8 bg-amber-400 hover:bg-amber-300 active:scale-95 text-stone-950 rounded-xl text-sm font-black shadow-md transition-all cursor-pointer border border-amber-300" title="Settings / سیٹنگز">
+        <button type="button" onclick="openSettingsModal()" class="flex items-center justify-center w-7 h-7 bg-amber-400 hover:bg-amber-300 active:scale-95 text-stone-950 rounded-xl text-xs font-black shadow-md transition-all cursor-pointer border border-amber-300" title="Settings & Help / سیٹنگز اور ہیلپ">
           <span>⚙️</span>
           <span id="settingsBtnLabel" class="hidden">Settings</span>
+        </button>
+        <!-- Hidden compatibility anchors for legacy JS references -->
+        <button type="button" id="headerGeminiPromptIconBtn" onclick="openGeminiPromptBoxFromAnywhere()" class="hidden" aria-hidden="true"></button>
+        <button type="button" id="headerHelpIconBtn" onclick="switchMainTab('help')" class="hidden" aria-hidden="true"></button>
+      </div>
+    </div>
+
+    <!-- Row 2: GULZAR Brand (Left) | Persistent Non-Scrolling Quick Nav Pills (Right) -->
+    <div class="max-w-5xl mx-auto px-2.5 py-1.5 flex items-center justify-between gap-1.5 border-t border-white/10">
+      <div class="flex items-center gap-1.5 shrink-0" onclick="switchMainTab('plants'); scrollGulzarToTop();" style="cursor:pointer;">
+        <div class="w-7 h-7 rounded-xl bg-white/20 border border-amber-300/70 flex items-center justify-center overflow-hidden shadow-xs shrink-0" style="width:28px;height:28px;min-width:28px;max-width:28px;">
+          <img id="appHeaderRoseIcon" src="data:image/jpeg;base64,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" alt="Gulzar" style="width:30px;height:30px;object-fit:cover;display:block;border-radius:10px;" />
+        </div>
+        <span id="appHeaderBrand" class="font-black text-base sm:text-lg tracking-wide text-white block leading-none" style="white-space:nowrap;">GULZAR</span>
+      </div>
+
+      <div class="flex items-center gap-1 shrink-0">
+        <button type="button" onclick="openGeminiLiveSyncModal()" class="px-2 py-1 rounded-xl bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-300/50 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Gemini Live Sync">
+          <span>🎥</span><span>Sync</span>
+        </button>
+        <button type="button" onclick="openEncyclopediaModal()" class="px-2 py-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 border border-amber-200 text-[11px] font-black flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Encyclopedia">
+          <span>📚</span><span>Encyc</span>
+        </button>
+        <button type="button" onclick="openAddPlantModal()" class="px-2 py-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 border border-emerald-200 text-[11px] font-black flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Add New Plant">
+          <span>+</span><span>Add</span>
+        </button>
+        <button type="button" onclick="openLocationManagerModal()" class="px-2 py-1 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/25 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Location Manager">
+          <span>📍</span><span>Locs</span>
         </button>
       </div>
     </div>
@@ -714,7 +754,7 @@
             <span id="btnMultiPlantCareHeroLabel">کھاد / اسپرے ٹک لسٹ (پودے چنیں)</span>
           </button>
         </div>
-        <span id="plantCountBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-600 text-white border border-white/25 shadow-xs">6 پودے</span>
+        <span id="plantCountBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-700/90 text-white border border-emerald-300/50 shadow-xs inline-flex items-center" title="Zero-Loss History Restore Active"><span class="gulzar-restore-dot"></span><span>6 پودے</span></span>
       </div>
 
       <!-- AI Garden Care & Plant Doctor Hub (Tab 1 AI) -->
@@ -3359,7 +3399,7 @@
     };
 
     const DEFAULT_STATE = {
-      version: 28,
+      version: 36,
       palette: 'emerald',
       theme: 'dark',
       lang: 'en',
@@ -3604,7 +3644,7 @@
         if (raw) {
           const parsed = JSON.parse(raw);
           if (parsed && Array.isArray(parsed.plants)) {
-            gState = { ...gState, ...parsed, version: 26 };
+            gState = { ...gState, ...parsed, version: 36 };
             const p1 = gState.plants.find(p => p.id === 'p-1');
             if (p1 && p1.nameEn === 'Bougainvillea — Main Gate (Pink)' && p1.image === IMG_ROSE) {
               p1.nameUr = 'دیسی سرخ گلاب — مین گیٹ';
@@ -4114,7 +4154,7 @@
 
       setTxt('appHeaderBrand', t.brand);
       setTxt('moujFooterTitle', isEn ? 'Powered & Controlled by MOUJ SYNC' : 'پیشکش و کنٹرولڈ بائے: موج سِنک (MOUJ SYNC)');
-      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v35.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v35.0 (GULZAR Smart Home Garden)');
+      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v36.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v36.0 (GULZAR Smart Home Garden)');
       setTxt('btnHeroGeminiLiveLabel', isEn ? 'Gemini Live Sync' : 'جیمینائی لائیو سنک (Live Sync)');
       setTxt('btnHeroGeminiPromptLabel', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('btnOpenGeminiPromptFromEncycTxt', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
@@ -11678,9 +11718,14 @@ Return ONLY valid JSON:
 
       if (modeSel === 'merge') {
         // SAFE MERGE: Keep all existing plants/locations/stock/recipes and add any new ones from backup!
-        const existingPlantNames = new Set((gState.plants || []).map(p => (p.nameEn || p.nameUr || '').toLowerCase() + '|' + (p.locationEn || p.locationUr || '').toLowerCase()));
+        const makePlantCompositeKey = (p) => [
+          (p.nameEn || p.nameUr || '').trim().toLowerCase(),
+          (p.potSize || p.potEn || p.potUr || p.pot || '').trim().toLowerCase(),
+          (p.locationEn || p.locationUr || '').trim().toLowerCase()
+        ].join('|');
+        const existingPlantNames = new Set((gState.plants || []).map(makePlantCompositeKey));
         (parsed.plants || []).forEach(bp => {
-          const k = (bp.nameEn || bp.nameUr || '').toLowerCase() + '|' + (bp.locationEn || bp.locationUr || '').toLowerCase();
+          const k = makePlantCompositeKey(bp);
           if (!existingPlantNames.has(k)) {
             gState.plants.push(bp);
             existingPlantNames.add(k);
@@ -11714,12 +11759,15 @@ Return ONLY valid JSON:
           recipes: Array.isArray(parsed.recipes) ? parsed.recipes : DEFAULT_STATE.recipes,
           aiApiKey: keepKey || parsed.aiApiKey || '',
           lang: keepLang,
-          version: 30,
+          version: 36,
           _upgradedFullFertCatalogV30: true
         };
       }
 
       sanitizeExistingGardenPlants();
+      if (Array.isArray(gState.plants)) {
+        gState.plants.forEach(p => recalculatePlantLastDatesFromHistory(p));
+      }
       deduplicateStockInventory();
       persist();
       setPalette(gState.palette || 'emerald');
@@ -13762,39 +13810,40 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
           return kwList.some(k => txt.includes(k));
         });
       };
+      const safeLogIso = (entry) => {
+        if (!entry) return '';
+        const raw = entry.dateIso || entry.date || entry.dateStr || entry.timestamp || '';
+        return raw ? parseFlexibleDateToISO(raw) : '';
+      };
       const lastW = findLatestByType('water', ['water', 'پانی']);
-      if (lastW && lastW.dateIso) {
-        p.lastWateredDate = lastW.dateIso;
-        p.daysSinceWater = formatPlantedDateDisplay(lastW.dateIso, true).diffDays;
-      } else {
-        delete p.lastWateredDate;
+      const lastWIso = safeLogIso(lastW);
+      if (lastWIso) {
+        p.lastWateredDate = lastWIso;
+        p.daysSinceWater = formatPlantedDateDisplay(lastWIso, true).diffDays;
       }
       const lastT = findLatestByType('till', ['till', 'گوڈی']);
-      if (lastT && lastT.dateIso) {
-        p.lastTilledDate = lastT.dateIso;
-        p.daysSinceHoeing = formatPlantedDateDisplay(lastT.dateIso, true).diffDays;
+      const lastTIso = safeLogIso(lastT);
+      if (lastTIso) {
+        p.lastTilledDate = lastTIso;
+        p.daysSinceHoeing = formatPlantedDateDisplay(lastTIso, true).diffDays;
         p.hasBeenTilled = true;
-      } else {
-        delete p.lastTilledDate;
-        p.hasBeenTilled = false;
       }
       const fLogs = Array.isArray(p.feedHistory) ? p.feedHistory : [];
-      if (fLogs.length > 0) {
-        p.lastFedDate = fLogs[0].dateIso;
-        p.lastFertUr = fLogs[0].fertUr;
-        p.lastFertEn = fLogs[0].fertEn;
-        p.daysSinceFeed = formatPlantedDateDisplay(fLogs[0].dateIso, true).diffDays;
+      const lastFIso = safeLogIso(fLogs[0]) || safeLogIso(findLatestByType('feed', ['feed', 'fert', 'کھاد', 'mix', 'recipe']));
+      if (lastFIso) {
+        p.lastFedDate = lastFIso;
+        if (fLogs[0]) {
+          p.lastFertUr = fLogs[0].fertUr || p.lastFertUr;
+          p.lastFertEn = fLogs[0].fertEn || p.lastFertEn;
+        }
+        p.daysSinceFeed = formatPlantedDateDisplay(lastFIso, true).diffDays;
         p.hasBeenFed = true;
-      } else {
-        delete p.lastFedDate;
-        p.hasBeenFed = false;
       }
       const sLogs = Array.isArray(p.sprayHistory) ? p.sprayHistory : [];
-      if (sLogs.length > 0) {
-        p.lastSprayedDate = sLogs[0].dateIso;
-        p.daysSinceSpray = formatPlantedDateDisplay(sLogs[0].dateIso, true).diffDays;
-      } else {
-        delete p.lastSprayedDate;
+      const lastSIso = safeLogIso(sLogs[0]) || safeLogIso(findLatestByType('spray', ['spray', 'سپرے']));
+      if (lastSIso) {
+        p.lastSprayedDate = lastSIso;
+        p.daysSinceSpray = formatPlantedDateDisplay(lastSIso, true).diffDays;
       }
     }
 
@@ -13928,7 +13977,7 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     }
 
     // =========================================================================
-    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v35.0)
+    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v36.0)
     // =========================================================================
     function getSpeciesMemoryKey(nameStr) {
       const cleaned = normalizeSearchText(String(nameStr || '').replace(/\s+\d+$/, '').split('(')[0]);
