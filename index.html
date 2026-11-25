@@ -622,7 +622,7 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
   
-    /* === GULZAR v36.0 UI & TEXT FIXES === */
+    /* === GULZAR v37.0 UI & TEXT FIXES === */
     @keyframes gulzarPulseGreen {
       0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.75); opacity: 1; }
       50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); opacity: 0.65; }
@@ -727,31 +727,15 @@
     <!-- ============================================== -->
     <section id="tab-plants" class="space-y-3.5">
       <!-- Clean Floral Background Top Hero Bar (No useless text clutter!) -->
-      <div class="floral-banner-card rounded-3xl p-4 shadow-md flex flex-wrap items-center justify-between gap-2.5">
+      <div class="floral-banner-card rounded-3xl p-3 shadow-md flex flex-wrap items-center justify-between gap-2">
         <div class="flex flex-wrap items-center gap-2">
-          <button type="button" onclick="openAddPlantModal()" class="theme-btn-primary px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold shadow-md flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer border border-white/25">
-            <span>📸</span>
-            <span id="btnAddPlantLabel">+ نیا پودا شامل کریں</span>
-          </button>
-          <button type="button" onclick="openLocationManagerModal()" class="bg-black/55 hover:bg-black/80 text-white border border-white/25 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-1.5 cursor-pointer backdrop-blur-sm">
-            <span>📍</span>
-            <span id="btnLocManagerLabel">لوکیشنز مینیجر</span>
-          </button>
-          <button type="button" onclick="openEncyclopediaModal()" class="bg-amber-400 hover:bg-amber-300 text-stone-950 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md border border-amber-200 active:scale-95">
-            <span>📚</span>
-            <span id="btnEncyclopediaHeroLabel">انسائیکلوپیڈیا (370+ پودے)</span>
-          </button>
-          <button type="button" onclick="openGeminiPromptBoxFromAnywhere()" class="bg-black/65 hover:bg-black/85 text-amber-300 border border-amber-400/60 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95">
-            <span>🤖</span>
-            <span id="btnHeroGeminiPromptLabel">جیمنائی پرامپٹ و گائیڈ پیسٹ</span>
-          </button>
-          <button type="button" onclick="openGeminiLiveSyncModal()" class="bg-blue-600 hover:bg-blue-500 text-white border border-blue-300/60 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95">
-            <span>🎥</span>
-            <span id="btnHeroGeminiLiveLabel">جیمینائی لائیو سنک (Live Sync)</span>
-          </button>
-          <button type="button" onclick="openMultiPlantCareModal('feed')" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md border border-emerald-200 active:scale-95">
+          <button type="button" onclick="openMultiPlantCareModal('feed')" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-1.5 cursor-pointer shadow-md border border-emerald-200 active:scale-95">
             <span>✅</span>
             <span id="btnMultiPlantCareHeroLabel">کھاد / اسپرے ٹک لسٹ (پودے چنیں)</span>
+          </button>
+          <button type="button" onclick="openGeminiPromptBoxFromAnywhere()" class="bg-black/65 hover:bg-black/85 text-amber-300 border border-amber-400/60 px-3 py-2 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95">
+            <span>🤖</span>
+            <span id="btnHeroGeminiPromptLabel">جیمنائی پرامپٹ و گائیڈ پیسٹ</span>
           </button>
         </div>
         <span id="plantCountBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-700/90 text-white border border-emerald-300/50 shadow-xs inline-flex items-center" title="Zero-Loss History Restore Active"><span class="gulzar-restore-dot"></span><span>6 پودے</span></span>
@@ -2135,12 +2119,12 @@
   <!-- ===================================================================== -->
   <!-- FLOATING SCROLL-TO-TOP (⬆️) & QUICK BACK / DASHBOARD (⬅️) DOCK        -->
   <!-- ===================================================================== -->
-  <div id="gulzarFloatingNavDock" style="position:fixed;bottom:76px;right:12px;z-index:44;display:flex;flex-direction:column;gap:8px; align-items:flex-end;">
-    <button type="button" id="floatingBackHomeBtn" onclick="handleGulzarBackOrHome()" class="hidden bg-amber-400 text-stone-950 border-2 border-white/40 px-3 py-1.5 rounded-full text-xs font-black shadow-2xl items-center gap-1 cursor-pointer active:scale-95" style="box-shadow:0 4px 14px rgba(0,0,0,0.55);">
+  <div id="gulzarFloatingNavDock" style="position:fixed;bottom:72px;left:10px;z-index:44;display:flex;flex-direction:row;gap:6px;align-items:center;pointer-events:none;">
+    <button type="button" id="floatingBackHomeBtn" onclick="handleGulzarBackOrHome()" class="hidden bg-amber-400/95 text-stone-950 border border-white/50 px-2.5 py-1 rounded-full text-[11px] font-black shadow-lg items-center gap-1 cursor-pointer active:scale-95" style="pointer-events:auto;box-shadow:0 3px 10px rgba(0,0,0,0.45);backdrop-filter:blur(6px);">
       <span>⬅️</span>
       <span id="floatingBackHomeTxt">واپس ڈیش بورڈ</span>
     </button>
-    <button type="button" id="floatingScrollTopBtn" onclick="scrollGulzarToTop()" class="bg-emerald-500 text-stone-950 border-2 border-white/40 px-3 py-1.5 rounded-full text-xs font-black shadow-2xl flex items-center gap-1 cursor-pointer active:scale-95" style="box-shadow:0 4px 14px rgba(0,0,0,0.55);">
+    <button type="button" id="floatingScrollTopBtn" onclick="scrollGulzarToTop()" class="bg-emerald-500/95 text-stone-950 border border-white/50 px-2.5 py-1 rounded-full text-[11px] font-black shadow-lg flex items-center gap-1 cursor-pointer active:scale-95" style="pointer-events:auto;box-shadow:0 3px 10px rgba(0,0,0,0.45);backdrop-filter:blur(6px);">
       <span>⬆️</span>
       <span id="floatingScrollTopTxt">ٹاپ (Top)</span>
     </button>
@@ -3399,7 +3383,7 @@
     };
 
     const DEFAULT_STATE = {
-      version: 36,
+      version: 37,
       palette: 'emerald',
       theme: 'dark',
       lang: 'en',
@@ -3644,7 +3628,7 @@
         if (raw) {
           const parsed = JSON.parse(raw);
           if (parsed && Array.isArray(parsed.plants)) {
-            gState = { ...gState, ...parsed, version: 36 };
+            gState = { ...gState, ...parsed, version: 37 };
             const p1 = gState.plants.find(p => p.id === 'p-1');
             if (p1 && p1.nameEn === 'Bougainvillea — Main Gate (Pink)' && p1.image === IMG_ROSE) {
               p1.nameUr = 'دیسی سرخ گلاب — مین گیٹ';
@@ -4154,7 +4138,7 @@
 
       setTxt('appHeaderBrand', t.brand);
       setTxt('moujFooterTitle', isEn ? 'Powered & Controlled by MOUJ SYNC' : 'پیشکش و کنٹرولڈ بائے: موج سِنک (MOUJ SYNC)');
-      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v36.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v36.0 (GULZAR Smart Home Garden)');
+      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v37.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v37.0 (GULZAR Smart Home Garden)');
       setTxt('btnHeroGeminiLiveLabel', isEn ? 'Gemini Live Sync' : 'جیمینائی لائیو سنک (Live Sync)');
       setTxt('btnHeroGeminiPromptLabel', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
       setTxt('btnOpenGeminiPromptFromEncycTxt', isEn ? 'Gemini Prompt & Paste Guide' : 'جیمنائی پرامپٹ و گائیڈ پیسٹ');
@@ -11702,9 +11686,35 @@ Return ONLY valid JSON:
       // Save automatic pre-restore safety snapshot so original data is never lost
       saveInAppBackupSnapshot('Auto Pre-Restore Safety');
 
+      const backupRefIso = parseFlexibleDateToISO(parsed.exportedAt || parsed.savedAt || parsed.updatedAt || parsed.timestamp || getLocalTodayISO());
+      const shiftIsoDaysBack = (baseIso, daysBack) => {
+        const d = new Date(baseIso + 'T12:00:00');
+        if (isNaN(d.getTime())) return getLocalTodayISO();
+        d.setDate(d.getDate() - Math.max(0, Math.round(Number(daysBack) || 0)));
+        const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), day = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      };
       parsed.plants.forEach(p => {
         p.plantedDate = parseFlexibleDateToISO(p.plantedDate || '2026-10-01');
         if (p.locationDate) p.locationDate = parseFlexibleDateToISO(p.locationDate);
+        if (p.lastWateredDate) p.lastWateredDate = parseFlexibleDateToISO(p.lastWateredDate);
+        if (p.lastTilledDate) p.lastTilledDate = parseFlexibleDateToISO(p.lastTilledDate);
+        if (p.lastFedDate) p.lastFedDate = parseFlexibleDateToISO(p.lastFedDate);
+        if (p.lastSprayedDate) p.lastSprayedDate = parseFlexibleDateToISO(p.lastSprayedDate);
+        // Extract any real dates from history first
+        recalculatePlantLastDatesFromHistory(p);
+        // Backfill missing ISO dates from legacy counters relative to backup timestamp so old plants never reset to Due Now!
+        if (!p.lastFedDate && (p.hasBeenFed || (typeof p.daysSinceFeed === 'number' && p.daysSinceFeed >= 0 && p.daysSinceFeed < 15))) {
+          p.lastFedDate = shiftIsoDaysBack(backupRefIso, p.daysSinceFeed || 0);
+          p.hasBeenFed = true;
+        }
+        if (!p.lastTilledDate && (p.hasBeenTilled || (typeof p.daysSinceHoeing === 'number' && p.daysSinceHoeing >= 0 && p.daysSinceHoeing < 14))) {
+          p.lastTilledDate = shiftIsoDaysBack(backupRefIso, p.daysSinceHoeing || 0);
+          p.hasBeenTilled = true;
+        }
+        if (!p.lastWateredDate && typeof p.daysSinceWater === 'number' && p.daysSinceWater >= 0) {
+          p.lastWateredDate = shiftIsoDaysBack(backupRefIso, p.daysSinceWater);
+        }
       });
       if (parsed.learnedPlants && typeof parsed.learnedPlants === 'object') {
         Object.assign(BOTANICAL_DB, parsed.learnedPlants);
@@ -11759,7 +11769,7 @@ Return ONLY valid JSON:
           recipes: Array.isArray(parsed.recipes) ? parsed.recipes : DEFAULT_STATE.recipes,
           aiApiKey: keepKey || parsed.aiApiKey || '',
           lang: keepLang,
-          version: 36,
+          version: 37,
           _upgradedFullFertCatalogV30: true
         };
       }
@@ -12332,19 +12342,82 @@ Return ONLY valid JSON:
         if (p.locationEn && (!p.locationUr || !hasUrScript(p.locationUr))) { p.locationUr = translateCustomTerm(p.locationEn, 'ur'); changed = true; }
 
         const pAge = formatPlantedDateDisplay(p.plantedDate, false).diffDays;
-        if ((p.daysSinceHoeing || 0) > pAge) {
+        const hasRealTillRecord = Boolean(p.lastTilledDate);
+        const hasRealFeedRecord = Boolean(p.lastFedDate || (Array.isArray(p.feedHistory) && p.feedHistory.length > 0));
+        if (!hasRealTillRecord && (p.daysSinceHoeing || 0) > pAge) {
           p.daysSinceHoeing = pAge;
-          p.hasBeenTilled = false;
+          if (!p.hasBeenTilled) p.hasBeenTilled = false;
           changed = true;
         }
-        if ((p.daysSinceFeed || 0) > pAge) {
+        if (!hasRealFeedRecord && (p.daysSinceFeed || 0) > pAge) {
           p.daysSinceFeed = pAge;
-          p.hasBeenFed = false;
+          if (!p.hasBeenFed) p.hasBeenFed = false;
           changed = true;
         }
+
+        // v37.0 Strict Botanical Name & Care Tip Repair (Fixes Korean Grass, Kashmiri Mirch, Gull Dawoodi, Bleeding Heart Vine, Cassia Nodosa, Adinum)
+        const repairRules = [
+          {
+            test: /korean\s*grass|carpet\s*grass|zoysia|کورین\s*گھاس/i,
+            sciName: 'Zoysia tenuifolia',
+            pruneEn: 'Mow / trim evenly every 3–4 weeks (Mar–Oct)',
+            pruneUr: 'ہر 3 تا 4 ہفتے بعد گھاس کی ہموار تراش (مارچ تا اکتوبر)',
+            totkaEn: 'Water deeply in early morning and top-dress seasonally with fine sand & compost.',
+            totkaUr: 'صبح سویرے گہرا پانی دیں اور موسمی طور پر ریت و کمپوسٹ کی ہلکی تہہ ڈالیں۔'
+          },
+          {
+            test: /kashmiri\s*mirch|green\s*chili|chilli|mirch|کشمیری\s*مرچ|مرچ/i,
+            sciName: 'Capsicum annuum',
+            pruneEn: 'Pinch early growing tips & remove lower yellowing leaves',
+            pruneUr: 'شروع میں اوپری کونپلیں ہلکی توڑیں اور نچلے پیلے پتے ہٹائیں',
+            totkaEn: 'Give 6+ hours sun, avoid overwatering during flowering, and feed calcium/potash for heavy pods.',
+            totkaUr: 'روزانہ 6 گھنٹے دھوپ دیں، پھول آتے وقت پانی کم رکھیں اور کیلشیم و پوٹاش کھاد دیں۔'
+          },
+          {
+            test: /gull?\s*dawoodi|gul[-\s]*e[-\s]*dawoodi|chrysanthemum|گل\s*داؤدی/i,
+            sciName: 'Chrysanthemum indicum',
+            pruneEn: 'Pinch tips till August; deadhead faded winter blooms',
+            pruneUr: 'اگست تک کونپلیں چٹکی سے توڑیں اور سردیوں میں سوکھے پھول ہٹائیں'
+          },
+          {
+            test: /bleeding\s*heart|clerodendrum/i,
+            sciName: 'Clerodendrum thomsoniae',
+            fixMismatchedSci: /lantana/i
+          },
+          {
+            test: /cassia\s*nodosa|pink\s*shower/i,
+            sciName: 'Cassia nodosa',
+            fixMismatchedSci: /fistula/i
+          },
+          {
+            test: /adinum|adenium|desert\s*rose|ایڈینیم/i,
+            sciName: 'Adenium obesum'
+          }
+        ];
+        for (const r of repairRules) {
+          if (r.test.test(nCheck)) {
+            const badSci = !p.sciName || p.sciName === 'Custom Trained Plant' || p.sciName === 'Botanical sp.' || (r.fixMismatchedSci && r.fixMismatchedSci.test(p.sciName));
+            if (badSci) {
+              p.sciName = r.sciName;
+              changed = true;
+            }
+            if (r.pruneEn && (!p.pruneEn || /deadhead faded blooms/i.test(p.pruneEn))) {
+              p.pruneEn = r.pruneEn;
+              p.pruneUr = r.pruneUr;
+              changed = true;
+            }
+            if (r.totkaEn && (!p.totkaEn || /pinch spent flowers/i.test(p.totkaEn))) {
+              p.totkaEn = r.totkaEn;
+              p.totkaUr = r.totkaUr;
+              changed = true;
+            }
+            break;
+          }
+        }
+
         if (!p.sciName || p.sciName === 'Custom Trained Plant' || p.sciName === 'Botanical sp.') {
           const matches = findBestFlexiblePlantMatches(p.nameEn || p.nameUr || '');
-          if (matches.length > 0 && matches[0].score >= 45) {
+          if (matches.length > 0 && matches[0].score >= 55) {
             p.sciName = matches[0].prof.sciName;
             changed = true;
           }
@@ -13977,7 +14050,7 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
     }
 
     // =========================================================================
-    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v36.0)
+    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v37.0)
     // =========================================================================
     function getSpeciesMemoryKey(nameStr) {
       const cleaned = normalizeSearchText(String(nameStr || '').replace(/\s+\d+$/, '').split('(')[0]);
