@@ -10009,17 +10009,15 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
 
                   return `
                     <div class="theme-card p-2.5 rounded-xl border border-white/15 space-y-1 text-xs">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <strong class="text-emerald-300">${actLabel}:</strong>
-                          <span class="font-bold text-white"> ${noteLabel}</span>
-                        </div>
+                      <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <strong class="text-emerald-300">${actLabel}:</strong>
                         <div class="flex items-center gap-1 shrink-0">
                           <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded-md text-amber-300 font-latin-num">${dateLabel}</span>
                           <button type="button" onclick="document.getElementById('histEntryEditBox_${p.id}_${hIdx}').classList.toggle('hidden')" class="px-1.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[10px] cursor-pointer" title="${isEn ? 'Edit Date / Note' : 'تاریخ یا نوٹ ایڈٹ کریں'}">✏️</button>
                           <button type="button" onclick="deletePlantHistoryEntry('${p.id}', '${hId}', ${hIdx})" class="px-1.5 py-0.5 rounded bg-red-600/30 hover:bg-red-600/60 text-red-200 text-[10px] cursor-pointer" title="${isEn ? 'Delete Entry' : 'یہ ریکارڈ حذف کریں'}">🗑️</button>
                         </div>
                       </div>
+                      <span class="w-full block mt-1 leading-relaxed font-bold text-white">${noteLabel}</span>
                       ${methodLabel ? `<div class="text-[11px] text-emerald-200/90">🛠️ <strong>${isEn ? 'Method:' : 'طریقہ کار:'}</strong> ${methodLabel}</div>` : ''}
                       <div id="histEntryEditBox_${p.id}_${hIdx}" class="hidden pt-1.5 mt-1 border-t theme-border space-y-1.5">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
