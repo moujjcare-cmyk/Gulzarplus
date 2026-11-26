@@ -1,8 +1,10 @@
 {
+  "id": "./",
   "name": "GULZAR — گلزار Smart Home Garden",
   "short_name": "Gulzar",
-  "description": "Bilingual Urdu & English Smart Home Garden Manager — Powered & Controlled by MOUJ SYNC",
+  "description": "Bilingual Urdu & English Smart Home Garden Manager v38.0 — Powered & Controlled by MOUJ SYNC",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#071712",
   "theme_color": "#09221a",
@@ -12,13 +14,25 @@
       "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
