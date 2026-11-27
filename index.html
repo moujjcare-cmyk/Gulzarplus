@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-palette="emerald" data-theme="dark">
+<html lang="en" dir="ltr" data-palette="emerald" data-theme="dark" data-scheme="emerald-night">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -129,6 +129,129 @@
       --hero-overlay: linear-gradient(135deg, rgba(12, 74, 110, 0.80) 0%, rgba(7, 89, 133, 0.70) 100%);
     }
 
+    /* ===== v39 UI: 4 Named Color Schemes (gState.theme → html[data-scheme]) =====
+       Selector specificity (0,3,0) + later source order overrides legacy palette combos. */
+    :root[data-scheme="emerald-night"][data-theme] {
+      --bg-main: #071712; --bg-card: #0d261e; --bg-card-alt: #13352a; --bg-header: #09221a;
+      --text-main: #ecfdf5; --text-muted: #a7f3d0; --border-col: rgba(52, 211, 153, 0.25);
+      --accent: #10b981; --accent-hover: #059669; --badge-bg: rgba(251, 191, 36, 0.18); --badge-text: #fcd34d;
+      --input-bg: #0a1f18; --option-bg: #0d261e; --option-text: #ecfdf5;
+      --hero-overlay: linear-gradient(135deg, rgba(7, 26, 20, 0.78) 0%, rgba(15, 52, 39, 0.68) 100%);
+    }
+    :root[data-scheme="daylight-garden"][data-theme] {
+      --bg-main: #f5f8f2; --bg-card: #ffffff; --bg-card-alt: #e9f3e8; --bg-header: #065f46;
+      --text-main: #063729; --text-muted: #1b5e47; --border-col: rgba(6, 95, 70, 0.24);
+      --accent: #059669; --accent-hover: #047857; --badge-bg: #d1fae5; --badge-text: #064e3b;
+      --input-bg: #ffffff; --option-bg: #ffffff; --option-text: #063729;
+      --hero-overlay: linear-gradient(135deg, rgba(6, 78, 59, 0.80) 0%, rgba(4, 120, 87, 0.70) 100%);
+    }
+    :root[data-scheme="terracotta-gold"][data-theme] {
+      --bg-main: #1a0f0a; --bg-card: #291710; --bg-card-alt: #3a2117; --bg-header: #24130c;
+      --text-main: #fff8f1; --text-muted: #fed7aa; --border-col: rgba(245, 158, 11, 0.30);
+      --accent: #d97706; --accent-hover: #b45309; --badge-bg: rgba(217, 119, 6, 0.24); --badge-text: #fcd34d;
+      --input-bg: #20120c; --option-bg: #291710; --option-text: #fff8f1;
+      --hero-overlay: linear-gradient(135deg, rgba(28, 16, 11, 0.80) 0%, rgba(61, 34, 23, 0.70) 100%);
+    }
+    :root[data-scheme="midnight-slate"][data-theme] {
+      --bg-main: #0b1320; --bg-card: #111e32; --bg-card-alt: #182942; --bg-header: #0d1829;
+      --text-main: #f1f5f9; --text-muted: #99f6e4; --border-col: rgba(45, 212, 191, 0.26);
+      --accent: #0d9488; --accent-hover: #0f766e; --badge-bg: rgba(20, 184, 166, 0.22); --badge-text: #5eead4;
+      --input-bg: #0e192b; --option-bg: #111e32; --option-text: #f1f5f9;
+      --hero-overlay: linear-gradient(135deg, rgba(11, 19, 32, 0.82) 0%, rgba(24, 41, 66, 0.72) 100%);
+    }
+
+    /* Daylight Garden: remap light-on-dark utility text inside light cards for outdoor readability */
+    :root[data-scheme="daylight-garden"] .theme-card :is(.text-white, .text-white\/90, .text-white\/80, .text-white\/75, .text-white\/70, .text-white\/60, .text-stone-100, .text-stone-200, .text-stone-300, .text-emerald-50, .text-emerald-100),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.text-white, .text-white\/90, .text-white\/80, .text-white\/75, .text-white\/70, .text-white\/60, .text-stone-100, .text-stone-200, .text-stone-300, .text-emerald-50, .text-emerald-100) { color: #063729 !important; }
+    :root[data-scheme="daylight-garden"] .theme-card :is(.text-amber-200, .text-amber-300, .text-amber-400, .text-yellow-200, .text-yellow-300),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.text-amber-200, .text-amber-300, .text-amber-400, .text-yellow-200, .text-yellow-300) { color: #92400e !important; }
+    :root[data-scheme="daylight-garden"] .theme-card :is(.text-emerald-200, .text-emerald-300, .text-emerald-400, .text-green-200, .text-green-300),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.text-emerald-200, .text-emerald-300, .text-emerald-400, .text-green-200, .text-green-300) { color: #047857 !important; }
+    :root[data-scheme="daylight-garden"] .theme-card :is(.text-teal-200, .text-teal-300, .text-cyan-200, .text-cyan-300, .text-sky-200, .text-sky-300, .text-blue-200, .text-blue-300),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.text-teal-200, .text-teal-300, .text-cyan-200, .text-cyan-300, .text-sky-200, .text-sky-300, .text-blue-200, .text-blue-300) { color: #0f5f73 !important; }
+    :root[data-scheme="daylight-garden"] .theme-card :is(.text-red-200, .text-red-300, .text-rose-200, .text-rose-300, .text-orange-200, .text-orange-300),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.text-red-200, .text-red-300, .text-rose-200, .text-rose-300, .text-orange-200, .text-orange-300) { color: #b42318 !important; }
+    :root[data-scheme="daylight-garden"] .theme-card :is(.bg-black\/20, .bg-black\/30, .bg-black\/40, .bg-black\/50, .bg-stone-900\/60, .bg-stone-950\/60),
+    :root[data-scheme="daylight-garden"] .theme-card-alt :is(.bg-black\/20, .bg-black\/30, .bg-black\/40, .bg-black\/50, .bg-stone-900\/60, .bg-stone-950\/60) { background-color: rgba(6, 95, 70, 0.08) !important; }
+    /* ...but keep white text on solid coloured buttons, headers, banners & photo overlays */
+    :root[data-scheme="daylight-garden"] :is(.theme-card, .theme-card-alt) :is(.theme-btn-primary, .theme-header, .floral-banner-card, [class*="bg-emerald-6"], [class*="bg-emerald-7"], [class*="bg-blue-6"], [class*="bg-blue-5"], [class*="bg-red-6"], [class*="bg-red-5"], [class*="bg-teal-6"], [class*="bg-teal-7"], [class*="bg-stone-7"], [class*="bg-stone-8"], [class*="bg-stone-9"], [class*="bg-purple-6"], [class*="bg-indigo-6"], .bg-black\/60, .bg-black\/70),
+    :root[data-scheme="daylight-garden"] :is(.theme-card, .theme-card-alt) :is(.theme-btn-primary, .theme-header, .floral-banner-card, [class*="bg-emerald-6"], [class*="bg-emerald-7"], [class*="bg-blue-6"], [class*="bg-blue-5"], [class*="bg-red-6"], [class*="bg-red-5"], [class*="bg-teal-6"], [class*="bg-teal-7"], [class*="bg-stone-7"], [class*="bg-stone-8"], [class*="bg-stone-9"], [class*="bg-purple-6"], [class*="bg-indigo-6"], .bg-black\/60, .bg-black\/70) :is(.text-white, .text-white\/90, .text-white\/80, .text-white\/75, .text-amber-200, .text-amber-300, .text-emerald-200, .text-emerald-300) { color: #ffffff !important; }
+    :root[data-scheme="daylight-garden"] :is(.theme-card, .theme-card-alt) :is([class*="bg-emerald-6"], [class*="bg-blue-6"], [class*="bg-red-6"], [class*="bg-teal-6"], [class*="bg-stone-8"], [class*="bg-stone-9"]).text-amber-300 { color: #fde68a !important; }
+    :root[data-scheme="daylight-garden"] input::placeholder,
+    :root[data-scheme="daylight-garden"] textarea::placeholder { color: rgba(6, 55, 41, 0.55) !important; }
+    :root[data-scheme="daylight-garden"] :is(.theme-card, .theme-card-alt) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]), select, textarea) {
+      background-color: var(--input-bg, transparent);
+      color: var(--text-main);
+      border-color: var(--border-col);
+    }
+
+    /* Top-bar 🎨 theme popover + Settings scheme cards */
+    .gulzar-theme-menu {
+      position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 60;
+      width: min(15.5rem, calc(100vw - 1.25rem)); padding: 0.4rem;
+      background: var(--bg-card); color: var(--text-main);
+      border: 1px solid var(--border-col); border-radius: 1rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+    .gulzar-theme-option {
+      display: flex; align-items: center; gap: 0.55rem; width: 100%;
+      padding: 0.45rem 0.55rem; border-radius: 0.75rem; text-align: start;
+      border: 1px solid transparent; cursor: pointer; color: var(--text-main);
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .gulzar-theme-option:hover, .gulzar-theme-option:focus-visible { background: var(--bg-card-alt); outline: none; }
+    .gulzar-theme-option.is-active { border-color: var(--accent); background: var(--bg-card-alt); }
+    .gulzar-theme-option .scheme-check { margin-inline-start: auto; font-weight: 900; color: var(--accent); visibility: hidden; }
+    .gulzar-theme-option.is-active .scheme-check { visibility: visible; }
+    .gulzar-scheme-swatch {
+      display: inline-flex; flex-shrink: 0; width: 1.9rem; height: 1.9rem; border-radius: 9999px; overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.55); box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+    .gulzar-scheme-swatch > i { flex: 1; display: block; }
+    .gulzar-scheme-card {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; min-width: 0;
+      padding: 0.6rem; border-radius: 0.9rem; border: 2px solid var(--border-col);
+      background: var(--bg-card-alt); color: var(--text-main); cursor: pointer; text-align: start;
+      transition: border-color 0.15s ease, transform 0.1s ease;
+    }
+    .gulzar-scheme-card:active { transform: scale(0.97); }
+    .gulzar-scheme-card.is-active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+    .gulzar-scheme-card .scheme-title { font-weight: 800; font-size: 0.74rem; line-height: 1.25; }
+    .gulzar-scheme-card .scheme-sub { font-size: 0.62rem; color: var(--text-muted); line-height: 1.3; }
+
+    /* RTL/LTR-safe plant-name input with ✕ ▼ actions on the logical end side */
+    .gulzar-name-input { padding-inline-start: 0.75rem !important; padding-inline-end: 4.1rem !important; padding-left: unset; padding-right: unset; }
+    .gulzar-input-end-actions {
+      position: absolute; inset-inline-end: 6px; top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 4px; z-index: 2;
+    }
+    .gulzar-pot-head { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; flex-wrap: wrap; }
+    .gulzar-pot-head > label { min-width: 0; }
+
+    /* 360–412px mobile polish for Reports + Pot Manager */
+    #gardenReportsModal, #potManagerModal { overflow-x: hidden; }
+    #gardenReportsModal > div, #potManagerModal > div { max-width: 100%; }
+    #gardenReportsBody, #customPotsListContainer { overflow-wrap: anywhere; word-break: break-word; }
+    .report-stat-card { min-width: 0; }
+    .report-plant-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 0.5rem; min-width: 0; }
+    .report-plant-row .report-plant-name { min-width: 0; flex: 1 1 8rem; }
+    .report-plant-row .report-plant-meta { flex: 0 1 auto; max-width: 100%; white-space: normal; }
+    .report-filter-bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.25rem; }
+    .pot-mgr-item-actions button { min-height: 30px; }
+    @media (max-width: 420px) {
+      .gulzar-modal-head-actions { width: 100%; }
+      .gulzar-modal-head-actions > .gulzar-flex-btn { flex: 1 1 0; justify-content: center; }
+    }
+    /* Utilities missing from the precompiled fallback set */
+    .gap-x-2 { column-gap: 0.5rem; }
+    .gap-y-1\.5 { row-gap: 0.375rem; }
+    .min-w-\[9rem\] { min-width: 9rem; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    .text-purple-300 { color: #d8b4fe; }
+    @media (min-width: 640px) { .sm\:order-last { order: 9999; } }
+    :root[data-scheme="daylight-garden"] :is(.theme-card, .theme-card-alt) :is(.text-purple-300, .text-purple-200) { color: #6b21a8 !important; }
+
     html[lang="ur"] body {
       font-family: 'Noto Nastaliq Urdu', 'Plus Jakarta Sans', serif;
       line-height: 2.15;
@@ -226,11 +349,11 @@
       text-overflow: ellipsis !important;
     }
     select option {
-      background-color: #0d261e !important;
-      color: #ecfdf5 !important;
+      background-color: var(--option-bg, #0d261e) !important;
+      color: var(--option-text, #ecfdf5) !important;
       font-weight: 700;
     }
-    :root[data-theme="light"] select option {
+    :root[data-theme="light"]:not([data-scheme]) select option {
       background-color: #ffffff !important;
       color: #064e3b !important;
       font-weight: 700;
@@ -626,7 +749,7 @@
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
   
-    /* === GULZAR v38.0 UI & TEXT FIXES === */
+    /* === GULZAR v39.0 UI & TEXT FIXES === */
     @keyframes gulzarPulseGreen {
       0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.75); opacity: 1; }
       50% { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); opacity: 0.65; }
@@ -656,13 +779,16 @@
       line-height: 1.65 !important;
     }
 
-    /* === GULZAR v38.0 COMPLETE MISSING UTILITY CLASSES === */
+    /* === GULZAR v39.0 COMPLETE MISSING UTILITY CLASSES === */
     @keyframes gulzarFadeIn {
       from { opacity: 0; transform: scale(0.96); }
       to { opacity: 1; transform: scale(1); }
     }
     .animate-fade-in { animation: gulzarFadeIn 0.18s ease-out both; }
     .inline-block { display: inline-block; }
+    .px-1\.5 { padding-left: 0.375rem; padding-right: 0.375rem; }
+    .bg-teal-600\/90 { background-color: rgba(13, 148, 136, 0.9); }
+    .hover\:bg-red-500\/80:hover { background-color: rgba(239, 68, 68, 0.8); }
     .list-disc { list-style-type: disc; }
     .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
     .backdrop-blur-\[2px\] { -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
@@ -831,9 +957,17 @@
       </div>
 
       <div class="flex items-center gap-1 shrink-0">
-        <button type="button" id="themeModeToggleBtn" onclick="toggleDarkLight()" class="flex items-center justify-center w-7 h-7 rounded-xl bg-white/20 hover:bg-white/30 text-white border border-white/25 transition-all cursor-pointer shadow-xs text-xs" title="Dark / Light Mode">
-          <span id="themeModeIcon">🌙</span>
-        </button>
+        <div id="headerThemeWrap" class="relative" style="position:relative;">
+          <button type="button" id="headerThemeBtn" onclick="toggleHeaderThemeMenu(event)" aria-haspopup="true" aria-expanded="false" aria-controls="headerThemeMenu" class="flex items-center justify-center w-7 h-7 rounded-xl bg-white/20 hover:bg-white/30 text-white border border-white/25 transition-all cursor-pointer shadow-xs text-xs active:scale-95" title="Color Scheme / رنگ سکیم">
+            <span aria-hidden="true">🎨</span>
+          </button>
+          <div id="headerThemeMenu" class="gulzar-theme-menu hidden" role="menu" aria-labelledby="headerThemeBtn">
+            <div id="headerThemeMenuTitle" class="px-2 pt-1 pb-1.5 text-[10px] font-black uppercase tracking-wider theme-muted">Color Scheme</div>
+            <div id="headerThemeMenuList" class="flex flex-col gap-0.5"></div>
+          </div>
+          <!-- Legacy compatibility anchors (toggleDarkLight now cycles schemes) -->
+          <button type="button" id="themeModeToggleBtn" onclick="toggleDarkLight()" class="hidden" aria-hidden="true" tabindex="-1"><span id="themeModeIcon">🌙</span></button>
+        </div>
         <button type="button" onclick="openSettingsModal()" class="flex items-center justify-center w-7 h-7 bg-amber-400 hover:bg-amber-300 active:scale-95 text-stone-950 rounded-xl text-xs font-black shadow-md transition-all cursor-pointer border border-amber-300" title="Settings & Help / سیٹنگز اور ہیلپ">
           <span>⚙️</span>
           <span id="settingsBtnLabel" class="hidden">Settings</span>
@@ -853,18 +987,21 @@
         <span id="appHeaderBrand" class="font-black text-base sm:text-lg tracking-wide text-white block leading-none" style="white-space:nowrap;">GULZAR</span>
       </div>
 
-      <div class="flex items-center gap-1 shrink-0">
-        <button type="button" onclick="openGeminiLiveSyncModal()" class="px-2 py-1 rounded-xl bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-300/50 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Gemini Live Sync">
-          <span>🎥</span><span>Sync</span>
+      <div class="flex items-center gap-1 shrink-0 flex-wrap justify-end">
+        <button type="button" id="headerReportsBtn" onclick="openGardenReportsModal()" class="px-1.5 sm:px-2 py-1 rounded-xl bg-teal-600/90 hover:bg-teal-600 text-white border border-emerald-200/50 text-[10px] sm:text-[11px] font-black flex items-center gap-0.5 sm:gap-1 active:scale-95 transition-all cursor-pointer" title="Garden Analytics & Care Reports / گارڈن رپورٹس">
+          <span>📊</span><span id="hdrBtnReportsLbl">Reports</span>
         </button>
-        <button type="button" onclick="openEncyclopediaModal()" class="px-2 py-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 border border-amber-200 text-[11px] font-black flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Encyclopedia">
-          <span>📚</span><span>Encyc</span>
+        <button type="button" onclick="openGeminiLiveSyncModal()" class="px-1.5 sm:px-2 py-1 rounded-xl bg-blue-600/90 hover:bg-blue-500 text-white border border-blue-300/50 text-[10px] sm:text-[11px] font-bold flex items-center gap-0.5 sm:gap-1 active:scale-95 transition-all cursor-pointer" title="Gemini Live Sync">
+          <span>🎥</span><span id="hdrBtnSyncLbl">Sync</span>
         </button>
-        <button type="button" onclick="openAddPlantModal()" class="px-2 py-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 border border-emerald-200 text-[11px] font-black flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Add New Plant">
-          <span>+</span><span>Add</span>
+        <button type="button" onclick="openEncyclopediaModal()" class="px-1.5 sm:px-2 py-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-stone-950 border border-amber-200 text-[10px] sm:text-[11px] font-black flex items-center gap-0.5 sm:gap-1 active:scale-95 transition-all cursor-pointer" title="Encyclopedia">
+          <span>📚</span><span id="hdrBtnEncycLbl">Encyc</span>
         </button>
-        <button type="button" onclick="openLocationManagerModal()" class="px-2 py-1 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/25 text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all cursor-pointer" title="Location Manager">
-          <span>📍</span><span>Locs</span>
+        <button type="button" onclick="openAddPlantModal()" class="px-1.5 sm:px-2 py-1 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-stone-950 border border-emerald-200 text-[10px] sm:text-[11px] font-black flex items-center gap-0.5 sm:gap-1 active:scale-95 transition-all cursor-pointer" title="Add New Plant">
+          <span>+</span><span id="hdrBtnAddLbl">Add</span>
+        </button>
+        <button type="button" onclick="openLocationManagerModal()" class="px-1.5 sm:px-2 py-1 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/25 text-[10px] sm:text-[11px] font-bold flex items-center gap-0.5 sm:gap-1 active:scale-95 transition-all cursor-pointer" title="Location Manager">
+          <span>📍</span><span id="hdrBtnLocsLbl">Locs</span>
         </button>
       </div>
     </div>
@@ -1300,28 +1437,14 @@
         </div>
       </div>
 
-      <!-- Color Palettes (Clean Collapsible Drawer) -->
-      <details class="theme-card-alt p-3.5 rounded-2xl border">
-        <summary id="settingsPaletteLabel" class="text-xs font-bold cursor-pointer select-none">🎨 پسندیدہ کلر پیلیٹ منتخب کریں (Theme Colors)</summary>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2.5 mt-2 border-t theme-border">
-          <button type="button" onclick="setPalette('emerald')" class="pal-opt-btn p-2 rounded-xl border flex items-center gap-2 text-xs font-bold cursor-pointer">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#10b981] shrink-0"></span>
-            <span id="palNameEmerald">زمرد باغ</span>
-          </button>
-          <button type="button" onclick="setPalette('terracotta')" class="pal-opt-btn p-2 rounded-xl border flex items-center gap-2 text-xs font-bold cursor-pointer">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#ea580c] shrink-0"></span>
-            <span id="palNameTerracotta">ٹیراکوٹا</span>
-          </button>
-          <button type="button" onclick="setPalette('rose')" class="pal-opt-btn p-2 rounded-xl border flex items-center gap-2 text-xs font-bold cursor-pointer">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#e11d48] shrink-0"></span>
-            <span id="palNameRose">شاہی گلاب</span>
-          </button>
-          <button type="button" onclick="setPalette('ocean')" class="pal-opt-btn p-2 rounded-xl border flex items-center gap-2 text-xs font-bold cursor-pointer">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#0284c7] shrink-0"></span>
-            <span id="palNameOcean">نیلگوں سکون</span>
-          </button>
+      <!-- Color Scheme Selector (mirrors the top-bar 🎨 switcher) -->
+      <div id="settingsThemeSchemeCard" class="theme-card-alt p-3.5 rounded-2xl border">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <div id="settingsPaletteLabel" class="text-xs font-bold">🎨 Color Scheme</div>
+          <span id="settingsThemeActiveName" class="theme-badge px-2 py-0.5 rounded-lg text-[10px] font-black truncate"></span>
         </div>
-      </details>
+        <div id="settingsThemeSchemeGrid" class="grid grid-cols-2 gap-2" role="radiogroup" aria-labelledby="settingsPaletteLabel"></div>
+      </div>
 
       <!-- ========================================================================= -->
       <!-- DEDICATED GEMINI CHAT -> ENCYCLOPEDIA PROMPT & PASTE IMPORT BOX           -->
@@ -1430,6 +1553,16 @@
           </button>
           <button type="button" onclick="optimizeAndShrinkDatabaseNow()" class="theme-card hover:border-emerald-400 border border-emerald-400/50 text-emerald-300 py-2.5 px-3 rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
             <span>⚡</span><span id="lblOptimizeDbBtn">Fix & Optimize DB Size</span>
+          </button>
+        </div>
+
+        <!-- Quick Access: Custom Pot Manager (CRUD) & Garden Analytics Reports -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button type="button" onclick="openPotManagerModal()" class="theme-card hover:border-amber-400 border border-amber-400/50 text-amber-300 py-2 px-3 rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
+            <span>🪴</span><span id="lblSettingsPotMgrBtn">Manage Custom Pots (CRUD)</span>
+          </button>
+          <button type="button" onclick="closeSettingsModal(); openGardenReportsModal();" class="theme-card hover:border-emerald-400 border border-emerald-400/50 text-emerald-300 py-2 px-3 rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 active:scale-95">
+            <span>📊</span><span id="lblSettingsReportsBtn">Garden Analytics & Reports</span>
           </button>
         </div>
 
@@ -1560,12 +1693,15 @@
           </div>
         </div>
 
-        <!-- Primary High-Contrast Name + Web Search Button & Variant Inputs -->
+        <!-- Primary High-Contrast Name + One-Tap Clear (✕) + Web Search Button & Variant Inputs -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 relative">
           <div class="flex items-stretch gap-1.5">
-            <div class="relative flex-1">
-              <input id="formPlantNameInput" type="text" autocomplete="off" onfocus="handlePlantNameInput(this.value, true)" onclick="handlePlantNameInput(this.value, true)" oninput="handlePlantNameInput(this.value, false)" placeholder="پودے کا نام لکھیں یا کلک کر کے نیچے فہرست دیکھیں (اردو / English)..." class="w-full theme-card-alt border-2 border-emerald-400 rounded-xl pl-3 pr-7 py-2.5 font-extrabold text-sm shadow-xs" />
-              <button type="button" onclick="toggleInPlacePlantDropdown()" class="absolute right-2 top-2.5 text-emerald-300 text-xs font-black cursor-pointer" title="Show Plant List">▼</button>
+            <div class="relative flex-1 min-w-0">
+              <input id="formPlantNameInput" type="text" autocomplete="off" data-human-typed="0" onfocus="handlePlantNameInput(this.value, true, true)" onclick="handlePlantNameInput(this.value, true, true)" oninput="onFormPlantNameTyped(this.value)" placeholder="پودے کا نام لکھیں یا کلک کر کے نیچے فہرست دیکھیں (اردو / English)..." class="w-full theme-card-alt border-2 border-emerald-400 rounded-xl gulzar-name-input py-2.5 font-extrabold text-sm shadow-xs" />
+              <div class="gulzar-input-end-actions">
+                <button type="button" id="clearPlantNameBtn" onclick="clearFormPlantNameInput()" class="w-6 h-6 rounded-full bg-white/15 hover:bg-red-500/80 text-white text-[11px] font-black flex items-center justify-center cursor-pointer active:scale-95" title="Clear Plant Name / نام صاف کریں">✕</button>
+                <button type="button" onclick="toggleInPlacePlantDropdown()" class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-black flex items-center justify-center cursor-pointer active:scale-95" title="Show Plant List">▼</button>
+              </div>
             </div>
             <button type="button" onclick="runLiveWebPlantSearch()" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-2 rounded-xl text-[11px] font-black cursor-pointer shrink-0 flex items-center gap-1 shadow-xs border border-blue-300/50" title="Search Plant on Web (Wikipedia / Google)">
               <span>🌐</span><span id="btnWebSearchPlantLabel">Web Search</span>
@@ -1574,7 +1710,7 @@
           <input id="formPlantVariantColor" type="text" oninput="this.dataset.userEdited='1'" placeholder="رنگ یا ورائٹی (مثلاً پیلا و نارنجی، سرخ، سفید)" class="theme-card-alt border rounded-xl px-3 py-2 text-xs sm:text-sm font-bold" />
         </div>
 
-        <!-- Quick Flower/Foliage Color Chips + Pot Size Selector -->
+        <!-- Quick Flower/Foliage Color Chips + Pot Size Selector (with Full CRUD Pot Manager) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
           <div class="flex flex-wrap items-center gap-1 theme-card-alt px-2.5 py-1.5 rounded-xl border">
             <span id="lblQuickColorChips" class="text-[10px] theme-muted font-bold">🎨 رنگ:</span>
@@ -1585,19 +1721,27 @@
             <button type="button" onclick="setFormQuickColorChip('نارنجی (Orange)', 'Orange')" class="text-[10px] theme-badge px-1.5 py-0.5 rounded-md font-bold cursor-pointer">🟠 نارنجی</button>
             <button type="button" onclick="setFormQuickColorChip('دو رنگا (Variegated)', 'Variegated')" class="text-[10px] theme-badge px-1.5 py-0.5 rounded-md font-bold cursor-pointer">🌿 چتکبرا</button>
           </div>
-          <div class="flex items-center gap-1.5 theme-card-alt px-2.5 py-1.5 rounded-xl border">
-            <label id="lblFormPotSize" for="formPotSizeSelect" class="text-[10px] font-bold text-amber-300 shrink-0">🪴 گملا:</label>
-            <select id="formPotSizeSelect" onchange="handlePotSizeSelectChange(this.value)" class="flex-1 theme-card border rounded-lg px-2 py-1 text-xs font-bold cursor-pointer">
-              <option value="12 انچ مٹی کا گملا|12-inch Clay Pot">12" مٹی کا گملا (12" Pot)</option>
-              <option value="8 انچ گملا|8-inch Pot">8" چھوٹا گملا (8" Pot)</option>
-              <option value="10 انچ گملا|10-inch Pot">10" درمیانہ گملا (10" Pot)</option>
-              <option value="14 انچ بڑا گملا|14-inch Large Pot">14" بڑا گملا (14" Pot)</option>
-              <option value="18 انچ گملا|18-inch Jumbo Pot">18" جمبو گملا (18" Pot)</option>
-              <option value="24 انچ ڈرم / کیاری|24-inch Drum / Planter">24" ڈرم / کنٹینر</option>
-              <option value="زمین / کیاری میں لگا ہوا|Planted in Ground Bed">زمین / کیاری (Ground)</option>
-              <option value="custom">➕ کسٹم سائز...</option>
-            </select>
-            <input id="formCustomPotSizeInput" type="text" placeholder="سائز لکھیں..." class="hidden w-24 theme-card border rounded-lg px-2 py-1 text-xs font-bold" />
+          <div class="theme-card-alt px-2.5 py-1.5 rounded-xl border space-y-1.5">
+            <div class="gulzar-pot-head">
+              <label id="lblFormPotSize" for="formPotSizeSelect" class="text-[10px] font-bold text-amber-300 shrink-0">🪴 گملا:</label>
+              <button type="button" id="btnManagePotsFromForm" onclick="openPotManagerModal()" class="bg-amber-400/20 hover:bg-amber-400 text-amber-300 hover:text-stone-950 border border-amber-400/60 px-2 py-1 rounded-lg text-[10px] font-black cursor-pointer shrink-0 active:scale-95 whitespace-nowrap" title="Manage / New Pot">+ Manage / New Pot</button>
+            </div>
+            <div>
+              <select id="formPotSizeSelect" onchange="handlePotSizeSelectChange(this.value)" class="w-full min-w-0 theme-card border rounded-lg px-2 py-1.5 text-xs font-bold cursor-pointer">
+                <option value="12 انچ مٹی کا گملا|12-inch Clay Pot">12" مٹی کا گملا (12" Pot)</option>
+                <option value="8 انچ گملا|8-inch Pot">8" چھوٹا گملا (8" Pot)</option>
+                <option value="10 انچ گملا|10-inch Pot">10" درمیانہ گملا (10" Pot)</option>
+                <option value="14 انچ بڑا گملا|14-inch Large Pot">14" بڑا گملا (14" Pot)</option>
+                <option value="18 انچ گملا|18-inch Jumbo Pot">18" جمبو گملا (18" Pot)</option>
+                <option value="24 انچ ڈرم / کیاری|24-inch Drum / Planter">24" ڈرم / کنٹینر</option>
+                <option value="زمین / کیاری میں لگا ہوا|Planted in Ground Bed">زمین / کیاری (Ground)</option>
+                <option value="custom">➕ کسٹم سائز...</option>
+              </select>
+            </div>
+            <div id="formCustomPotSizeBox" class="hidden flex items-center gap-1.5">
+              <input id="formCustomPotSizeInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();saveInlineCustomPotFromForm();}" placeholder="کسٹم گملا لکھیں (مثلاً 16 انچ گملا #1)..." class="flex-1 min-w-0 theme-card border border-amber-400/60 rounded-lg px-2.5 py-1 text-xs font-bold" />
+              <button type="button" id="btnSaveInlineCustomPot" onclick="saveInlineCustomPotFromForm()" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer shrink-0">💾 Save</button>
+            </div>
           </div>
         </div>
 
@@ -1620,7 +1764,7 @@
             <option value="wild_herb">🌾 خود رو اور طبی بوٹیاں (Wild &amp; Medicinal)</option>
             <option value="custom">✨ میرے شامل کردہ پودے (Custom Added)</option>
           </select>
-          <select id="botanicalCatalogSelect" onchange="if(this.value) applyPresetPlant(this.value, true)" class="w-full max-w-full truncate theme-card-alt border border-amber-400/60 rounded-xl px-2.5 py-1.5 text-xs font-bold cursor-pointer">
+          <select id="botanicalCatalogSelect" onchange="if(this.value) onBotanicalCatalogSelect(this.value)" class="w-full max-w-full truncate theme-card-alt border border-amber-400/60 rounded-xl px-2.5 py-1.5 text-xs font-bold cursor-pointer">
             <option value="">📚 یا ڈراپ ڈاؤن سے چنیں (370+ پودے)</option>
           </select>
         </div>
@@ -1846,6 +1990,7 @@
         </details>
       </div>
       <div id="carePickerOptionsList" class="space-y-2"></div>
+      <div id="customCareSuppliesManagerBox" class="theme-card-alt p-2.5 rounded-2xl border border-amber-400/40 space-y-2 text-xs"></div>
       <div class="flex items-center justify-between pt-2 border-t theme-border gap-2">
         <button type="button" id="btnCarePickerAddNewStock" onclick="closeCareSupplyPickerModal(); switchMainTab('stock'); openAddStockModal();" class="text-xs font-bold text-amber-400 hover:underline cursor-pointer">+ نئی کھاد / اسپرے شامل کریں</button>
         <button type="button" id="btnCarePickerClose" onclick="closeCareSupplyPickerModal()" class="px-4 py-1.5 rounded-xl text-xs font-bold theme-card-alt border cursor-pointer">بند کریں</button>
@@ -2433,9 +2578,9 @@
   <!-- ============================================== -->
   <!-- MODAL: UNIFIED DELETE CONFIRMATION DIALOG      -->
   <!-- ============================================== -->
-  <div id="unifiedConfirmModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div id="unifiedConfirmModal" style="z-index:95;" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="theme-card border border-red-500/60 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl animate-fade-in text-center my-auto">
-      <div class="w-16 h-16 mx-auto rounded-2xl bg-red-500/20 border-2 border-red-500/60 flex items-center justify-center text-3xl shadow-lg shadow-red-500/20">
+      <div id="confirmModalIconBox" class="w-16 h-16 mx-auto rounded-2xl bg-red-500/20 border-2 border-red-500/60 flex items-center justify-center text-3xl shadow-lg shadow-red-500/20">
         🗑️
       </div>
       <div class="space-y-1.5">
@@ -2443,7 +2588,7 @@
         <p id="confirmModalMessage" class="text-xs text-stone-300 leading-relaxed">کیا آپ واقعی اس آئٹم کو حذف کرنا چاہتے ہیں؟</p>
       </div>
       <div class="flex gap-2 pt-2">
-        <button type="button" onclick="closeUnifiedConfirmModal()" class="flex-1 py-2.5 rounded-xl border border-stone-600 bg-stone-800 hover:bg-stone-700 active:scale-95 text-stone-200 text-xs font-bold cursor-pointer transition">
+        <button id="confirmModalCancelBtn" type="button" onclick="closeUnifiedConfirmModal(true)" class="flex-1 py-2.5 rounded-xl border border-stone-600 bg-stone-800 hover:bg-stone-700 active:scale-95 text-stone-200 text-xs font-bold cursor-pointer transition">
           منسوخ کریں (Cancel)
         </button>
         <button id="confirmModalActionBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-black cursor-pointer shadow-lg shadow-red-600/30 transition flex items-center justify-center gap-1.5">
@@ -2496,6 +2641,64 @@
 
       <div class="flex justify-end pt-1">
         <button type="button" onclick="closeGeminiLiveSyncModal()" class="theme-btn-primary px-5 py-2 rounded-xl text-xs font-bold cursor-pointer">بند کریں</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL: CUSTOM POT MANAGER (FULL CRUD — CREATE, READ, UPDATE, DELETE)  -->
+  <!-- ===================================================================== -->
+  <div id="potManagerModal" style="z-index:65;" onclick="if(event.target===this)closePotManagerModal()" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 overflow-y-auto">
+    <div class="theme-card rounded-3xl max-w-md w-full p-4 sm:p-5 border-2 border-amber-400/60 shadow-2xl space-y-3.5 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-2 border-b theme-border pb-2.5">
+        <div class="min-w-0 flex-1">
+          <h3 id="potMgrModalTitle" class="text-base font-extrabold text-amber-300 flex items-center gap-1.5"><span>🪴</span><span>کسٹم گملے مینیجر (Pot Manager)</span></h3>
+          <p id="potMgrModalSub" class="text-[11px] theme-muted">Save, rename (with plant cascade), or remove custom pot sizes</p>
+        </div>
+        <button type="button" onclick="closePotManagerModal()" class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-sm font-black cursor-pointer shrink-0" aria-label="Close">✕</button>
+      </div>
+
+      <div class="flex items-stretch gap-2">
+        <input id="newPotMgrInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();addNewCustomPotFromManager();}" placeholder="نیا کسٹم گملا لکھیں (مثلاً 16 انچ مٹی کا گملا #1)..." class="flex-1 min-w-0 theme-card-alt border border-amber-400/50 rounded-xl px-3 py-2 text-xs sm:text-sm font-bold" />
+        <button type="button" id="btnAddPotMgr" onclick="addNewCustomPotFromManager()" class="theme-btn-primary px-3 py-2 rounded-xl text-xs font-black cursor-pointer shrink-0 whitespace-nowrap">+ شامل کریں</button>
+      </div>
+
+      <div class="space-y-1.5 max-h-72 overflow-y-auto pr-0.5" id="customPotsListContainer"></div>
+
+      <div class="flex items-center justify-between gap-2 pt-2 border-t theme-border">
+        <span id="potMgrCountBadge" class="text-[11px] theme-muted font-bold">0 Custom Pots</span>
+        <button type="button" id="btnClosePotMgr" onclick="closePotManagerModal()" class="theme-btn-primary px-4 py-2 rounded-xl text-xs font-bold cursor-pointer">مکمل ہوا</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL: GARDEN ANALYTICS & CARE REPORT DASHBOARD (v39.0)               -->
+  <!-- ===================================================================== -->
+  <div id="gardenReportsModal" style="z-index:65;" onclick="if(event.target===this)closeGardenReportsModal()" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto">
+    <div class="theme-card rounded-3xl max-w-3xl w-full p-4 sm:p-5 border-2 border-emerald-400/60 shadow-2xl space-y-4 my-auto max-h-[92vh] overflow-y-auto">
+      <div class="sticky top-0 z-20 theme-card flex flex-wrap items-start justify-between gap-2 border-b theme-border pb-2.5 pt-1 -mt-1">
+        <div class="min-w-0 flex-1">
+          <h3 id="reportsModalTitle" class="text-base sm:text-lg font-extrabold text-emerald-300 flex items-center gap-1.5">
+            <span>📊</span><span>گارڈن رپورٹس اور تجزیاتی ڈیش بورڈ</span>
+          </h3>
+          <p id="reportsModalSub" class="text-[11px] theme-muted">Complete garden health summary, location breakdown &amp; care activity log</p>
+        </div>
+        <button type="button" onclick="closeGardenReportsModal()" class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-sm font-black cursor-pointer shrink-0 sm:order-last" aria-label="Close">✕</button>
+        <div class="gulzar-modal-head-actions flex items-center gap-1.5 sm:w-auto">
+          <button type="button" onclick="copyGardenReportText()" class="gulzar-flex-btn bg-amber-400 hover:bg-amber-300 text-stone-950 px-2.5 py-1.5 rounded-xl text-[11px] font-black cursor-pointer shadow-xs flex items-center gap-1 active:scale-95">
+            <span>📋</span><span id="btnCopyReportLbl">Copy Report</span>
+          </button>
+          <button type="button" onclick="shareGardenReportText()" class="gulzar-flex-btn bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1.5 rounded-xl text-[11px] font-black cursor-pointer shadow-xs flex items-center gap-1 active:scale-95">
+            <span>📤</span><span id="btnShareReportLbl">Share</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="gardenReportsBody" class="space-y-4"></div>
+
+      <div class="flex justify-end pt-2 border-t theme-border">
+        <button type="button" id="btnCloseReportsModal" onclick="closeGardenReportsModal()" class="theme-btn-primary px-5 py-2 rounded-xl text-xs font-bold cursor-pointer">بند کریں</button>
       </div>
     </div>
   </div>
@@ -3381,7 +3584,7 @@
         settingsAiKey: '🤖 Gemini AI API Key:',
         modelLabel: 'ماڈل:',
         btnSaveAi: 'محفوظ و ٹیسٹ کریں',
-        settingsPalette: '🎨 پسندیدہ کلر پیلیٹ منتخب کریں:',
+        settingsPalette: '🎨 رنگ سکیم',
         palEmerald: 'زمرد باغ',
         palTerracotta: 'ٹیراکوٹا',
         palRose: 'شاہی گلاب',
@@ -3477,7 +3680,7 @@
         settingsAiKey: '🤖 Gemini AI API Key:',
         modelLabel: 'Model:',
         btnSaveAi: 'Save & Test Key',
-        settingsPalette: '🎨 Choose Color Palette:',
+        settingsPalette: '🎨 Color Scheme',
         palEmerald: 'Royal Emerald',
         palTerracotta: 'Terracotta',
         palRose: 'Mughal Rose',
@@ -3545,9 +3748,9 @@
     };
 
     const DEFAULT_STATE = {
-      version: 38,
+      version: 39,
       palette: 'emerald',
-      theme: 'dark',
+      theme: 'emerald-night',
       lang: 'en',
       city: 'lahore',
       activeTab: 'plants',
@@ -3556,6 +3759,8 @@
       calcLiters: 1,
       aiApiKey: '',
       aiModel: 'gemini-3.8-flash',
+      customPots: [],
+      customCareSupplies: [],
       locations: [
         { id: 'loc-1', ur: 'مین گیٹ — دائیں طرف کا جنگلہ', en: 'Main Gate — Right Grill' },
         { id: 'loc-2', ur: 'مین گیٹ — بائیں طرف کی کیاری', en: 'Main Gate — Left Flowerbed' },
@@ -3790,7 +3995,9 @@
         if (raw) {
           const parsed = JSON.parse(raw);
           if (parsed && Array.isArray(parsed.plants)) {
-            gState = { ...gState, ...parsed, version: 38 };
+            gState = { ...gState, ...parsed, version: 39 };
+            if (!Array.isArray(gState.customPots)) gState.customPots = [];
+            if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
             const p1 = gState.plants.find(p => p.id === 'p-1');
             if (p1 && p1.nameEn === 'Bougainvillea — Main Gate (Pink)' && p1.image === IMG_ROSE) {
               p1.nameUr = 'دیسی سرخ گلاب — مین گیٹ';
@@ -4132,7 +4339,9 @@
       ['دھنیا', 'Coriander'], ['ہری مرچ', 'Green Chilli'], ['ٹماٹر', 'Tomato'], ['انجیر', 'Fig'],
       ['انگور', 'Grapevine'], ['فالسہ', 'Falsa'], ['سوہانجنا', 'Moringa'], ['نیم', 'Neem'],
       ['مور پنکھ', 'Thuja'], ['فائکس', 'Ficus'], ['عدنیم', 'Adenium'], ['صحرائی گلاب', 'Desert Rose'],
-      // v38.0 common gardening observation vocabulary (keeps EN mode in real English, never Roman Urdu)
+      // v39.0 common gardening observation & custom pot vocabulary (keeps EN mode in real English, never Roman Urdu)
+      ['مٹی کا گملا', 'Clay Pot'], ['پلاسٹک گملا', 'Plastic Pot'], ['سیمنٹ گملا', 'Cement Pot'],
+      ['ہینگنگ باسکٹ', 'Hanging Basket'], ['گرو بیگ', 'Grow Bag'], ['انچ', 'inch'], ['گملا', 'Pot'],
       ['جڑوں میں پانی', 'Root Drench'], ['جڑوں میں دی', 'Applied to roots'], ['پتوں پر اسپرے', 'Foliar Spray'],
       ['مٹی کی گوڈی', 'Soil Hoeing'], ['پیلے پتے', 'Yellow leaves'], ['سوکھے پتے', 'Dry leaves'],
       ['نئی کونپلیں', 'New shoots'], ['نئے پتے', 'New leaves'], ['کونپلیں', 'Shoots'], ['کلیاں', 'Buds'],
@@ -4380,7 +4589,28 @@
 
       setTxt('appHeaderBrand', t.brand);
       setTxt('moujFooterTitle', isEn ? 'Powered & Controlled by MOUJ SYNC' : 'پیشکش و کنٹرولڈ بائے: موج سِنک (MOUJ SYNC)');
-      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v38.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v38.0 (GULZAR Smart Home Garden)');
+      setTxt('moujFooterSub', isEn ? '🌹 GULZAR Smart Home Garden • v39.0' : '🌹 گلزار سمارٹ ہوم گارڈن • v39.0 (GULZAR Smart Home Garden)');
+      setTxt('hdrBtnReportsLbl', isEn ? 'Reports' : 'رپورٹس');
+      setTxt('hdrBtnSyncLbl', isEn ? 'Sync' : 'سنک');
+      setTxt('hdrBtnEncycLbl', isEn ? 'Encyc' : 'فہرست');
+      setTxt('hdrBtnAddLbl', isEn ? 'Add' : 'نیا پودا');
+      setTxt('hdrBtnLocsLbl', isEn ? 'Locs' : 'جگہیں');
+      setTxt('lblSettingsPotMgrBtn', isEn ? 'Manage Custom Pots (CRUD)' : 'کسٹم گملے مینج کریں (CRUD)');
+      setTxt('lblSettingsReportsBtn', isEn ? 'Garden Analytics & Reports' : 'گارڈن رپورٹس اور تجزیہ');
+      setTxt('lblFormPotSize', isEn ? '🪴 Pot:' : '🪴 گملا:');
+      setTxt('btnManagePotsFromForm', isEn ? '+ Manage / New Pot' : '+ گملے مینج کریں');
+      setPh('formCustomPotSizeInput', isEn ? 'Type custom pot size (e.g. 16" Clay Pot #1)...' : 'کسٹم گملا لکھیں (مثلاً 16 انچ گملا #1)...');
+      setTxt('btnSaveInlineCustomPot', isEn ? '💾 Save' : '💾 محفوظ');
+      setTxt('potMgrModalTitle', isEn ? '🪴 Custom Pot Manager (CRUD)' : '🪴 کسٹم گملے مینیجر (Pot Manager)');
+      setTxt('potMgrModalSub', isEn ? 'Create, rename (with optional plant cascade), or delete custom pot sizes' : 'نئے کسٹم گملے شامل کریں، نام بدلیں (پودوں پر خودکار اپڈیٹ) یا حذف کریں');
+      setPh('newPotMgrInput', isEn ? 'Enter custom pot size (e.g. 16" Clay Pot #1)...' : 'نیا کسٹم گملا لکھیں (مثلاً 16 انچ مٹی کا گملا #1)...');
+      setTxt('btnAddPotMgr', isEn ? '+ Add Pot' : '+ شامل کریں');
+      setTxt('btnClosePotMgr', t.btnDone);
+      setTxt('reportsModalTitle', isEn ? '📊 Garden Analytics & Care Report' : '📊 گارڈن رپورٹس اور تجزیاتی ڈیش بورڈ');
+      setTxt('reportsModalSub', isEn ? 'Complete garden health summary, location breakdown & filterable care log' : 'مکمل گارڈن ہیلتھ خلاصہ، لوکیشن وار پودے اور نگہداشت ریکارڈ');
+      setTxt('btnCopyReportLbl', isEn ? 'Copy Report' : 'رپورٹ کاپی');
+      setTxt('btnShareReportLbl', isEn ? 'Share' : 'شیئر');
+      setTxt('btnCloseReportsModal', isEn ? 'Close' : 'بند کریں');
       setTxt('lblMergeDupPlantsBtn', isEn ? 'Merge Duplicate Plants (Same Location & Pot)' : 'ڈپلیکیٹ پودے ضم کریں (ایک ہی جگہ اور گملا)');
       setTxt('lblLocMgrMergeDupBtn', isEn ? 'Merge Duplicate Plants' : 'ڈپلیکیٹ پودے ضم کریں');
       setTxt('btnHeroGeminiLiveLabel', isEn ? 'Gemini Live Sync' : 'جیمینائی لائیو سنک (Live Sync)');
@@ -4495,6 +4725,7 @@
       setTxt('modelSelectLabel', t.modelLabel);
       setTxt('btnSaveTestAiKey', t.btnSaveAi);
       setTxt('settingsPaletteLabel', t.settingsPalette);
+      if (typeof renderThemeSchemeMenus === 'function') renderThemeSchemeMenus();
       setTxt('palNameEmerald', t.palEmerald);
       setTxt('palNameTerracotta', t.palTerracotta);
       setTxt('palNameRose', t.palRose);
@@ -4719,12 +4950,25 @@
       populateBotanicalCatalogDropdown();
       populateFormFertilizerStockPicker();
       populateFlexibleDateDropdowns();
+      if (typeof populatePotSizeDropdown === 'function') populatePotSizeDropdown();
       renderRecipeStockChips();
 
       // If Add/Edit Plant Modal is open, switch its auto-filled fields to the new language
       const addModal = document.getElementById('addPlantModal');
       if (addModal && !addModal.classList.contains('hidden') && currentPresetKey && BOTANICAL_DB[currentPresetKey]) {
         applyPresetPlant(currentPresetKey, true);
+      }
+      const potMgrModal = document.getElementById('potManagerModal');
+      if (potMgrModal && !potMgrModal.classList.contains('hidden') && typeof renderCustomPotsManagerList === 'function') {
+        renderCustomPotsManagerList();
+      }
+      const repModal = document.getElementById('gardenReportsModal');
+      if (repModal && !repModal.classList.contains('hidden') && typeof renderGardenReportsContent === 'function') {
+        renderGardenReportsContent();
+      }
+      const locMgrModal = document.getElementById('locationManagerModal');
+      if (locMgrModal && !locMgrModal.classList.contains('hidden') && typeof renderLocationsList === 'function') {
+        renderLocationsList();
       }
 
       // If Mix Recipe Modal has AI-generated bilingual fields, switch them to the new language
@@ -4903,19 +5147,142 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    function toggleDarkLight() {
-      gState.theme = gState.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', gState.theme);
-      const icon = document.getElementById('themeModeIcon');
-      if (icon) icon.textContent = gState.theme === 'dark' ? '🌙' : '☀️';
-      persist();
+    // ===== v39 UI: Color Scheme engine (gState.theme) — pure presentation, no DB logic =====
+    const GULZAR_THEME_SCHEMES = [
+      { key: 'emerald-night', mode: 'dark', palette: 'emerald', meta: '#09221a', icon: '🌙', swatch: ['#071712', '#10b981', '#fbbf24'],
+        en: 'Emerald Night', ur: 'زمرد رات', subEn: 'Deep forest emerald & warm gold (default)', subUr: 'گہرا زمردی سبز اور سنہری (ڈیفالٹ)' },
+      { key: 'daylight-garden', mode: 'light', palette: 'emerald', meta: '#065f46', icon: '☀️', swatch: ['#f5f8f2', '#059669', '#063729'],
+        en: 'Daylight Garden', ur: 'دن کا باغ', subEn: 'Sunlit ivory & sage — outdoor reading', subUr: 'روشن ہاتھی دانت و سبز — دھوپ میں پڑھنے کیلئے' },
+      { key: 'terracotta-gold', mode: 'dark', palette: 'terracotta', meta: '#24130c', icon: '🏺', swatch: ['#1a0f0a', '#d97706', '#fcd34d'],
+        en: 'Terracotta & Gold', ur: 'ٹیراکوٹا اور سنہری', subEn: 'Warm clay-pot bronze & amber', subUr: 'مٹی کے گملے کا کانسی اور عنبر' },
+      { key: 'midnight-slate', mode: 'dark', palette: 'ocean', meta: '#0d1829', icon: '🌌', swatch: ['#0b1320', '#0d9488', '#5eead4'],
+        en: 'Midnight Slate', ur: 'آدھی رات سلیٹ', subEn: 'Slate blue-grey with mint/cyan', subUr: 'سلیٹی نیلا اور پودینہ/فیروزی' }
+    ];
+
+    function normalizeThemeSchemeKey(raw) {
+      const v = String(raw || '').trim().toLowerCase();
+      if (GULZAR_THEME_SCHEMES.some(s => s.key === v)) return v;
+      if (v === 'light') return 'daylight-garden';
+      return 'emerald-night'; // 'dark', empty, unknown → default
     }
 
-    function setPalette(pal) {
-      gState.palette = pal;
-      document.documentElement.setAttribute('data-palette', pal);
+    function getThemeSchemeMeta(key) {
+      const k = normalizeThemeSchemeKey(key);
+      return GULZAR_THEME_SCHEMES.find(s => s.key === k) || GULZAR_THEME_SCHEMES[0];
+    }
+
+    function applyThemeSchemeToDom(key) {
+      const s = getThemeSchemeMeta(key);
+      const root = document.documentElement;
+      root.setAttribute('data-scheme', s.key);
+      root.setAttribute('data-theme', s.mode);
+      root.setAttribute('data-palette', s.palette);
+      const metaEl = document.querySelector('meta[name="theme-color"]');
+      if (metaEl) metaEl.setAttribute('content', s.meta);
+      const icon = document.getElementById('themeModeIcon');
+      if (icon) icon.textContent = s.mode === 'dark' ? '🌙' : '☀️';
+      return s;
+    }
+
+    function renderThemeSchemeMenus() {
+      const isEn = gState.lang === 'en';
+      const active = normalizeThemeSchemeKey(gState.theme);
+      const esc = (typeof escapeGuideHtml === 'function') ? escapeGuideHtml : (x => String(x));
+      const swatch = s => `<span class="gulzar-scheme-swatch" aria-hidden="true">${s.swatch.map(c => `<i style="background:${c}"></i>`).join('')}</span>`;
+      const list = document.getElementById('headerThemeMenuList');
+      if (list) {
+        list.innerHTML = GULZAR_THEME_SCHEMES.map(s => `
+          <button type="button" role="menuitemradio" aria-checked="${s.key === active}" class="gulzar-theme-option${s.key === active ? ' is-active' : ''}" onclick="selectThemeSchemeFromUi('${s.key}')">
+            ${swatch(s)}
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs font-extrabold leading-tight">${esc(isEn ? s.en : s.ur)}</span>
+              <span class="block text-[10px] theme-muted leading-snug">${esc(isEn ? s.subEn : s.subUr)}</span>
+            </span>
+            <span class="scheme-check" aria-hidden="true">✓</span>
+          </button>`).join('');
+      }
+      const grid = document.getElementById('settingsThemeSchemeGrid');
+      if (grid) {
+        grid.innerHTML = GULZAR_THEME_SCHEMES.map(s => `
+          <button type="button" role="radio" aria-checked="${s.key === active}" class="gulzar-scheme-card${s.key === active ? ' is-active' : ''}" onclick="selectThemeSchemeFromUi('${s.key}')">
+            <span class="flex items-center gap-1.5 w-full">${swatch(s)}<span class="text-sm" style="margin-inline-start:auto;" aria-hidden="true">${s.key === active ? '✅' : s.icon}</span></span>
+            <span class="scheme-title">${esc(isEn ? s.en : s.ur)}</span>
+            <span class="scheme-sub">${esc(isEn ? s.subEn : s.subUr)}</span>
+          </button>`).join('');
+      }
+      const activeMeta = getThemeSchemeMeta(active);
+      const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      setT('settingsThemeActiveName', `${activeMeta.icon} ${isEn ? activeMeta.en : activeMeta.ur}`);
+      setT('headerThemeMenuTitle', isEn ? '🎨 Color Scheme' : '🎨 رنگ سکیم');
+      const btn = document.getElementById('headerThemeBtn');
+      if (btn) {
+        const lbl = isEn ? `Color Scheme: ${activeMeta.en}` : `رنگ سکیم: ${activeMeta.ur}`;
+        btn.setAttribute('title', lbl);
+        btn.setAttribute('aria-label', lbl);
+      }
+    }
+
+    function applyThemeScheme(schemeKey, notifyUser = false) {
+      gState.theme = normalizeThemeSchemeKey(schemeKey);
+      const s = applyThemeSchemeToDom(gState.theme);
+      gState.palette = s.palette;
+      renderThemeSchemeMenus();
       persist();
-      notify(gState.lang === 'en' ? 'Color palette updated!' : 'کلر پیلیٹ تبدیل ہو گیا!', '🎨');
+      if (notifyUser) notify(gState.lang === 'en' ? `Color scheme: ${s.en}` : `رنگ سکیم: ${s.ur}`, '🎨');
+      return s.key;
+    }
+
+    function selectThemeSchemeFromUi(key) {
+      applyThemeScheme(key, true);
+      closeHeaderThemeMenu();
+    }
+
+    function closeHeaderThemeMenu() {
+      const menu = document.getElementById('headerThemeMenu');
+      const btn = document.getElementById('headerThemeBtn');
+      if (menu) menu.classList.add('hidden');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleHeaderThemeMenu(ev) {
+      if (ev) ev.stopPropagation();
+      const menu = document.getElementById('headerThemeMenu');
+      const btn = document.getElementById('headerThemeBtn');
+      if (!menu) return;
+      const willOpen = menu.classList.contains('hidden');
+      if (willOpen) {
+        renderThemeSchemeMenus();
+        menu.classList.remove('hidden');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        const first = menu.querySelector('.gulzar-theme-option.is-active') || menu.querySelector('.gulzar-theme-option');
+        if (first) { try { first.focus({ preventScroll: true }); } catch (e) {} }
+      } else {
+        closeHeaderThemeMenu();
+      }
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrap = document.getElementById('headerThemeWrap');
+      if (wrap && !wrap.contains(e.target)) closeHeaderThemeMenu();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeHeaderThemeMenu();
+    });
+
+    // Backward-compatible: now cycles through the 4 schemes
+    function toggleDarkLight() {
+      const cur = normalizeThemeSchemeKey(gState.theme);
+      const idx = GULZAR_THEME_SCHEMES.findIndex(s => s.key === cur);
+      const next = GULZAR_THEME_SCHEMES[(idx + 1) % GULZAR_THEME_SCHEMES.length];
+      applyThemeScheme(next.key, true);
+    }
+
+    // Backward-compatible: legacy palette names map onto the closest scheme
+    function setPalette(pal) {
+      const map = { emerald: 'emerald-night', terracotta: 'terracotta-gold', rose: 'terracotta-gold', ocean: 'midnight-slate' };
+      const curMode = getThemeSchemeMeta(gState.theme).mode;
+      const target = (pal === 'emerald' && curMode === 'light') ? 'daylight-garden' : (map[pal] || 'emerald-night');
+      applyThemeScheme(target, true);
     }
 
     function changeCity(cityKey) {
@@ -5876,17 +6243,151 @@
         });
       }
 
+      const customSupsForType = (gState.customCareSupplies || []).filter(cs => cs && cs.typeKey === typeKey);
+      if (customSupsForType.length > 0) {
+        optionsHtml += `<div class="text-[11px] font-bold text-emerald-300 pt-1">${isEn ? '⭐ Your Saved Custom Care Options (1-Tap):' : '⭐ آپ کے محفوظ کردہ کسٹم اختیارات (1-کلک):'}</div>`;
+        customSupsForType.forEach(cs => {
+          const csUr = (cs.ur || cs.en || '').replace(/'/g, '');
+          const csEn = (cs.en || cs.ur || '').replace(/'/g, '');
+          optionsHtml += `
+            <button type="button" onclick="confirmCareSupplySelection('${csUr}', '${csEn}')" class="w-full theme-card-alt border border-emerald-400/60 hover:border-emerald-300 p-2.5 rounded-xl text-xs flex items-center justify-between cursor-pointer text-left">
+              <span class="font-extrabold text-emerald-200">✨ ${escapeGuideHtml(isEn ? csEn : csUr)}</span>
+              <span class="text-[10px] bg-emerald-500 text-stone-950 px-2.5 py-0.5 rounded-lg font-black shrink-0">${isEn ? 'Apply ✓' : 'لگائیں ✓'}</span>
+            </button>`;
+        });
+      }
+
       const tInp = document.getElementById('careActionTimeInput');
       if (tInp) tInp.value = getNowTimeHHMM();
       const rInp = document.getElementById('careActionResultInput');
       if (rInp) rInp.value = '';
       renderCarePickerMultiPlantList(plantId, typeKey);
+      renderCustomCareSuppliesCrudBox(typeKey);
 
       closeBtn.textContent = isEn ? 'Cancel' : 'بند کریں';
       list.innerHTML = optionsHtml;
       modal.classList.remove('hidden');
       if (typeof pushGulzarModalState === 'function') pushGulzarModalState('careSupplyPickerModal');
       if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
+    }
+
+    let _editingCustomCareSupplyId = null;
+    function renderCustomCareSuppliesCrudBox(typeKey) {
+      const box = document.getElementById('customCareSuppliesManagerBox');
+      if (!box) return;
+      const isEn = gState.lang === 'en';
+      if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
+      const items = gState.customCareSupplies.filter(cs => cs && cs.typeKey === typeKey);
+      const typeTitle = typeKey === 'feed'
+        ? (isEn ? 'Custom Fertilizer' : 'کسٹم کھاد')
+        : typeKey === 'spray'
+        ? (isEn ? 'Custom Spray' : 'کسٹم اسپرے')
+        : (isEn ? 'Custom Care Method' : 'کسٹم طریقہ');
+
+      box.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-extrabold text-amber-300 text-[11px]">🛠️ ${isEn ? `Manage Saved ${typeTitle}s (CRUD):` : `محفوظ ${typeTitle} مینج کریں (CRUD):`}</span>
+          <span class="text-[10px] theme-muted font-latin-num">${items.length}</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <input id="newCustomCareSupplyInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();addCustomCareSupplyFromPicker('${typeKey}');}" placeholder="${isEn ? `Save new ${typeTitle.toLowerCase()}...` : `نیا ${typeTitle} محفوظ کریں...`}" class="flex-1 min-w-0 theme-card border rounded-lg px-2.5 py-1.5 text-xs font-bold" />
+          <button type="button" onclick="addCustomCareSupplyFromPicker('${typeKey}')" class="bg-emerald-500 hover:bg-emerald-400 text-stone-950 px-2.5 py-1.5 rounded-lg text-[11px] font-black cursor-pointer shrink-0">+ ${isEn ? 'Save' : 'محفوظ'}</button>
+        </div>
+        ${items.length > 0 ? `<div class="space-y-1 max-h-32 overflow-y-auto pt-0.5">${items.map(cs => {
+          const isEd = _editingCustomCareSupplyId === cs.id;
+          const curTxt = isEn ? (cs.en || cs.ur) : (cs.ur || cs.en);
+          if (isEd) {
+            return `
+              <div class="flex items-center gap-1 theme-card p-1.5 rounded-lg border border-amber-400">
+                <input id="editCustomCareSupplyInp-${cs.id}" type="text" value="${escapeGuideHtml(curTxt)}" class="flex-1 min-w-0 theme-card-alt border rounded px-2 py-1 text-xs font-bold" />
+                <button type="button" onclick="saveEditedCustomCareSupply('${cs.id}', '${typeKey}')" class="bg-emerald-500 text-stone-950 px-2 py-1 rounded text-[10px] font-black cursor-pointer">✓</button>
+                <button type="button" onclick="_editingCustomCareSupplyId=null;renderCustomCareSuppliesCrudBox('${typeKey}')" class="bg-stone-700 text-white px-2 py-1 rounded text-[10px] font-bold cursor-pointer">✕</button>
+              </div>`;
+          }
+          return `
+            <div class="flex items-center justify-between gap-2 theme-card px-2.5 py-1.5 rounded-lg border text-[11px]">
+              <span class="font-bold truncate">✨ ${escapeGuideHtml(curTxt)}</span>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" onclick="startEditCustomCareSupply('${cs.id}', '${typeKey}')" class="theme-card-alt border px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="Edit">✏️</button>
+                <button type="button" onclick="promptDeleteCustomCareSupply('${cs.id}', '${typeKey}')" class="bg-red-600/80 hover:bg-red-700 text-white px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer" title="Delete">🗑️</button>
+              </div>
+            </div>`;
+        }).join('')}</div>` : ''}
+      `;
+    }
+
+    function addCustomCareSupplyFromPicker(typeKey) {
+      const isEn = gState.lang === 'en';
+      const inp = document.getElementById('newCustomCareSupplyInput');
+      const raw = (inp?.value || '').trim();
+      if (!raw) return;
+      if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
+      const parsed = splitBilingualGeminiText(raw);
+      const enVal = parsed.en || translateCustomTerm(raw, 'en');
+      const urVal = parsed.ur || translateCustomTerm(raw, 'ur');
+      const dup = gState.customCareSupplies.find(x => x.typeKey === typeKey && (x.en.toLowerCase() === enVal.toLowerCase() || x.ur === urVal));
+      if (dup) {
+        notify(isEn ? 'Already saved in custom care options!' : 'یہ پہلے سے محفوظ ہے!', 'ℹ️');
+        if (inp) inp.value = '';
+        return;
+      }
+      gState.customCareSupplies.unshift({ id: 'cs-' + Date.now(), typeKey, ur: urVal, en: enVal });
+      persist();
+      if (inp) inp.value = '';
+      if (activeCarePlantId) {
+        openCareSupplyPicker(activeCarePlantId, typeKey);
+      } else {
+        renderCustomCareSuppliesCrudBox(typeKey);
+      }
+      notify(isEn ? `Saved custom care option: ${enVal}` : `کسٹم آپشن محفوظ ہو گیا: ${urVal}`, '✅');
+    }
+
+    function startEditCustomCareSupply(id, typeKey) {
+      _editingCustomCareSupplyId = id;
+      renderCustomCareSuppliesCrudBox(typeKey);
+    }
+
+    function saveEditedCustomCareSupply(id, typeKey) {
+      const isEn = gState.lang === 'en';
+      const inp = document.getElementById('editCustomCareSupplyInp-' + id);
+      const raw = (inp?.value || '').trim();
+      if (!raw) return;
+      const item = (gState.customCareSupplies || []).find(x => x.id === id);
+      if (!item) return;
+      const parsed = splitBilingualGeminiText(raw);
+      item.en = parsed.en || translateCustomTerm(raw, 'en');
+      item.ur = parsed.ur || translateCustomTerm(raw, 'ur');
+      _editingCustomCareSupplyId = null;
+      persist();
+      if (activeCarePlantId) {
+        openCareSupplyPicker(activeCarePlantId, typeKey);
+      } else {
+        renderCustomCareSuppliesCrudBox(typeKey);
+      }
+      notify(isEn ? `Updated: ${item.en}` : `اپڈیٹ ہو گیا: ${item.ur}`, '✏️');
+    }
+
+    function promptDeleteCustomCareSupply(id, typeKey) {
+      const isEn = gState.lang === 'en';
+      const item = (gState.customCareSupplies || []).find(x => x.id === id);
+      if (!item) return;
+      const lbl = escapeGuideHtml(isEn ? item.en : item.ur);
+      askUserConfirmation({
+        titleEn: 'Remove Custom Care Option?',
+        titleUr: 'کسٹم آپشن حذف کریں؟',
+        msgEn: `Delete saved custom option <strong>${lbl}</strong>? Existing plant history logs remain untouched.`,
+        msgUr: `کیا آپ واقعی «<strong>${lbl}</strong>» کو فہرست سے حذف کرنا چاہتے ہیں؟ پودوں کا پرانا ریکارڈ محفوظ رہے گا۔`,
+        onConfirm: () => {
+          gState.customCareSupplies = (gState.customCareSupplies || []).filter(x => x.id !== id);
+          persist();
+          if (activeCarePlantId) {
+            openCareSupplyPicker(activeCarePlantId, typeKey);
+          } else {
+            renderCustomCareSuppliesCrudBox(typeKey);
+          }
+          notify(isEn ? 'Custom care option removed.' : 'کسٹم آپشن حذف کر دیا گیا۔', '🗑️');
+        }
+      });
     }
 
     function closeCareSupplyPickerModal() {
@@ -6322,26 +6823,52 @@
       return true;
     }
 
-    // Unified Delete Confirmation System
+    // Unified Confirmation & Cascade Dialog System
     let _pendingConfirmCallback = null;
+    let _pendingCancelCallback = null;
 
     function askUserConfirmation(opts) {
       const isEn = gState.lang === 'en';
       const modal = document.getElementById('unifiedConfirmModal');
+      const iconBox = document.getElementById('confirmModalIconBox');
       const titleEl = document.getElementById('confirmModalTitle');
       const msgEl = document.getElementById('confirmModalMessage');
       const actionBtn = document.getElementById('confirmModalActionBtn');
+      const cancelBtn = document.getElementById('confirmModalCancelBtn');
 
+      const isCustomAction = Boolean(opts && (opts.confirmEn || opts.confirmUr));
+      _pendingConfirmCallback = (opts && typeof opts.onConfirm === 'function') ? opts.onConfirm : null;
+      _pendingCancelCallback = (opts && typeof opts.onCancel === 'function') ? opts.onCancel : null;
+
+      if (iconBox) {
+        iconBox.textContent = isCustomAction ? '🔄' : '🗑️';
+        iconBox.className = isCustomAction
+          ? 'w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border-2 border-emerald-400/60 flex items-center justify-center text-3xl shadow-lg'
+          : 'w-16 h-16 mx-auto rounded-2xl bg-red-500/20 border-2 border-red-500/60 flex items-center justify-center text-3xl shadow-lg shadow-red-500/20';
+      }
       if (titleEl) titleEl.textContent = isEn ? (opts.titleEn || 'Confirm Removal') : (opts.titleUr || 'حذف کرنے کی تصدیق');
       if (msgEl) msgEl.innerHTML = isEn ? (opts.msgEn || 'Are you sure you want to remove this item?') : (opts.msgUr || 'کیا آپ واقعی اس آئٹم کو حذف کرنا چاہتے ہیں؟');
 
+      if (cancelBtn) {
+        cancelBtn.textContent = isEn
+          ? (opts.cancelEn || 'Cancel')
+          : (opts.cancelUr || 'منسوخ کریں');
+      }
+
       if (actionBtn) {
-        actionBtn.innerHTML = `<span>🗑️ ${isEn ? 'Yes, Remove' : 'ہاں، حذف کریں'}</span>`;
+        actionBtn.className = isCustomAction
+          ? 'flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-stone-950 text-xs font-black cursor-pointer shadow-lg transition flex items-center justify-center gap-1.5'
+          : 'flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white text-xs font-black cursor-pointer shadow-lg shadow-red-600/30 transition flex items-center justify-center gap-1.5';
+        const btnTxt = isCustomAction
+          ? `✅ ${isEn ? (opts.confirmEn || 'Confirm') : (opts.confirmUr || 'تصدیق کریں')}`
+          : `🗑️ ${isEn ? 'Yes, Remove' : 'ہاں، حذف کریں'}`;
+        actionBtn.innerHTML = `<span>${btnTxt}</span>`;
         actionBtn.onclick = () => {
-          closeUnifiedConfirmModal();
-          if (typeof opts.onConfirm === 'function') {
-            opts.onConfirm();
-          }
+          const cb = _pendingConfirmCallback;
+          _pendingConfirmCallback = null;
+          _pendingCancelCallback = null;
+          closeUnifiedConfirmModal(false);
+          if (cb) cb();
         };
       }
 
@@ -6349,9 +6876,20 @@
       if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
     }
 
-    function closeUnifiedConfirmModal() {
+    function confirmUnifiedModal() {
+      const actionBtn = document.getElementById('confirmModalActionBtn');
+      if (actionBtn && typeof actionBtn.onclick === 'function') {
+        actionBtn.onclick();
+      }
+    }
+
+    function closeUnifiedConfirmModal(runCancel = true) {
       const modal = document.getElementById('unifiedConfirmModal');
       if (modal) modal.classList.add('hidden');
+      const cancelCb = runCancel ? _pendingCancelCallback : null;
+      _pendingConfirmCallback = null;
+      _pendingCancelCallback = null;
+      if (cancelCb) cancelCb();
       if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
     }
 
@@ -7440,22 +7978,38 @@
 
     function openAddPlantModal(plantIdToEdit = null) {
       editingPlantId = plantIdToEdit;
+      if (typeof _plantNameDebounceTimer !== 'undefined' && _plantNameDebounceTimer) {
+        clearTimeout(_plantNameDebounceTimer);
+        _plantNameDebounceTimer = null;
+      }
       const isEn = gState.lang === 'en';
       const modal = document.getElementById('addPlantModal');
       const title = document.getElementById('addPlantModalTitle');
       document.getElementById('aiModalStatusBanner').classList.add('hidden');
+      const webBox = document.getElementById('webSearchPlantResultBox');
+      if (webBox) { webBox.classList.add('hidden'); webBox.innerHTML = ''; }
       const autoBox = document.getElementById('nameAutocompleteBox');
       if (autoBox) { autoBox.classList.add('hidden'); autoBox.innerHTML = ''; }
+      const customPotBox = document.getElementById('formCustomPotSizeBox');
+      if (customPotBox) customPotBox.classList.add('hidden');
+      const customPotInp = document.getElementById('formCustomPotSizeInput');
+      if (customPotInp) customPotInp.value = '';
       setPlantPhotoWaitingCircle(false);
       closeInlineLocationCreator();
       populateBotanicalCatalogDropdown();
       populateFormFertilizerStockPicker();
 
+      const nameInputEl = document.getElementById('formPlantNameInput');
+      if (nameInputEl) nameInputEl.dataset.humanTyped = '0';
+
       if (plantIdToEdit) {
         const p = gState.plants.find(x => x.id === plantIdToEdit);
         if (p) {
           title.textContent = isEn ? '✏️ Edit Plant Details' : '✏️ پودے کی معلومات میں ترمیم کریں';
-          document.getElementById('formPlantNameInput').value = isEn ? (p.nameEn || p.nameUr) : (p.nameUr || p.nameEn);
+          if (nameInputEl) {
+            nameInputEl.value = isEn ? (p.nameEn || p.nameUr) : (p.nameUr || p.nameEn);
+            nameInputEl.dataset.humanTyped = '0';
+          }
           document.getElementById('formPlantVariantColor').value = isEn ? (p.variantEn || p.variantUr) : (p.variantUr || p.variantEn);
           document.getElementById('plantFormImgPreview').src = p.image;
           currentPlantFormImg = p.image;
@@ -7472,6 +8026,20 @@
             persist();
           }
           populateLocationDropdowns(matchedLoc ? matchedLoc.id : null);
+
+          let selectedPotPipe = '12 انچ مٹی کا گملا|12-inch Clay Pot';
+          if (p.potSizeUr || p.potSizeEn || p.potSize) {
+            const pUr = p.potSizeUr || translateCustomTerm(p.potSizeEn || p.potSize, 'ur');
+            const pEn = p.potSizeEn || translateCustomTerm(p.potSizeUr || p.potSize, 'en');
+            if (typeof ensurePotOptionRegistered === 'function') {
+              selectedPotPipe = ensurePotOptionRegistered(pUr, pEn);
+            } else {
+              selectedPotPipe = `${pUr}|${pEn}`;
+            }
+          }
+          if (typeof populatePotSizeDropdown === 'function') {
+            populatePotSizeDropdown(selectedPotPipe);
+          }
 
           document.getElementById('formWaterDaysInput').value = p.waterDays || 3;
           const pDateEl = document.getElementById('formPlantedDateInput');
@@ -7496,13 +8064,19 @@
         if (sizeBadge) sizeBadge.classList.add('hidden');
         const dupWarn = document.getElementById('plantDuplicateWarningBanner');
         if (dupWarn) { dupWarn.classList.add('hidden'); dupWarn.innerHTML = ''; }
-        document.getElementById('formPlantNameInput').value = '';
+        if (nameInputEl) {
+          nameInputEl.value = '';
+          nameInputEl.dataset.humanTyped = '0';
+        }
         document.getElementById('formPlantVariantColor').value = ''; document.getElementById('formPlantVariantColor').dataset.userEdited = '0';
         document.getElementById('plantFormImgPreview').src = IMG_INDOOR;
         currentPlantFormImg = IMG_INDOOR;
         currentAiCompactImg = IMG_INDOOR;
         lastDecodedPxAnalysis = null;
         populateLocationDropdowns();
+        if (typeof populatePotSizeDropdown === 'function') {
+          populatePotSizeDropdown('12 انچ مٹی کا گملا|12-inch Clay Pot');
+        }
         const pDateEl = document.getElementById('formPlantedDateInput');
         if (pDateEl) pDateEl.value = getLocalTodayISO();
         const locDateEl = document.getElementById('formLocationDateInput');
@@ -7616,6 +8190,7 @@
         let emeraldGreen = 0, limeYellowGreen = 0, blueGrayGreen = 0;
         let crimsonRed = 0, magentaPink = 0, goldenYellow = 0, fieryOrange = 0;
         let purpleViolet = 0, pureWhite = 0, creamVariegated = 0, darkBurgundy = 0;
+        let woodyCanopyPixels = 0;
         let sumR = 0, sumG = 0, sumB = 0, activeCenterPixels = 0;
         const gray = new Float32Array(80 * 80);
 
@@ -7642,6 +8217,11 @@
               else if (maxC === g) hue = 60 * ((b - r) / delta + 2);
               else hue = 60 * ((r - g) / delta + 4);
               if (hue < 0) hue += 360;
+            }
+
+            // Count woody bark/stem pixels in the upper/mid canopy (y: 12..46) to distinguish woody shrubs from indoor Pothos vines
+            if (y >= 12 && y <= 46 && x >= 16 && x <= 64 && hue >= 8 && hue < 38 && sat >= 0.16 && sat < 0.65 && val >= 0.16 && val < 0.62) {
+              woodyCanopyPixels++;
             }
 
             // Detect Terracotta Clay Pot & Brown Soil pixels (warm earthy red-orange-brown, moderate saturation)
@@ -7695,6 +8275,7 @@
         const rLime = limeYellowGreen / normP;
         const rEmerald = emeraldGreen / normP;
         const rBlueGreen = blueGrayGreen / normP;
+        const rWoodyCanopy = woodyCanopyPixels / normP;
         const totalGreen = rLime + rEmerald + rBlueGreen;
 
         const sig = [
@@ -7710,24 +8291,32 @@
         ];
         currentPhotoSignature = sig;
 
-        // 0. Check filename or typed hint first!
-        const userTypedHint = (document.getElementById('formPlantNameInput')?.value || '').trim();
-        const combinedHint = `${userTypedHint} ${lastUploadedFileName}`.trim();
-        if (combinedHint.length >= 2) {
+        // 0. Check explicit human-typed hint or meaningful botanical filename ONLY (ignore auto-filled presets & camera filenames!)
+        const nameInpEl = document.getElementById('formPlantNameInput');
+        const userTypedHint = (nameInpEl && nameInpEl.dataset && nameInpEl.dataset.humanTyped === '1')
+          ? (nameInpEl.value || '').trim()
+          : '';
+        const cleanedFileHint = String(lastUploadedFileName || '')
+          .replace(/\b(img|pxl|dsc|dcim|whatsapp|screenshot|snapchat|photo|image|camera|pic|captured|trimmed|hdr|portrait|burst|wa|vid)\b/gi, ' ')
+          .replace(/\b\d+\b/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        const combinedHint = `${userTypedHint} ${cleanedFileHint}`.trim();
+        if (combinedHint.length >= 3) {
           const hintMatches = findBestFlexiblePlantMatches(combinedHint);
-          if (hintMatches.length > 0 && hintMatches[0].score >= 60) {
+          if (hintMatches.length > 0 && hintMatches[0].score >= 85) {
             const topKey = hintMatches[0].key;
             const moreKeys = hintMatches.slice(1, 7).map(m => m.key);
             return {
               primary: topKey,
-              candidates: [topKey, ...moreKeys, 'rose', 'marigold', 'motia', 'moneyplant'].slice(0, 8),
-              reasonEn: `Matched from photo name / plant hint ("${combinedHint}") + visual profile`,
-              reasonUr: `تصویر کے نام اور بصری خصوصیات کی بنیاد پر شناخت`
+              candidates: [topKey, ...moreKeys, 'ixora', 'rose', 'motia', 'hibiscus'].filter(k => BOTANICAL_DB[k]).slice(0, 8),
+              reasonEn: `Matched from your typed plant hint ("${combinedHint}") + visual profile`,
+              reasonUr: `آپ کے درج کردہ نام اور بصری خصوصیات کی بنیاد پر شناخت`
             };
           }
         }
 
-        // 1A. Check 4-Quadrant Botanical Gallery Signatures FIRST (Karonda, Bougainvillea, Variegated Bougainvillea, Champa, Guava, Madhumalti, Syngonium, etc.)
+        // 1A. Check 4-Quadrant Botanical Gallery Signatures FIRST (tighten moneyplant so woody/chlorotic shrubs never match Pothos!)
         let bestGalEntry = null;
         let bestGalDist = 999;
         for (const gEntry of GARDEN_GALLERY_SIGNATURES) {
@@ -7738,7 +8327,12 @@
             bestGalEntry = gEntry;
           }
         }
-        if (bestGalEntry && bestGalDist < 0.36 && BOTANICAL_DB[bestGalEntry.key]) {
+        const galAllowed = bestGalEntry && BOTANICAL_DB[bestGalEntry.key] && (
+          bestGalEntry.key === 'moneyplant'
+            ? (bestGalDist < 0.18 && rWoodyCanopy < 0.045 && fineTextureRatio < 0.20)
+            : (bestGalDist < 0.34)
+        );
+        if (galAllowed) {
           return {
             primary: bestGalEntry.key,
             candidates: bestGalEntry.cands.filter(k => BOTANICAL_DB[k]),
@@ -7892,22 +8486,34 @@
             reasonUr: 'گہرے سبز پتوں کے ساتھ سفید خوشبودار پھولوں کی بنیاد پر شناخت'
           };
         }
-        // 9. Woody Green Shrubs with Glossy Oval Opposite Leaves (Karonda, Kamini, Lemon, Guava, Motia) vs Variegated Money Plant
+        // 9. Woody Green Shrubs with Glossy Oval Opposite Leaves (Karonda, Kamini, Lemon, Guava, Motia) vs Variegated Shrubs vs Money Plant
         if (rLime >= 0.35 && rCream < 0.032 && (rPink + rCrimson) < 0.01) {
           return {
             primary: 'karonda',
-            candidates: ['karonda', 'kamini', 'lemon', 'guava', 'motia', 'ficus', 'madhumalti', 'moneyplant'].filter(k => BOTANICAL_DB[k]),
+            candidates: ['karonda', 'kamini', 'lemon', 'guava', 'motia', 'ficus', 'madhumalti', 'ixora'].filter(k => BOTANICAL_DB[k]),
             reasonEn: 'Bright-green glossy opposite oval leaves on woody shrub branches (Karonda / Kamini / Citrus)',
             reasonUr: 'چمکدار سبز بیضوی پتے اور مضبوط جھاڑی دار شاخیں (کروندا / کامنی / لیموں)'
           };
         }
         if (rCream >= 0.038 && totalGreen >= 0.14) {
-          return {
-            primary: 'moneyplant',
-            candidates: ['moneyplant', 'marblepothos', 'ficusbenjamina', 'syngonium', 'spiderplant', 'songofindia', 'schefflera'],
-            reasonEn: 'Cream / golden variegated leaf patterns on green foliage',
-            reasonUr: 'سبز پتوں پر سنہری و سفید دھاری دار ڈیزائن کی بنیاد پر شناخت'
-          };
+          // If woody bark/stems or shrubby leaf edges are visible, classify as variegated/chlorotic woody shrub rather than indoor Golden Pothos!
+          if (rWoodyCanopy >= 0.042 || fineTextureRatio >= 0.20) {
+            const woodyPick = BOTANICAL_DB.bougainvillea_variegated && rCream >= 0.065 ? 'bougainvillea_variegated' : 'ixora';
+            return {
+              primary: woodyPick,
+              candidates: ['bougainvillea_variegated', 'ixora', 'ficusbenjamina', 'hibiscus', 'schefflera', 'motia', 'lemon', 'moneyplant'].filter(k => BOTANICAL_DB[k]),
+              reasonEn: 'Woody shrub stems with variegated or pale-green/chlorotic outdoor leaves',
+              reasonUr: 'مضبوط شاخوں والے پودے کے چتکبرے یا ہلکے سبز پتے'
+            };
+          }
+          if (rCream >= 0.055) {
+            return {
+              primary: 'moneyplant',
+              candidates: ['moneyplant', 'marblepothos', 'syngonium', 'ficusbenjamina', 'spiderplant', 'songofindia', 'schefflera'].filter(k => BOTANICAL_DB[k]),
+              reasonEn: 'Heart-shaped indoor vine foliage with cream / golden variegation',
+              reasonUr: 'بیل نما پودے کے سبز پتوں پر سنہری و سفید دھاری دار ڈیزائن'
+            };
+          }
         }
         // 10. Glaucous Blue-Green / Gray-Green Fleshy Succulents & Cacti (Aloe Vera, Echeveria, Agave, Jade Plant, Haworthia)
         if (rBlueGreen >= 0.06 || (totalGreen >= 0.06 && totalGreen < 0.22 && fineTextureRatio < 0.16)) {
@@ -8109,20 +8715,20 @@
       const imgEl = document.getElementById('plantFormImgPreview');
       const compactDataUrl = passedAiDataUrl || currentAiCompactImg || currentPlantFormImg;
 
-      const analysis = passedPxAnalysis || lastDecodedPxAnalysis || analyzePlantPhotoPixels(imgEl);
-      const userTypedBeforeScan = (document.getElementById('formPlantNameInput')?.value || '').trim();
+      // TIER 1: Direct Gemini Vision First — NEVER pre-fill formPlantNameInput with offline pixel guesses,
+      // and ONLY pass a hint to Gemini if the human explicitly typed it prior to scanning!
+      const nameInputEl = document.getElementById('formPlantNameInput');
+      const isHumanTyped = Boolean(nameInputEl && nameInputEl.dataset && nameInputEl.dataset.humanTyped === '1');
+      const userTypedBeforeScan = isHumanTyped ? (nameInputEl.value || '').trim() : '';
 
-      // Only pre-fill if user hasn't typed a name yet AND local match is a strong non-generic signature; never overwrite user's typed name with Vinca!
+      const analysis = passedPxAnalysis || lastDecodedPxAnalysis || analyzePlantPhotoPixels(imgEl);
       const initialKey = analysis.primary;
-      if (!userTypedBeforeScan && analysis.trainedMatch) {
-        applyPresetPlant(initialKey, true);
-      }
 
       setPlantPhotoWaitingCircle(true, 'AI Scan');
       showModalAiBanner(
         isEn
-          ? `<div class="flex items-center gap-3"><span class="ai-waiting-circle-ring"></span><div><strong>Analyzing with Gemini 3.8 Flash Vision...</strong><br><span class="text-amber-300">Initial visual profile: ${BOTANICAL_DB[initialKey]?.nameEn || initialKey}. Refining species & leaf health...</span></div></div>`
-          : `<div class="flex items-center gap-3"><span class="ai-waiting-circle-ring"></span><div><strong>جیمینائی 3.8 فلیش ویژن سے معائنہ جاری ہے...</strong><br><span class="text-amber-300">ابتدائی باٹینیکل پروفائل: ${BOTANICAL_DB[initialKey]?.nameUr || initialKey}</span></div></div>`,
+          ? `<div class="flex items-center gap-3"><span class="ai-waiting-circle-ring"></span><div><strong>Tier 1: Analyzing Photo Directly with Gemini Vision AI...</strong><br><span class="text-amber-300">Inspecting leaf venation, stem structure, flowers & plant health...</span></div></div>`
+          : `<div class="flex items-center gap-3"><span class="ai-waiting-circle-ring"></span><div><strong>مرحلہ 1: جیمینائی ویژن AI سے براہِ راست تصویر کا معائنہ جاری ہے...</strong><br><span class="text-amber-300">پتوں کی رگوں، شاخوں کی بناوٹ اور صحت کی شناخت کی جا رہی ہے...</span></div></div>`,
         'info'
       );
 
@@ -8135,8 +8741,8 @@
           contents: [{
             parts: [
               { inlineData: { mimeType, data: cleanBase64 } },
-              { text: `You are an expert Pakistani & Tropical Botanist. Carefully examine the plant inside the pot in this photo (ignore the floor/background). Inspect leaf shape, leaflets, margin, venation, stem habit, and any buds/flowers.
-${userTypedBeforeScan ? `User hint: "${userTypedBeforeScan}".` : ''}
+              { text: `You are an expert Pakistani & Tropical Botanist. Carefully examine the plant inside the pot in this photo (ignore the floor/background). Inspect leaf shape, leaflets, margin, venation, woody vs herbaceous stem habit, and any buds/flowers. Distinguish true indoor Golden Pothos vines from outdoor woody shrubs with variegated or chlorotic leaves.
+${userTypedBeforeScan.length >= 2 ? `Optional human-typed hint (verify visually against the photo; ignore if photo clearly shows a different species): "${userTypedBeforeScan}".` : ''}
 Return ONLY a single valid JSON object (no markdown, no extra text):
 {"nameEn":"Common English Name","nameUr":"مشہور پاکستانی اردو نام","sciName":"Scientific Binomial Name","category":"flowering","variantEn":"Leaf/Flower description","variantUr":"پتوں یا پھولوں کی پہچان","confidence":96,"visualReasonEn":"Key leaf/stem traits seen in photo","visualReasonUr":"تصویر میں پتوں کی خاص پہچان","healthEn":"Leaf health & care tip","healthUr":"پتوں کی صحت اور مشورہ","similarNames":["Alt 1","Alt 2"],"waterDays":3,"sunEn":"Sunlight needed","sunUr":"دھوپ کی ضرورت","fertEn":"Fertilizer schedule","fertUr":"کھاد کا شیڈول","pruneEn":"Pruning season","pruneUr":"کٹائی کا موسم","totkaEn":"Expert gardener tip","totkaUr":"استاد مالی کا نسخہ"}` }
             ]
@@ -8147,10 +8753,13 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
         const data = await callGeminiUniversal(model, apiKey, payload);
         if (data && data._error && data.status === 429) {
           setPlantPhotoWaitingCircle(false);
+          if (!isHumanTyped) applyPresetPlant(initialKey, true);
+          const webFallbackQuery = (BOTANICAL_DB[initialKey]?.nameEn || initialKey).replace(/'/g, '');
+          const webBtnHtml = `<div class="pt-1.5"><button type="button" onclick="runLiveWebPlantSearch('${webFallbackQuery}')" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer">🌐 ${isEn ? 'Tier 3: Search Web / Wikipedia' : 'مرحلہ 3: ویب / ویکیپیڈیا سرچ'}</button></div>`;
           showModalAiBanner(
-            isEn
-              ? `⚠️ <strong>All Free Tier Models Reached Minute Limit (HTTP 429):</strong><br>Auto-configured via Botanical Engine (<span class="text-amber-300">${BOTANICAL_DB[initialKey]?.nameEn}</span>). Tap any candidate button below to switch!` + buildInteractiveAiVisionBannerHtml(initialKey, analysis.candidates, analysis.reasonEn, 'Tap any match below to switch instantly.', false, 91)
-              : `⚠️ <strong>مفت API Key کی فی منٹ لمٹ مکمل (HTTP 429):</strong><br>پودا بلٹ ان باٹینیکل انجن (<span class="text-amber-300">${BOTANICAL_DB[initialKey]?.nameUr}</span>) سے سیٹ کر دیا گیا ہے۔ نیچے بٹن سے تبدیل بھی کر سکتے ہیں!` + buildInteractiveAiVisionBannerHtml(initialKey, analysis.candidates, analysis.reasonUr, 'نیچے دیے گئے بٹن سے فوری تبدیل کریں۔', false, 91),
+            (isEn
+              ? `⚠️ <strong>All Free Tier Models Reached Minute Limit (HTTP 429):</strong><br>Suggested via Offline Botanical Engine (<span class="text-amber-300">${BOTANICAL_DB[initialKey]?.nameEn}</span>). Tap any candidate button below to switch!` + buildInteractiveAiVisionBannerHtml(initialKey, analysis.candidates, analysis.reasonEn, 'Tap any match below to switch instantly.', false, 91)
+              : `⚠️ <strong>مفت API Key کی فی منٹ لمٹ مکمل (HTTP 429):</strong><br>آف لائن باٹینیکل انجن سے تجویز کردہ (<span class="text-amber-300">${BOTANICAL_DB[initialKey]?.nameUr}</span>)۔ نیچے بٹن سے تبدیل بھی کر سکتے ہیں!` + buildInteractiveAiVisionBannerHtml(initialKey, analysis.candidates, analysis.reasonUr, 'نیچے دیے گئے بٹن سے فوری تبدیل کریں۔', false, 91)) + webBtnHtml,
             'warn'
           );
           return;
@@ -8159,14 +8768,28 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
           const rawText = extractGeminiResponseText(data);
           const parsed = parseFaultTolerantGeminiJson(rawText);
           if (parsed && (parsed.nameUr || parsed.nameEn)) {
-            const flexMatch = findBestFlexiblePlantMatches(`${parsed.nameEn || ''} ${parsed.sciName || ''} ${parsed.nameUr || ''}`);
+            // TIER 2: Auto-Match Gemini Vision's species/scientific name against the 370+ Plant BOTANICAL_DB
             const byNameKey = findExistingEncyclopediaKeyByName(parsed.nameEn, parsed.nameUr, parsed.sciName);
-            let targetKey = (flexMatch.length > 0 && flexMatch[0].score >= 70) ? flexMatch[0].key : (byNameKey || ('learned_' + (parsed.nameEn || 'plant').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 28)));
-            if (!BOTANICAL_DB[targetKey]) {
-              BOTANICAL_DB[targetKey] = {
+            const flexMatch = findBestFlexiblePlantMatches(`${parsed.sciName || ''} ${parsed.nameEn || ''} ${parsed.nameUr || ''}`);
+            const aiGenus = String(parsed.sciName || '').trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
+            const hasValidAiGenus = aiGenus.length >= 4 && aiGenus !== 'botanical' && aiGenus !== 'custom';
+            let flexCandidateKey = '';
+            if (flexMatch.length > 0 && flexMatch[0].score >= 85) {
+              const candGenus = String(flexMatch[0].prof?.sciName || '').trim().split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
+              if (!hasValidAiGenus || !candGenus || candGenus === aiGenus || flexMatch[0].score >= 160) {
+                flexCandidateKey = flexMatch[0].key;
+              }
+            }
+            let targetKey = byNameKey || flexCandidateKey;
+            let matchedInBuiltinDb = Boolean(targetKey && BOTANICAL_DB[targetKey]);
+
+            // TIER 3: Unlisted Species — Persist full AI Botanical Profile into Encyclopedia + Offer 1-Tap Web Search Enrichment
+            if (!matchedInBuiltinDb) {
+              targetKey = 'learned_' + (parsed.sciName || parsed.nameEn || 'plant').toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '').slice(0, 28);
+              const learnedEntry = {
                 cat: parsed.category || 'flowering',
-                nameUr: parsed.nameUr || parsed.nameEn,
-                nameEn: parsed.nameEn || parsed.nameUr,
+                nameUr: parsed.nameUr || translateCustomTerm(parsed.nameEn, 'ur'),
+                nameEn: parsed.nameEn || translateCustomTerm(parsed.nameUr, 'en'),
                 sciName: parsed.sciName || 'Botanical sp.',
                 variantUr: parsed.variantUr || 'تازہ پودا',
                 variantEn: parsed.variantEn || 'Fresh Specimen',
@@ -8179,9 +8802,16 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
                 pruneEn: parsed.pruneEn || 'Feb to March',
                 totkaUr: parsed.totkaUr || 'نرم گوڈی اور متوازن پانی دیں۔',
                 totkaEn: parsed.totkaEn || 'Aerate topsoil gently and avoid overwatering.',
-                img: IMG_INDOOR
+                img: currentPlantFormImg || IMG_INDOOR,
+                sig: currentPhotoSignature
               };
+              BOTANICAL_DB[targetKey] = learnedEntry;
+              if (!gState.learnedPlants) gState.learnedPlants = {};
+              gState.learnedPlants[targetKey] = learnedEntry;
+              persist();
+              populateBotanicalCatalogDropdown();
             }
+
             const simKeys = [];
             if (Array.isArray(parsed.similarNames)) {
               parsed.similarNames.forEach(sn => {
@@ -8193,8 +8823,11 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
             applyPresetPlant(targetKey, true);
             const reasonTxt = isEn ? (parsed.visualReasonEn || '') : (parsed.visualReasonUr || '');
             const healthTxt = isEn ? (parsed.healthEn || '') : (parsed.healthUr || '');
+            const tierNote = matchedInBuiltinDb
+              ? `<div class="text-[10px] text-emerald-300 font-bold pt-1">✅ ${isEn ? 'Tier 2: Matched in 370+ Local Botanical Encyclopedia & Care Auto-Filled!' : 'مرحلہ 2: بلٹ ان باٹینیکل انسائیکلوپیڈیا سے مکمل نگہداشت پلان خودکار بھر دیا گیا!'}</div>`
+              : `<div class="flex items-center justify-between gap-2 flex-wrap pt-1.5 border-t border-white/15"><span class="text-[10px] text-amber-300 font-bold">🌐 ${isEn ? 'Tier 3: New species auto-saved to Encyclopedia!' : 'مرحلہ 3: نیا پودا انسائیکلوپیڈیا میں محفوظ کر لیا گیا!'}</span><button type="button" onclick="runLiveWebPlantSearch('${String(parsed.sciName || parsed.nameEn || '').replace(/'/g, '')}')" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer">🌐 ${isEn ? 'Enrich via Web / Wikipedia' : 'ویب / ویکیپیڈیا سے مزید تفصیل'}</button></div>`;
             showModalAiBanner(
-              buildInteractiveAiVisionBannerHtml(targetKey, [...simKeys, ...analysis.candidates], reasonTxt, healthTxt, true, parsed.confidence || 96),
+              buildInteractiveAiVisionBannerHtml(targetKey, [...simKeys, ...analysis.candidates], reasonTxt, healthTxt, true, parsed.confidence || 96) + tierNote,
               'success'
             );
             return;
@@ -8203,17 +8836,20 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       }
 
       setPlantPhotoWaitingCircle(false);
-      // Never nag the user for an API key inside Add New Plant!
+      // Offline / No-Key Fallback (only fills input if human didn't explicitly type a custom name)
       const keyPromptHtml = '<input id="inlineModalKeyInput" type="hidden" />';
-
       const detectedKey = analysis.primary;
-      applyPresetPlant(detectedKey, true);
+      if (!isHumanTyped) {
+        applyPresetPlant(detectedKey, true);
+      }
       const reasonTxt = isEn ? (analysis.reasonEn || '') : (analysis.reasonUr || '');
       const healthTxt = isEn
-        ? 'Foliage color & contrast analyzed. Tap any matching plant button below to switch in 1 tap!'
-        : 'پتوں کے رنگ اور ساخت کا تجزیہ مکمل۔ نیچے دیے گئے کسی بھی پودے پر کلک کر کے فوری سلیکٹ کریں!';
+        ? 'Offline visual trait scan complete. Tap any matching plant below or use Web Search!'
+        : 'آف لائن بصری معائنہ مکمل۔ نیچے دیے گئے کسی بھی پودے پر کلک کریں یا ویب سرچ استعمال کریں!';
+      const offlineWebQ = (userTypedBeforeScan || BOTANICAL_DB[detectedKey]?.nameEn || '').replace(/'/g, '');
+      const offlineWebBtn = `<div class="pt-1.5"><button type="button" onclick="runLiveWebPlantSearch('${offlineWebQ}')" class="bg-blue-600 hover:bg-blue-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer">🌐 ${isEn ? 'Tier 3: Search Web / Wikipedia' : 'مرحلہ 3: ویب / ویکیپیڈیا سرچ'}</button></div>`;
       showModalAiBanner(
-        keyPromptHtml + buildInteractiveAiVisionBannerHtml(detectedKey, analysis.candidates, reasonTxt, healthTxt, false, 92),
+        keyPromptHtml + buildInteractiveAiVisionBannerHtml(detectedKey, analysis.candidates, reasonTxt, healthTxt, false, 92) + offlineWebBtn,
         'success'
       );
     }
@@ -8862,25 +9498,33 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
            </div>`;
     }
 
+    let _plantNameDebounceTimer = null;
+
     function applyPresetPlant(key, fillNameInput = true, autoFillVariant = true) {
       const prof = BOTANICAL_DB[key];
       if (!prof) return;
       currentPresetKey = key;
       const isEn = gState.lang === 'en';
 
-      const catSel = document.getElementById('botanicalCatalogSelect');
-      if (catSel) {
-        if (!Array.from(catSel.options || []).some(o => o.value === key)) {
-          const filterSel = document.getElementById('botanicalCategoryFilter');
-          if (filterSel) filterSel.value = 'all';
-          populateBotanicalCatalogDropdown();
-        }
-        catSel.value = key;
-      }
-
       if (fillNameInput) {
+        if (_plantNameDebounceTimer) {
+          clearTimeout(_plantNameDebounceTimer);
+          _plantNameDebounceTimer = null;
+        }
+        const catSel = document.getElementById('botanicalCatalogSelect');
+        if (catSel) {
+          if (!Array.from(catSel.options || []).some(o => o.value === key)) {
+            const filterSel = document.getElementById('botanicalCategoryFilter');
+            if (filterSel) filterSel.value = 'all';
+            populateBotanicalCatalogDropdown();
+          }
+          catSel.value = key;
+        }
         const nameEl = document.getElementById('formPlantNameInput');
-        if (nameEl) nameEl.value = isEn ? prof.nameEn : prof.nameUr;
+        if (nameEl) {
+          nameEl.value = isEn ? prof.nameEn : prof.nameUr;
+          if (nameEl.dataset) nameEl.dataset.humanTyped = '0';
+        }
         const autoBox = document.getElementById('nameAutocompleteBox');
         if (autoBox) autoBox.classList.add('hidden');
       }
@@ -8898,6 +9542,48 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       checkAndShowDuplicatePlantWarning();
     }
 
+    function onBotanicalCatalogSelect(key) {
+      if (!key || !BOTANICAL_DB[key]) return;
+      if (_plantNameDebounceTimer) {
+        clearTimeout(_plantNameDebounceTimer);
+        _plantNameDebounceTimer = null;
+      }
+      applyPresetPlant(key, true);
+    }
+
+    function onFormPlantNameTyped(val) {
+      const nameEl = document.getElementById('formPlantNameInput');
+      if (nameEl && nameEl.dataset) {
+        nameEl.dataset.humanTyped = (val || '').trim().length > 0 ? '1' : '0';
+      }
+      // Reset catalog dropdown value while user is typing partial search text so re-selecting the same plant from dropdown always fires onchange!
+      const catSel = document.getElementById('botanicalCatalogSelect');
+      if (catSel) catSel.value = '';
+      handlePlantNameInput(val, false, false);
+    }
+
+    function clearFormPlantNameInput() {
+      if (_plantNameDebounceTimer) {
+        clearTimeout(_plantNameDebounceTimer);
+        _plantNameDebounceTimer = null;
+      }
+      const nameEl = document.getElementById('formPlantNameInput');
+      if (nameEl) {
+        nameEl.value = '';
+        if (nameEl.dataset) nameEl.dataset.humanTyped = '0';
+      }
+      currentPresetKey = '';
+      const catSel = document.getElementById('botanicalCatalogSelect');
+      if (catSel) catSel.value = '';
+      const dupWarn = document.getElementById('plantDuplicateWarningBanner');
+      if (dupWarn) { dupWarn.classList.add('hidden'); dupWarn.innerHTML = ''; }
+      const webBox = document.getElementById('webSearchPlantResultBox');
+      if (webBox) { webBox.classList.add('hidden'); webBox.innerHTML = ''; }
+      // Reset dropdown list immediately without lag and keep focus in the text input
+      _runPlantNameFilterNow('', true);
+      if (nameEl && typeof nameEl.focus === 'function') nameEl.focus();
+    }
+
     function setQuickFertInForm(urTxt, enTxt) {
       const isEn = gState.lang === 'en';
       const fertBox = document.getElementById('formFertInput');
@@ -8913,11 +9599,26 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
         box.classList.add('hidden');
       } else {
         const val = document.getElementById('formPlantNameInput')?.value || '';
-        handlePlantNameInput(val, true);
+        handlePlantNameInput(val, true, true);
       }
     }
 
-    function handlePlantNameInput(val, showAllOnEmpty = false) {
+    function handlePlantNameInput(val, showAllOnEmpty = false, immediate = false) {
+      if (_plantNameDebounceTimer) {
+        clearTimeout(_plantNameDebounceTimer);
+        _plantNameDebounceTimer = null;
+      }
+      if (!immediate && !showAllOnEmpty) {
+        _plantNameDebounceTimer = setTimeout(() => {
+          _plantNameDebounceTimer = null;
+          _runPlantNameFilterNow(val, false);
+        }, 250);
+        return;
+      }
+      _runPlantNameFilterNow(val, showAllOnEmpty);
+    }
+
+    function _runPlantNameFilterNow(val, showAllOnEmpty = false) {
       const isEn = gState.lang === 'en';
       const box = document.getElementById('nameAutocompleteBox');
       const raw = (val || '').trim();
@@ -8926,6 +9627,7 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       if (!raw && !showAllOnEmpty) {
         currentPresetKey = '';
         box.classList.add('hidden');
+        checkAndShowDuplicatePlantWarning();
         return;
       }
 
@@ -9115,6 +9817,10 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
     }
 
     function selectAutocompletePlant(key) {
+      if (_plantNameDebounceTimer) {
+        clearTimeout(_plantNameDebounceTimer);
+        _plantNameDebounceTimer = null;
+      }
       applyPresetPlant(key, true);
       const box = document.getElementById('nameAutocompleteBox');
       if (box) box.classList.add('hidden');
@@ -9361,9 +10067,24 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       const chosenGrowthStageVal = document.getElementById('formGrowthStageSelect')?.value || 'auto';
       const rawPotSel = document.getElementById('formPotSizeSelect')?.value || '12 انچ مٹی کا گملا|12-inch Clay Pot';
       const customPotTxt = (document.getElementById('formCustomPotSizeInput')?.value || '').trim();
-      const [potSizeUr, potSizeEn] = (rawPotSel === 'custom' && customPotTxt)
-        ? [translateCustomTerm(customPotTxt, 'ur'), translateCustomTerm(customPotTxt, 'en')]
-        : rawPotSel.split('|');
+      let potSizeUr = '12 انچ مٹی کا گملا';
+      let potSizeEn = '12-inch Clay Pot';
+      if (rawPotSel === 'custom' && customPotTxt) {
+        if (typeof addOrGetCustomPot === 'function') {
+          const savedPot = addOrGetCustomPot(customPotTxt);
+          if (savedPot) {
+            potSizeUr = savedPot.ur;
+            potSizeEn = savedPot.en;
+          }
+        } else {
+          potSizeUr = translateCustomTerm(customPotTxt, 'ur');
+          potSizeEn = translateCustomTerm(customPotTxt, 'en');
+        }
+      } else if (rawPotSel && rawPotSel !== 'custom') {
+        const parts = rawPotSel.split('|');
+        potSizeUr = parts[0] || parts[1] || '12 انچ مٹی کا گملا';
+        potSizeEn = parts[1] || parts[0] || '12-inch Clay Pot';
+      }
       const pDateInfoUr = formatPlantedDateDisplay(plantedDateVal, false);
       const pDateInfoEn = formatPlantedDateDisplay(plantedDateVal, true);
       const pDateFormattedUr = pDateInfoUr.dateText;
@@ -10070,33 +10791,128 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
       document.getElementById('plantDetailModal').classList.add('hidden');
     }
 
+    let _editingLocationIdx = null;
     function openLocationManagerModal() {
+      _editingLocationIdx = null;
       renderLocationsList();
       document.getElementById('locationManagerModal').classList.remove('hidden');
+      if (typeof pushGulzarModalState === 'function') pushGulzarModalState('locationManagerModal');
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
     }
     function closeLocationManagerModal() {
+      _editingLocationIdx = null;
       document.getElementById('locationManagerModal').classList.add('hidden');
       populateLocationDropdowns();
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
     }
     function renderLocationsList() {
       const isEn = gState.lang === 'en';
       const box = document.getElementById('locationsListContainer');
-      box.innerHTML = gState.locations.map((loc, idx) => `
-        <div class="theme-card-alt p-2.5 rounded-xl border text-xs flex items-center justify-between gap-2">
-          <span class="font-bold flex items-center gap-1.5"><span>📍</span><span>${isEn ? loc.en : loc.ur}</span></span>
-          <div class="flex items-center gap-1">
-            <button type="button" onclick="promptDeleteLocation(${idx})" class="px-2.5 py-1 rounded-lg bg-red-600/80 hover:bg-red-700 text-white text-[11px] cursor-pointer">${isEn ? 'Delete' : 'حذف'}</button>
-          </div>
-        </div>
-      `).join('');
+      if (!box) return;
+      box.innerHTML = (gState.locations || []).map((loc, idx) => {
+        const curLbl = isEn ? (loc.en || loc.ur) : (loc.ur || loc.en);
+        const plantCnt = (gState.plants || []).filter(p =>
+          (loc.en && (p.locationEn || '').toLowerCase() === loc.en.toLowerCase()) ||
+          (loc.ur && p.locationUr === loc.ur)
+        ).length;
+        if (_editingLocationIdx === idx) {
+          return `
+            <div class="theme-card-alt p-2.5 rounded-xl border-2 border-amber-400 text-xs space-y-2">
+              <div class="flex items-center gap-1.5">
+                <input id="editLocInput-${idx}" type="text" value="${escapeGuideHtml(curLbl)}" onkeydown="if(event.key==='Enter'){event.preventDefault();saveEditedLocation(${idx});}" class="flex-1 min-w-0 theme-card border border-amber-400/60 rounded-lg px-2.5 py-1.5 text-xs font-bold" />
+                <button type="button" onclick="saveEditedLocation(${idx})" class="px-2.5 py-1.5 rounded-lg bg-emerald-500 text-stone-950 font-black text-[11px] cursor-pointer">💾 ${isEn ? 'Save' : 'محفوظ'}</button>
+                <button type="button" onclick="_editingLocationIdx=null;renderLocationsList();" class="px-2 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-[11px] cursor-pointer">✕</button>
+              </div>
+            </div>`;
+        }
+        return `
+          <div class="theme-card-alt p-2.5 rounded-xl border text-xs flex items-center justify-between gap-2">
+            <div class="min-w-0 flex-1">
+              <span class="font-bold flex items-center gap-1.5 truncate"><span>📍</span><span class="truncate">${escapeGuideHtml(curLbl)}</span></span>
+              ${plantCnt > 0 ? `<span class="text-[10px] text-emerald-300 font-latin-num ml-5">${plantCnt} ${isEn ? (plantCnt === 1 ? 'plant' : 'plants') : 'پودے'}</span>` : ''}
+            </div>
+            <div class="flex items-center gap-1 shrink-0">
+              <button type="button" onclick="startEditLocation(${idx})" class="px-2 py-1 rounded-lg theme-card border text-[11px] font-bold cursor-pointer" title="${isEn ? 'Edit Location' : 'ترمیم کریں'}">✏️ ${isEn ? 'Edit' : 'ترمیم'}</button>
+              <button type="button" onclick="promptDeleteLocation(${idx})" class="px-2 py-1 rounded-lg bg-red-600/80 hover:bg-red-700 text-white text-[11px] font-bold cursor-pointer" title="${isEn ? 'Delete Location' : 'حذف کریں'}">🗑️ ${isEn ? 'Delete' : 'حذف'}</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+    function startEditLocation(idx) {
+      _editingLocationIdx = idx;
+      renderLocationsList();
+      setTimeout(() => document.getElementById('editLocInput-' + idx)?.focus(), 30);
+    }
+    function saveEditedLocation(idx) {
+      const isEn = gState.lang === 'en';
+      const loc = gState.locations[idx];
+      if (!loc) return;
+      const inp = document.getElementById('editLocInput-' + idx);
+      const raw = (inp?.value || '').trim();
+      if (!raw) return;
+      const parsed = splitBilingualGeminiText(raw);
+      const newEn = parsed.en || translateCustomTerm(raw, 'en');
+      const newUr = parsed.ur || translateCustomTerm(raw, 'ur');
+      const dup = gState.locations.some((l, i) => i !== idx && ((l.en || '').toLowerCase() === newEn.toLowerCase() || l.ur === newUr));
+      if (dup) {
+        notify(isEn ? 'Another location with this name already exists!' : 'اس نام کی لوکیشن پہلے سے موجود ہے!', '⚠️');
+        return;
+      }
+      const oldEn = loc.en || '';
+      const oldUr = loc.ur || '';
+      loc.en = newEn;
+      loc.ur = newUr;
+      _editingLocationIdx = null;
+      const matchingPlants = (gState.plants || []).filter(p =>
+        (oldEn && (p.locationEn || '').toLowerCase() === oldEn.toLowerCase()) ||
+        (oldUr && p.locationUr === oldUr)
+      );
+      const finishLocSave = (cascadedCount = 0) => {
+        persist();
+        renderLocationsList();
+        populateLocationDropdowns();
+        renderPlantsList();
+        notify(
+          isEn
+            ? `Updated location to "${newEn}"${cascadedCount > 0 ? ` (+ ${cascadedCount} plant cards updated)` : ''}!`
+            : `لوکیشن اپڈیٹ ہو گئی: "${newUr}"${cascadedCount > 0 ? ` (${cascadedCount} پودوں پر بھی اپڈیٹ ہو گئی)` : ''}!`,
+          '📍'
+        );
+      };
+      if (matchingPlants.length > 0 && (oldEn.toLowerCase() !== newEn.toLowerCase() || oldUr !== newUr)) {
+        askUserConfirmation({
+          titleEn: 'Update Plants in This Location?',
+          titleUr: 'پودوں پر بھی نئی لوکیشن اپڈیٹ کریں؟',
+          msgEn: `<strong>${matchingPlants.length}</strong> plant(s) currently use <strong>${escapeGuideHtml(oldEn || oldUr)}</strong>. Cascade-update them to <strong>${escapeGuideHtml(newEn)}</strong> as well?`,
+          msgUr: `اس وقت <strong>${matchingPlants.length}</strong> پودے «<strong>${escapeGuideHtml(oldUr || oldEn)}</strong>» پر درج ہیں۔ کیا ان سب پر بھی نئی لوکیشن «<strong>${escapeGuideHtml(newUr)}</strong>» اپڈیٹ کر دی جائے؟`,
+          confirmEn: 'Yes, Update Plants',
+          confirmUr: 'جی ہاں، پودے اپڈیٹ کریں',
+          cancelEn: 'Only Rename List Entry',
+          cancelUr: 'صرف فہرست میں بدلیں',
+          onConfirm: () => {
+            matchingPlants.forEach(p => { p.locationEn = newEn; p.locationUr = newUr; });
+            finishLocSave(matchingPlants.length);
+          },
+          onCancel: () => finishLocSave(0)
+        });
+      } else {
+        finishLocSave(0);
+      }
     }
     function addNewLocationFromManager() {
       const isEn = gState.lang === 'en';
       const input = document.getElementById('newLocInput');
       const val = (input?.value || '').trim();
       if (!val) return;
-      const urVal = translateCustomTerm(val, 'ur');
-      const enVal = translateCustomTerm(val, 'en');
+      const parsed = splitBilingualGeminiText(val);
+      const urVal = parsed.ur || translateCustomTerm(val, 'ur');
+      const enVal = parsed.en || translateCustomTerm(val, 'en');
+      const existing = (gState.locations || []).find(l => (l.en || '').toLowerCase() === enVal.toLowerCase() || l.ur === urVal);
+      if (existing) {
+        input.value = '';
+        notify(isEn ? `Location "${existing.en}" already exists!` : `لوکیشن "${existing.ur}" پہلے سے موجود ہے!`, 'ℹ️');
+        return;
+      }
       gState.locations.unshift({ id: 'loc-' + Date.now(), ur: urVal, en: enVal });
       persist();
       renderLocationsList();
@@ -10107,8 +10923,10 @@ Return ONLY a single valid JSON object (no markdown, no extra text):
     function deleteLocation(idx) {
       const isEn = gState.lang === 'en';
       gState.locations.splice(idx, 1);
+      _editingLocationIdx = null;
       persist();
       renderLocationsList();
+      populateLocationDropdowns();
       renderPlantsList();
       notify(isEn ? 'Location removed.' : 'لوکیشن حذف کر دی گئی۔', '🗑️');
     }
@@ -11607,6 +12425,12 @@ Return ONLY valid JSON:
         );
       }
 
+      (gState.customCareSupplies || []).filter(cs => cs && cs.typeKey === typeKey).forEach(cs => {
+        const u = (cs.ur || cs.en || '').replace(/\|/g, '-');
+        const e = (cs.en || cs.ur || '').replace(/\|/g, '-');
+        opts.unshift({ key: 'customsup:' + cs.id, val: `${u}|${e}`, label: `✨ ${isEn ? e : u}` });
+      });
+
       sel.innerHTML = opts.map(o => `<option value="${o.val.replace(/"/g, '&quot;')}" data-key="${o.key || ''}">${o.label}</option>`).join('');
       if (preselectKey) {
         const idx = opts.findIndex(o => o.key === preselectKey);
@@ -12413,10 +13237,10 @@ Return ONLY valid JSON:
       delete parsed.githubToken;
 
       if (modeSel === 'merge') {
-        // SAFE MERGE: Keep all existing plants/locations/stock/recipes and add any new ones from backup!
+        // SAFE MERGE: Keep all existing plants/locations/customPots/stock/recipes and add any new ones from backup!
         const makePlantCompositeKey = (p) => [
           (p.nameEn || p.nameUr || '').trim().toLowerCase(),
-          (p.potSize || p.potEn || p.potUr || p.pot || '').trim().toLowerCase(),
+          (p.potSizeEn || p.potSizeUr || p.potSize || p.potEn || p.potUr || p.pot || '').trim().toLowerCase(),
           (p.locationEn || p.locationUr || '').trim().toLowerCase()
         ].join('|');
         const existingPlantNames = new Set((gState.plants || []).map(makePlantCompositeKey));
@@ -12435,6 +13259,26 @@ Return ONLY valid JSON:
             existingLocs.add(k);
           }
         });
+        if (!Array.isArray(gState.customPots)) gState.customPots = [];
+        const existingPots = new Set(gState.customPots.map(cp => (cp.en || cp.ur || '').toLowerCase()));
+        (parsed.customPots || []).forEach(bp => {
+          if (!bp) return;
+          const k = (bp.en || bp.ur || '').toLowerCase();
+          if (k && !existingPots.has(k)) {
+            gState.customPots.push(bp);
+            existingPots.add(k);
+          }
+        });
+        if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
+        const existingSups = new Set(gState.customCareSupplies.map(cs => `${cs.typeKey || ''}|${(cs.en || cs.ur || '').toLowerCase()}`));
+        (parsed.customCareSupplies || []).forEach(bs => {
+          if (!bs) return;
+          const k = `${bs.typeKey || ''}|${(bs.en || bs.ur || '').toLowerCase()}`;
+          if (k && !existingSups.has(k)) {
+            gState.customCareSupplies.push(bs);
+            existingSups.add(k);
+          }
+        });
         (parsed.stock || []).forEach(bs => gState.stock.push(bs));
         const existingRecs = new Set((gState.recipes || []).map(r => (r.titleEn || r.titleUr || '').toLowerCase()));
         (parsed.recipes || []).forEach(br => {
@@ -12444,18 +13288,21 @@ Return ONLY valid JSON:
             existingRecs.add(k);
           }
         });
+        gState.version = 39;
       } else {
-        // EXACT RESTORE: Cleanly replace plants, locations, stock & recipes with the backup file (no re-merging old deleted items!)
+        // EXACT RESTORE: Cleanly replace plants, locations, customPots, stock & recipes with the backup file (no re-merging old deleted items!)
         gState = {
           ...DEFAULT_STATE,
           ...parsed,
           plants: Array.isArray(parsed.plants) ? parsed.plants : [],
           locations: Array.isArray(parsed.locations) ? parsed.locations : DEFAULT_STATE.locations,
+          customPots: Array.isArray(parsed.customPots) ? parsed.customPots : [],
+          customCareSupplies: Array.isArray(parsed.customCareSupplies) ? parsed.customCareSupplies : [],
           stock: Array.isArray(parsed.stock) ? parsed.stock : DEFAULT_STATE.stock,
           recipes: Array.isArray(parsed.recipes) ? parsed.recipes : DEFAULT_STATE.recipes,
           aiApiKey: keepKey || parsed.aiApiKey || '',
           lang: keepLang,
-          version: 38,
+          version: 39,
           _upgradedFullFertCatalogV30: true
         };
       }
@@ -12466,7 +13313,7 @@ Return ONLY valid JSON:
       }
       deduplicateStockInventory();
       persist();
-      setPalette(gState.palette || 'emerald');
+      applyThemeScheme(gState.theme, false);
       setLanguage(keepLang);
       renderBackupSnapshotsList();
       notify(
@@ -13228,6 +14075,30 @@ Return ONLY valid JSON:
           }
         }
       });
+
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
+      // Harvest any non-standard custom pot sizes already present on existing plants so legacy custom pots appear in Pot Manager & dropdowns
+      if (typeof isBuiltInDefaultPot === 'function') {
+        gState.plants.forEach(p => {
+          const pEn = (p.potSizeEn || '').trim();
+          const pUr = (p.potSizeUr || '').trim();
+          if (!pEn && !pUr) return;
+          if (isBuiltInDefaultPot(pUr, pEn)) return;
+          const dup = gState.customPots.some(cp =>
+            (pEn && (cp.en || '').toLowerCase() === pEn.toLowerCase()) ||
+            (pUr && cp.ur === pUr)
+          );
+          if (!dup) {
+            gState.customPots.push({
+              id: 'pot-auto-' + gState.customPots.length + '-' + Date.now(),
+              ur: pUr || translateCustomTerm(pEn, 'ur'),
+              en: pEn || translateCustomTerm(pUr, 'en')
+            });
+            changed = true;
+          }
+        });
+      }
 
       // Strip redundant 100KB base64 images & built-in/duplicate keys from gState.learnedPlants
       if (gState.learnedPlants && typeof gState.learnedPlants === 'object') {
@@ -14359,7 +15230,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       return String(str || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     }
 
     function formatDetailedGuideHtml(rawText) {
@@ -14819,19 +15691,775 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       inp.dataset.userEdited = '1';
     }
 
-    function handlePotSizeSelectChange(val) {
-      const customInp = document.getElementById('formCustomPotSizeInput');
-      if (!customInp) return;
-      if (val === 'custom') {
-        customInp.classList.remove('hidden');
-        customInp.focus();
+    // =========================================================================
+    // FULL CRUD CUSTOM POT MANAGER (gState.customPots — Create, Read, Update, Delete)
+    // =========================================================================
+    const DEFAULT_POT_OPTIONS = [
+      { ur: '12 انچ مٹی کا گملا', en: '12-inch Clay Pot', lblUr: '12" مٹی کا گملا (12" Pot)', lblEn: '12" Clay Pot (Standard)' },
+      { ur: '8 انچ گملا', en: '8-inch Pot', lblUr: '8" چھوٹا گملا (8" Pot)', lblEn: '8" Small Pot' },
+      { ur: '10 انچ گملا', en: '10-inch Pot', lblUr: '10" درمیانہ گملا (10" Pot)', lblEn: '10" Medium Pot' },
+      { ur: '14 انچ بڑا گملا', en: '14-inch Large Pot', lblUr: '14" بڑا گملا (14" Pot)', lblEn: '14" Large Pot' },
+      { ur: '18 انچ گملا', en: '18-inch Jumbo Pot', lblUr: '18" جمبو گملا (18" Pot)', lblEn: '18" Jumbo Pot' },
+      { ur: '24 انچ ڈرم / کیاری', en: '24-inch Drum / Planter', lblUr: '24" ڈرم / کنٹینر', lblEn: '24" Drum / Planter' },
+      { ur: 'زمین / کیاری میں لگا ہوا', en: 'Planted in Ground Bed', lblUr: 'زمین / کیاری (Ground)', lblEn: 'Planted in Ground Bed' }
+    ];
+
+    function isBuiltInDefaultPot(urStr, enStr) {
+      const u = String(urStr || '').trim();
+      const e = String(enStr || '').trim().toLowerCase();
+      return DEFAULT_POT_OPTIONS.some(d => (u && d.ur === u) || (e && d.en.toLowerCase() === e));
+    }
+
+    function normalizePotBilingual(rawInput) {
+      const cleaned = String(rawInput || '').replace(/\|/g, '-').trim();
+      if (!cleaned) return null;
+      const parsed = splitBilingualGeminiText(cleaned);
+      const en = (parsed.en || translateCustomTerm(cleaned, 'en') || cleaned).replace(/\|/g, '-').trim();
+      const ur = (parsed.ur || translateCustomTerm(cleaned, 'ur') || cleaned).replace(/\|/g, '-').trim();
+      return { ur: ur || en, en: en || ur };
+    }
+
+    function addOrGetCustomPot(rawInput, silent = false) {
+      const isEn = gState.lang === 'en';
+      const norm = normalizePotBilingual(rawInput);
+      if (!norm) return null;
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+
+      const builtIn = DEFAULT_POT_OPTIONS.find(d => d.en.toLowerCase() === norm.en.toLowerCase() || d.ur === norm.ur);
+      if (builtIn) {
+        return { id: 'builtin', ur: builtIn.ur, en: builtIn.en, isBuiltIn: true };
+      }
+
+      let existing = gState.customPots.find(cp =>
+        (cp.en || '').toLowerCase() === norm.en.toLowerCase() || cp.ur === norm.ur
+      );
+      if (!existing) {
+        existing = {
+          id: 'pot-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+          ur: norm.ur,
+          en: norm.en
+        };
+        gState.customPots.unshift(existing);
+        persist();
+        if (!silent) {
+          notify(isEn ? `🪴 Saved custom pot: ${existing.en}` : `🪴 کسٹم گملا محفوظ ہو گیا: ${existing.ur}`, '🪴');
+        }
+      }
+      populatePotSizeDropdown(`${existing.ur}|${existing.en}`);
+      return existing;
+    }
+
+    function ensurePotOptionRegistered(urStr, enStr) {
+      const u = String(urStr || '').replace(/\|/g, '-').trim();
+      const e = String(enStr || '').replace(/\|/g, '-').trim();
+      if (!u && !e) return `${DEFAULT_POT_OPTIONS[0].ur}|${DEFAULT_POT_OPTIONS[0].en}`;
+      const builtIn = DEFAULT_POT_OPTIONS.find(d => (e && d.en.toLowerCase() === e.toLowerCase()) || (u && d.ur === u));
+      if (builtIn) return `${builtIn.ur}|${builtIn.en}`;
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      let existing = gState.customPots.find(cp =>
+        (e && (cp.en || '').toLowerCase() === e.toLowerCase()) || (u && cp.ur === u)
+      );
+      if (!existing) {
+        existing = {
+          id: 'pot-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+          ur: u || translateCustomTerm(e, 'ur'),
+          en: e || translateCustomTerm(u, 'en')
+        };
+        gState.customPots.unshift(existing);
+        persist();
+      }
+      return `${existing.ur}|${existing.en}`;
+    }
+
+    function populatePotSizeDropdown(selectedPipeVal = null) {
+      const sel = document.getElementById('formPotSizeSelect');
+      if (!sel) return;
+      const isEn = gState.lang === 'en';
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      const prevVal = selectedPipeVal || sel.value || `${DEFAULT_POT_OPTIONS[0].ur}|${DEFAULT_POT_OPTIONS[0].en}`;
+
+      let html = '';
+      if (gState.customPots.length > 0) {
+        html += `<optgroup label="${isEn ? '⭐ Your Custom Pots' : '⭐ آپ کے محفوظ کسٹم گملے'}">`;
+        gState.customPots.forEach(cp => {
+          const val = `${(cp.ur || cp.en).replace(/\|/g, '-')}|${(cp.en || cp.ur).replace(/\|/g, '-')}`;
+          const lbl = isEn ? (cp.en || cp.ur) : (cp.ur || cp.en);
+          html += `<option value="${escapeGuideHtml(val)}">🪴 ${escapeGuideHtml(lbl)}</option>`;
+        });
+        html += `</optgroup>`;
+      }
+      html += `<optgroup label="${isEn ? '🪴 Standard Pot Sizes' : '🪴 اسٹینڈرڈ گملے'}">`;
+      DEFAULT_POT_OPTIONS.forEach(d => {
+        const val = `${d.ur}|${d.en}`;
+        html += `<option value="${escapeGuideHtml(val)}">${escapeGuideHtml(isEn ? d.lblEn : d.lblUr)}</option>`;
+      });
+      html += `</optgroup>`;
+      html += `<option value="custom">${isEn ? '➕ + Custom Size...' : '➕ + کسٹم سائز...'}</option>`;
+
+      sel.innerHTML = html;
+      const matchingOpt = Array.from(sel.options || []).find(o => o.value === prevVal);
+      if (matchingOpt) {
+        sel.value = prevVal;
+      } else if (prevVal && prevVal !== 'custom' && prevVal.includes('|')) {
+        const [pUr, pEn] = prevVal.split('|');
+        const matchLoose = Array.from(sel.options || []).find(o => {
+          const [ou, oe] = (o.value || '').split('|');
+          return (pEn && oe && oe.toLowerCase() === pEn.toLowerCase()) || (pUr && ou === pUr);
+        });
+        sel.value = matchLoose ? matchLoose.value : `${DEFAULT_POT_OPTIONS[0].ur}|${DEFAULT_POT_OPTIONS[0].en}`;
       } else {
-        customInp.classList.add('hidden');
+        sel.value = `${DEFAULT_POT_OPTIONS[0].ur}|${DEFAULT_POT_OPTIONS[0].en}`;
       }
     }
 
+    function handlePotSizeSelectChange(val) {
+      const customBox = document.getElementById('formCustomPotSizeBox');
+      const customInp = document.getElementById('formCustomPotSizeInput');
+      if (val === 'custom') {
+        if (customBox) customBox.classList.remove('hidden');
+        if (customInp) {
+          customInp.classList.remove('hidden');
+          customInp.focus();
+        }
+      } else {
+        if (customBox) customBox.classList.add('hidden');
+        if (customInp) customInp.value = '';
+      }
+    }
+
+    function saveInlineCustomPotFromForm() {
+      const isEn = gState.lang === 'en';
+      const customInp = document.getElementById('formCustomPotSizeInput');
+      const customBox = document.getElementById('formCustomPotSizeBox');
+      const raw = (customInp?.value || '').trim();
+      if (!raw) {
+        notify(isEn ? 'Please enter a custom pot size first!' : 'پہلے کسٹم گملے کا سائز لکھیں!', '⚠️');
+        if (customInp) customInp.focus();
+        return null;
+      }
+      const saved = addOrGetCustomPot(raw, false);
+      if (saved) {
+        const pipeVal = `${saved.ur}|${saved.en}`;
+        populatePotSizeDropdown(pipeVal);
+        const sel = document.getElementById('formPotSizeSelect');
+        if (sel) sel.value = pipeVal;
+        if (customInp) customInp.value = '';
+        if (customBox) customBox.classList.add('hidden');
+      }
+      return saved;
+    }
+
+    let _editingCustomPotId = null;
+
+    function openPotManagerModal() {
+      _editingCustomPotId = null;
+      renderCustomPotsManagerList();
+      const modal = document.getElementById('potManagerModal');
+      if (modal) modal.classList.remove('hidden');
+      if (typeof pushGulzarModalState === 'function') pushGulzarModalState('potManagerModal');
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
+    }
+
+    function closePotManagerModal() {
+      _editingCustomPotId = null;
+      const modal = document.getElementById('potManagerModal');
+      if (modal) modal.classList.add('hidden');
+      populatePotSizeDropdown();
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
+    }
+
+    function renderCustomPotsManagerList() {
+      const isEn = gState.lang === 'en';
+      const box = document.getElementById('customPotsListContainer');
+      const badge = document.getElementById('potMgrCountBadge');
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      if (badge) {
+        badge.textContent = isEn
+          ? `${gState.customPots.length} Custom Pot${gState.customPots.length === 1 ? '' : 's'}`
+          : `${gState.customPots.length} کسٹم گملے`;
+      }
+      if (!box) return;
+
+      if (gState.customPots.length === 0) {
+        box.innerHTML = `
+          <div class="theme-card-alt rounded-2xl p-4 border text-center space-y-1 text-xs">
+            <div class="text-xl">🪴</div>
+            <p class="font-bold">${isEn ? 'No custom pots saved yet.' : 'ابھی کوئی کسٹم گملا محفوظ نہیں ہے۔'}</p>
+            <p class="text-[11px] theme-muted">${isEn ? 'Add custom pot sizes above (e.g. 16" Clay Pot #1, Hanging Basket, Grow Bag 15x15).' : 'اوپر نیا کسٹم گملا شامل کریں (مثلاً 16 انچ مٹی کا گملا #1، ہینگنگ باسکٹ، گرو بیگ)۔'}</p>
+          </div>`;
+        return;
+      }
+
+      box.innerHTML = gState.customPots.map(cp => {
+        const curLbl = isEn ? (cp.en || cp.ur) : (cp.ur || cp.en);
+        const subLbl = isEn ? cp.ur : cp.en;
+        const usedByCount = (gState.plants || []).filter(p =>
+          ((cp.en && (p.potSizeEn || '').toLowerCase() === cp.en.toLowerCase()) ||
+           (cp.ur && p.potSizeUr === cp.ur))
+        ).length;
+
+        if (_editingCustomPotId === cp.id) {
+          return `
+            <div class="theme-card-alt p-2.5 rounded-xl border-2 border-amber-400 text-xs space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5 pot-mgr-item-actions">
+                <input id="editCustomPotInput-${cp.id}" type="text" value="${escapeGuideHtml(curLbl)}" onkeydown="if(event.key==='Enter'){event.preventDefault();saveEditedCustomPot('${cp.id}');}" class="flex-1 min-w-[9rem] theme-card border border-amber-400/60 rounded-lg px-2.5 py-1.5 text-xs font-bold" />
+                <button type="button" onclick="saveEditedCustomPot('${cp.id}')" class="px-2.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-stone-950 font-black text-[11px] cursor-pointer">💾 ${isEn ? 'Save' : 'محفوظ'}</button>
+                <button type="button" onclick="_editingCustomPotId=null;renderCustomPotsManagerList();" class="px-2 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-[11px] cursor-pointer">✕</button>
+              </div>
+              ${usedByCount > 0 ? `<div class="text-[10px] text-amber-300">ℹ️ ${isEn ? `Used on ${usedByCount} plant card(s) — saving will offer automatic cascade update.` : `یہ گملا ${usedByCount} پودوں پر درج ہے — محفوظ کرنے پر خودکار اپڈیٹ کا پوچھا جائے گا۔`}</div>` : ''}
+            </div>`;
+        }
+
+        return `
+          <div class="theme-card-alt p-2.5 rounded-xl border text-xs flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5">
+            <div class="min-w-0 flex-1" style="flex-basis:9rem;">
+              <div class="font-extrabold flex items-start gap-1.5 leading-snug">
+                <span class="shrink-0">🪴</span>
+                <span class="min-w-0" style="overflow-wrap:anywhere;">${escapeGuideHtml(curLbl)}</span>
+              </div>
+              <div class="text-[10px] theme-muted flex flex-wrap items-center gap-1.5 mt-1">
+                ${subLbl && subLbl !== curLbl ? `<span class="min-w-0 truncate" style="max-width:100%;">${escapeGuideHtml(subLbl)}</span>` : ''}
+                <span class="theme-badge px-1.5 py-0.5 rounded-md font-bold font-latin-num whitespace-nowrap">${usedByCount} ${isEn ? (usedByCount === 1 ? 'plant' : 'plants') : 'پودے'}</span>
+              </div>
+            </div>
+            <div class="pot-mgr-item-actions flex items-center gap-1 shrink-0" style="margin-inline-start:auto;">
+              <button type="button" onclick="startEditCustomPot('${cp.id}')" class="px-2 py-1 rounded-lg theme-card border text-[11px] font-bold cursor-pointer hover:border-amber-400" title="${isEn ? 'Edit Pot Size' : 'گملا ایڈٹ کریں'}">✏️ ${isEn ? 'Edit' : 'ترمیم'}</button>
+              <button type="button" onclick="promptDeleteCustomPot('${cp.id}')" class="px-2 py-1 rounded-lg bg-red-600/80 hover:bg-red-700 text-white text-[11px] font-bold cursor-pointer" title="${isEn ? 'Delete Pot' : 'گملا حذف کریں'}">🗑️ ${isEn ? 'Delete' : 'حذف'}</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function addNewCustomPotFromManager() {
+      const isEn = gState.lang === 'en';
+      const inp = document.getElementById('newPotMgrInput');
+      const raw = (inp?.value || '').trim();
+      if (!raw) return;
+      const norm = normalizePotBilingual(raw);
+      if (!norm) return;
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+
+      if (isBuiltInDefaultPot(norm.ur, norm.en)) {
+        if (inp) inp.value = '';
+        notify(isEn ? `"${norm.en}" is already in the Standard Pots list!` : `"${norm.ur}" پہلے سے اسٹینڈرڈ گملوں میں موجود ہے!`, 'ℹ️');
+        return;
+      }
+      const existing = gState.customPots.find(cp => (cp.en || '').toLowerCase() === norm.en.toLowerCase() || cp.ur === norm.ur);
+      if (existing) {
+        if (inp) inp.value = '';
+        populatePotSizeDropdown(`${existing.ur}|${existing.en}`);
+        notify(isEn ? `Custom pot "${existing.en}" already exists!` : `کسٹم گملا "${existing.ur}" پہلے سے محفوظ ہے!`, 'ℹ️');
+        return;
+      }
+      const created = {
+        id: 'pot-' + Date.now() + '-' + Math.random().toString(36).slice(2, 5),
+        ur: norm.ur,
+        en: norm.en
+      };
+      gState.customPots.unshift(created);
+      persist();
+      if (inp) inp.value = '';
+      renderCustomPotsManagerList();
+      populatePotSizeDropdown(`${created.ur}|${created.en}`);
+      notify(isEn ? `Saved custom pot: ${created.en}` : `نیا کسٹم گملا محفوظ ہو گیا: ${created.ur}`, '🪴');
+    }
+
+    function startEditCustomPot(potId) {
+      _editingCustomPotId = potId;
+      renderCustomPotsManagerList();
+      setTimeout(() => document.getElementById('editCustomPotInput-' + potId)?.focus(), 30);
+    }
+
+    function saveEditedCustomPot(potId) {
+      const isEn = gState.lang === 'en';
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      const potObj = gState.customPots.find(cp => cp.id === potId);
+      if (!potObj) return;
+      const inp = document.getElementById('editCustomPotInput-' + potId);
+      const raw = (inp?.value || '').trim();
+      if (!raw) return;
+
+      const norm = normalizePotBilingual(raw);
+      if (!norm) return;
+
+      const dup = gState.customPots.some(cp => cp.id !== potId && ((cp.en || '').toLowerCase() === norm.en.toLowerCase() || cp.ur === norm.ur));
+      if (dup) {
+        notify(isEn ? 'Another custom pot with this name already exists!' : 'اس نام کا کسٹم گملا پہلے سے موجود ہے!', '⚠️');
+        return;
+      }
+
+      const oldEn = potObj.en || '';
+      const oldUr = potObj.ur || '';
+      potObj.en = norm.en;
+      potObj.ur = norm.ur;
+      _editingCustomPotId = null;
+
+      const matchingPlants = (gState.plants || []).filter(p =>
+        (oldEn && (p.potSizeEn || '').toLowerCase() === oldEn.toLowerCase()) ||
+        (oldUr && p.potSizeUr === oldUr) ||
+        (oldEn && (p.potSize || '').toLowerCase() === oldEn.toLowerCase())
+      );
+
+      const finalizePotEdit = (cascadedCount = 0) => {
+        persist();
+        renderCustomPotsManagerList();
+        populatePotSizeDropdown(`${potObj.ur}|${potObj.en}`);
+        renderPlantsList();
+        notify(
+          isEn
+            ? `Updated pot to "${potObj.en}"${cascadedCount > 0 ? ` (+ ${cascadedCount} plant cards updated)` : ''}!`
+            : `کسٹم گملا اپڈیٹ ہو گیا: "${potObj.ur}"${cascadedCount > 0 ? ` (${cascadedCount} پودوں پر بھی اپڈیٹ ہو گیا)` : ''}!`,
+          '🪴'
+        );
+      };
+
+      if (matchingPlants.length > 0 && (oldEn.toLowerCase() !== norm.en.toLowerCase() || oldUr !== norm.ur)) {
+        askUserConfirmation({
+          titleEn: 'Cascade-Update Existing Plant Cards?',
+          titleUr: 'موجودہ پودوں پر بھی گملے کا نیا سائز اپڈیٹ کریں؟',
+          msgEn: `<strong>${matchingPlants.length}</strong> plant card(s) currently have pot size <strong>${escapeGuideHtml(oldEn || oldUr)}</strong>. Do you want to update them to <strong>${escapeGuideHtml(potObj.en)}</strong> automatically?`,
+          msgUr: `آپ کے باغ کے <strong>${matchingPlants.length}</strong> پودوں پر پرانا گملا «<strong>${escapeGuideHtml(oldUr || oldEn)}</strong>» درج ہے۔ کیا ان پودوں پر بھی نیا گملا «<strong>${escapeGuideHtml(potObj.ur)}</strong>» خودکار اپڈیٹ کر دیا جائے؟`,
+          confirmEn: 'Yes, Cascade Update Plants',
+          confirmUr: 'جی ہاں، پودوں پر اپڈیٹ کریں',
+          cancelEn: 'Only Update Pot List',
+          cancelUr: 'صرف لسٹ اپڈیٹ کریں',
+          onConfirm: () => {
+            matchingPlants.forEach(p => {
+              p.potSizeEn = potObj.en;
+              p.potSizeUr = potObj.ur;
+              if (p.potSize) p.potSize = potObj.en;
+            });
+            finalizePotEdit(matchingPlants.length);
+          },
+          onCancel: () => finalizePotEdit(0)
+        });
+      } else {
+        finalizePotEdit(0);
+      }
+    }
+
+    function promptDeleteCustomPot(potId) {
+      const isEn = gState.lang === 'en';
+      const potObj = (gState.customPots || []).find(cp => cp.id === potId);
+      if (!potObj) return;
+      const potLabel = escapeGuideHtml(isEn ? (potObj.en || potObj.ur) : (potObj.ur || potObj.en));
+      askUserConfirmation({
+        titleEn: 'Confirm Custom Pot Removal',
+        titleUr: 'کسٹم گملا حذف کرنے کی تصدیق',
+        msgEn: `Remove custom pot <strong>${potLabel}</strong> from saved pot options? Existing plants using this pot will keep their current pot label safely.`,
+        msgUr: `کیا آپ واقعی کسٹم گملا «<strong>${potLabel}</strong>» کو فہرست سے حذف کرنا چاہتے ہیں؟ جن پودوں پر یہ گملا پہلے سے درج ہے وہ محفوظ رہیں گے۔`,
+        onConfirm: () => deleteCustomPot(potId)
+      });
+    }
+
+    function deleteCustomPot(potId) {
+      const isEn = gState.lang === 'en';
+      if (!Array.isArray(gState.customPots)) gState.customPots = [];
+      gState.customPots = gState.customPots.filter(cp => cp.id !== potId);
+      _editingCustomPotId = null;
+      persist();
+      renderCustomPotsManagerList();
+      populatePotSizeDropdown();
+      notify(isEn ? 'Custom pot removed cleanly.' : 'کسٹم گملا فہرست سے حذف کر دیا گیا۔', '🗑️');
+    }
+
     // =========================================================================
-    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v38.0)
+    // ONE-CLICK GARDEN REPORTS & ANALYTICS DASHBOARD (v39.0)
+    // =========================================================================
+    let _gardenReportPeriod = 'all';
+
+    function openGardenReportsModal(initialPeriod = null) {
+      if (initialPeriod) _gardenReportPeriod = initialPeriod;
+      renderGardenReportsContent();
+      const modal = document.getElementById('gardenReportsModal');
+      if (modal) modal.classList.remove('hidden');
+      resetModalScrollToTop('gardenReportsModal');
+      if (typeof pushGulzarModalState === 'function') pushGulzarModalState('gardenReportsModal');
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
+    }
+
+    function closeGardenReportsModal() {
+      const modal = document.getElementById('gardenReportsModal');
+      if (modal) modal.classList.add('hidden');
+      if (typeof updateFloatingNavButtons === 'function') updateFloatingNavButtons();
+    }
+
+    function setGardenReportPeriod(period) {
+      _gardenReportPeriod = period || 'all';
+      renderGardenReportsContent();
+    }
+
+    function computeGardenAnalyticsData(period = 'all') {
+      const isEn = gState.lang === 'en';
+      const plants = Array.isArray(gState.plants) ? gState.plants : [];
+      const todayIso = getLocalTodayISO();
+      const todayDate = new Date(todayIso + 'T12:00:00');
+      const curMonthIdx = todayDate.getMonth();
+      const monthTokensEn = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+      const monthTokensUr = ['جنوری', 'فروری', 'مارچ', 'اپریل', 'مئی', 'جون', 'جولائی', 'اگست', 'ستمبر', 'اکتوبر', 'نومبر', 'دسمبر'];
+      const curMonthEn = monthTokensEn[curMonthIdx];
+      const curMonthUr = monthTokensUr[curMonthIdx];
+
+      let waterDue = 0;
+      let tillDue = 0;
+      let feedDue = 0;
+      let sprayDue = 0;
+      let pruneDue = 0;
+      let healthyOnSchedule = 0;
+
+      const locGroupsMap = new Map();
+      const allActivityRows = [];
+
+      plants.forEach(p => {
+        const pDateInfo = formatPlantedDateDisplay(p.plantedDate || todayIso, isEn);
+        const ageDays = Math.max(0, pDateInfo.diffDays || 0);
+        const hasRealTill = Boolean(p.hasBeenTilled || p.lastTilledDate);
+        const hasRealFeed = Boolean(p.hasBeenFed || p.lastFedDate || (Array.isArray(p.feedHistory) && p.feedHistory.length > 0));
+        const hasRealSpray = Boolean(p.lastSprayedDate || (Array.isArray(p.sprayHistory) && p.sprayHistory.length > 0));
+
+        const effWater = Math.min(
+          p.lastWateredDate ? formatPlantedDateDisplay(p.lastWateredDate, isEn).diffDays : (p.daysSinceWater || 0),
+          ageDays
+        );
+        const effTill = p.lastTilledDate
+          ? formatPlantedDateDisplay(p.lastTilledDate, isEn).diffDays
+          : (hasRealTill ? (p.daysSinceHoeing || 0) : ageDays);
+        const effFeed = p.lastFedDate
+          ? formatPlantedDateDisplay(p.lastFedDate, isEn).diffDays
+          : (hasRealFeed ? (p.daysSinceFeed || 0) : ageDays);
+        const effSpray = p.lastSprayedDate
+          ? formatPlantedDateDisplay(p.lastSprayedDate, isEn).diffDays
+          : (hasRealSpray ? (p.daysSinceSpray || 0) : ageDays);
+
+        const wDue = effWater >= (p.waterDays || 3);
+        const tDue = effTill >= 14;
+        const fDue = effFeed >= 15;
+        const sDue = effSpray >= 15;
+        const prnTextEn = String(p.pruneEn || '').toLowerCase();
+        const prnTextUr = String(p.pruneUr || '');
+        const pDue = prnTextEn.includes(curMonthEn) || prnTextUr.includes(curMonthUr) || prnTextEn.includes('active');
+
+        if (wDue) waterDue++;
+        if (tDue) tillDue++;
+        if (fDue) feedDue++;
+        if (sDue) sprayDue++;
+        if (pDue) pruneDue++;
+        if (!wDue && !tDue && !fDue) healthyOnSchedule++;
+
+        const locEn = (p.locationEn || translateCustomTerm(p.locationUr, 'en') || 'Unassigned Area').trim();
+        const locUr = (p.locationUr || translateCustomTerm(p.locationEn, 'ur') || 'غیر متعین جگہ').trim();
+        const locKey = locEn.toLowerCase();
+        if (!locGroupsMap.has(locKey)) {
+          locGroupsMap.set(locKey, {
+            key: locKey,
+            locEn,
+            locUr,
+            plants: []
+          });
+        }
+        const potEn = p.potSizeEn || translateCustomTerm(p.potSizeUr || p.potSize || '12-inch Clay Pot', 'en');
+        const potUr = p.potSizeUr || translateCustomTerm(p.potSizeEn || p.potSize || '12 انچ مٹی کا گملا', 'ur');
+        locGroupsMap.get(locKey).plants.push({
+          id: p.id,
+          nameEn: p.nameEn || translateCustomTerm(p.nameUr, 'en'),
+          nameUr: p.nameUr || translateCustomTerm(p.nameEn, 'ur'),
+          potEn,
+          potUr,
+          ageText: pDateInfo.ageText || (isEn ? `${ageDays}d` : `${ageDays} دن`),
+          plantedDate: p.plantedDate || todayIso,
+          healthy: !wDue && !tDue && !fDue
+        });
+
+        const pNameEn = p.nameEn || translateCustomTerm(p.nameUr, 'en');
+        const pNameUr = p.nameUr || translateCustomTerm(p.nameEn, 'ur');
+        (Array.isArray(p.history) ? p.history : []).forEach(h => {
+          if (!h) return;
+          let dIso = h.dateIso ? parseFlexibleDateToISO(h.dateIso) : '';
+          if (!dIso) {
+            const rawD = String(h.dateEn || h.dateUr || '');
+            const isoM = rawD.match(/\d{4}-\d{2}-\d{2}/);
+            if (isoM) dIso = isoM[0];
+            else if (/today|آج/i.test(rawD)) dIso = todayIso;
+            else if (/yesterday|کل/i.test(rawD)) {
+              const yd = new Date(todayDate.getTime() - 86400000);
+              dIso = yd.toISOString().split('T')[0];
+            } else {
+              const daysAgoM = rawD.match(/(\d+)\s*(?:days?\s*ago|d\s*ago|دن\s*پہلے)/i);
+              if (daysAgoM) {
+                const ad = new Date(todayDate.getTime() - (parseInt(daysAgoM[1], 10) * 86400000));
+                dIso = ad.toISOString().split('T')[0];
+              }
+            }
+          }
+          let diffDays = 0;
+          if (dIso) {
+            const hd = new Date(dIso + 'T12:00:00');
+            if (!isNaN(hd.getTime())) {
+              diffDays = Math.max(0, Math.round((todayDate - hd) / 86400000));
+            }
+          } else {
+            diffDays = 999;
+          }
+          const maxWindow = period === 'week' ? 7 : (period === 'month' ? 30 : Infinity);
+          if (diffDays <= maxWindow) {
+            allActivityRows.push({
+              plantId: p.id,
+              plantEn: pNameEn,
+              plantUr: pNameUr,
+              locEn,
+              locUr,
+              typeKey: h.typeKey || 'care',
+              actionEn: h.actionEn || translateCustomTerm(h.actionUr || 'Care Logged', 'en'),
+              actionUr: h.actionUr || translateCustomTerm(h.actionEn || 'نگہداشت', 'ur'),
+              noteEn: h.noteEn || translateCustomTerm(h.noteUr || '', 'en'),
+              noteUr: h.noteUr || translateCustomTerm(h.noteEn || '', 'ur'),
+              methodEn: h.methodEn || (h.methodUr ? translateCustomTerm(h.methodUr, 'en') : ''),
+              methodUr: h.methodUr || (h.methodEn ? translateCustomTerm(h.methodEn, 'ur') : ''),
+              resultEn: h.resultEn || (h.resultUr ? translateCustomTerm(h.resultUr, 'en') : ''),
+              resultUr: h.resultUr || (h.resultEn ? translateCustomTerm(h.resultEn, 'ur') : ''),
+              dateIso: dIso || '',
+              dateDispEn: h.dateEn || dIso || 'Recorded',
+              dateDispUr: h.dateUr || dIso || 'درج شدہ',
+              diffDays
+            });
+          }
+        });
+      });
+
+      allActivityRows.sort((a, b) => {
+        if (a.dateIso && b.dateIso && a.dateIso !== b.dateIso) return b.dateIso.localeCompare(a.dateIso);
+        return a.diffDays - b.diffDays;
+      });
+
+      const locationGroups = Array.from(locGroupsMap.values()).sort((a, b) => b.plants.length - a.plants.length);
+
+      return {
+        totalPlants: plants.length,
+        waterDue,
+        tillDue,
+        feedDue,
+        sprayDue,
+        pruneDue,
+        healthyOnSchedule,
+        locationGroups,
+        activities: allActivityRows,
+        generatedDateIso: todayIso
+      };
+    }
+
+    function renderGardenReportsContent() {
+      const body = document.getElementById('gardenReportsBody');
+      if (!body) return;
+      const isEn = gState.lang === 'en';
+      const stats = computeGardenAnalyticsData(_gardenReportPeriod);
+
+      const summaryCards = [
+        { icon: '🌿', count: stats.totalPlants, lblEn: 'Total Plants', lblUr: 'کل پودے', cls: 'border-emerald-400/60 text-emerald-300' },
+        { icon: '✅', count: stats.healthyOnSchedule, lblEn: 'Healthy / On-Schedule', lblUr: 'صحت مند / شیڈول پر', cls: 'border-teal-400/60 text-teal-200' },
+        { icon: '💧', count: stats.waterDue, lblEn: 'Water Due Now', lblUr: 'پانی طلب', cls: stats.waterDue > 0 ? 'border-blue-400 text-blue-300' : 'theme-border theme-muted' },
+        { icon: '⛏️', count: stats.tillDue, lblEn: 'Hoeing Due (>14d)', lblUr: 'گوڈی طلب', cls: stats.tillDue > 0 ? 'border-amber-400 text-amber-300' : 'theme-border theme-muted' },
+        { icon: '🧪', count: stats.feedDue, lblEn: 'Feed Due (>15d)', lblUr: 'کھاد طلب', cls: stats.feedDue > 0 ? 'border-orange-400 text-orange-300' : 'theme-border theme-muted' },
+        { icon: '🐛', count: stats.sprayDue, lblEn: 'Spray Check (>15d)', lblUr: 'اسپرے توجہ', cls: stats.sprayDue > 0 ? 'border-rose-400 text-rose-300' : 'theme-border theme-muted' },
+        { icon: '✂️', count: stats.pruneDue, lblEn: 'Active Pruning Window', lblUr: 'کٹائی سیزن', cls: stats.pruneDue > 0 ? 'border-purple-400 text-purple-300' : 'theme-border theme-muted' }
+      ];
+
+      const periodBtns = [
+        { id: 'week', en: '📅 This Week (7d)', ur: '📅 اس ہفتے (7 دن)' },
+        { id: 'month', en: '🗓️ This Month (30d)', ur: '🗓️ اس مہینے (30 دن)' },
+        { id: 'all', en: '📚 All Time', ur: '📚 تمام ریکارڈ' }
+      ];
+
+      body.innerHTML = `
+        <!-- 1. Health & Care Summary Cards -->
+        <div class="space-y-2">
+          <h4 class="text-xs sm:text-sm font-extrabold text-amber-300 flex items-center justify-between">
+            <span>🩺 ${isEn ? '1. Garden Health & Care Summary' : '1. گارڈن ہیلتھ اور نگہداشت خلاصہ'}</span>
+            <span class="text-[11px] theme-muted font-latin-num">${stats.generatedDateIso}</span>
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            ${summaryCards.map((c, ci) => `
+              <div class="report-stat-card theme-card-alt rounded-2xl p-2.5 border ${c.cls} flex flex-col justify-between${ci === summaryCards.length - 1 ? ' col-span-2 sm:col-span-1' : ''}">
+                <div class="flex items-center justify-between">
+                  <span class="text-base">${c.icon}</span>
+                  <strong class="text-lg sm:text-xl font-black font-latin-num">${c.count}</strong>
+                </div>
+                <span class="text-[11px] font-bold mt-1 leading-tight">${isEn ? c.lblEn : c.lblUr}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 2. Location-Wise Plant Breakdown -->
+        <div class="space-y-2 pt-2 border-t theme-border">
+          <h4 class="text-xs sm:text-sm font-extrabold text-emerald-300 flex items-center justify-between">
+            <span>📍 ${isEn ? `2. Location-Wise Plant Breakdown (${stats.locationGroups.length} Areas)` : `2. لوکیشن کے لحاظ سے پودوں کی تفصیل (${stats.locationGroups.length} جگہیں)`}</span>
+            <span class="text-[11px] theme-muted font-latin-num">${stats.totalPlants} ${isEn ? 'Plants' : 'پودے'}</span>
+          </h4>
+          <div class="space-y-2 max-h-64 overflow-y-auto pr-1">
+            ${stats.locationGroups.length === 0 ? `
+              <div class="theme-card-alt rounded-2xl p-4 border text-center text-xs theme-muted">${isEn ? 'No plants in garden yet.' : 'ابھی باغ میں کوئی پودا شامل نہیں ہے۔'}</div>
+            ` : stats.locationGroups.map(lg => `
+              <div class="theme-card-alt rounded-2xl p-3 border space-y-1.5">
+                <div class="flex items-center justify-between gap-2 border-b theme-border pb-1">
+                  <strong class="text-xs sm:text-sm text-amber-300 min-w-0">📍 ${escapeGuideHtml(isEn ? lg.locEn : lg.locUr)}</strong>
+                  <span class="theme-badge px-2 py-0.5 rounded-full text-[10px] font-black font-latin-num">${lg.plants.length} ${isEn ? (lg.plants.length === 1 ? 'Plant' : 'Plants') : 'پودے'}</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-0.5">
+                  ${lg.plants.map(pl => `
+                    <div onclick="closeGardenReportsModal(); openPlantDetailModal('${pl.id}')" class="report-plant-row theme-card px-2.5 py-1.5 rounded-xl border text-[11px] cursor-pointer hover:border-emerald-400">
+                      <span class="report-plant-name font-bold" style="overflow-wrap:anywhere;">${pl.healthy ? '🟢' : '🟠'} ${escapeGuideHtml(isEn ? pl.nameEn : pl.nameUr)}</span>
+                      <span class="report-plant-meta theme-badge px-1.5 py-0.5 rounded-md text-[10px] font-latin-num">🪴 ${escapeGuideHtml(isEn ? pl.potEn : pl.potUr)} • ${escapeGuideHtml(pl.ageText)}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- 3. Filterable Care Activity Log Report -->
+        <div class="space-y-2 pt-2 border-t theme-border">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <h4 class="text-xs sm:text-sm font-extrabold text-amber-300">
+              📋 ${isEn ? `3. Care Activity Log Report (${stats.activities.length})` : `3. نگہداشت سرگرمیوں کی رپورٹ (${stats.activities.length})`}
+            </h4>
+            <div class="report-filter-bar w-full sm:w-auto">
+              ${periodBtns.map(pb => `
+                <button type="button" onclick="setGardenReportPeriod('${pb.id}')" class="px-1.5 py-1 rounded-xl text-[10px] sm:text-[11px] font-black cursor-pointer text-center leading-tight ${_gardenReportPeriod === pb.id ? 'bg-emerald-500 text-stone-950 shadow-xs' : 'theme-card-alt border'}">
+                  ${isEn ? pb.en : pb.ur}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+            ${stats.activities.length === 0 ? `
+              <div class="theme-card-alt rounded-2xl p-4 border text-center text-xs theme-muted">
+                ${isEn ? 'No care actions recorded in this time range.' : 'اس مدت کے دوران کوئی نگہداشت سرگرمی درج نہیں ملی۔'}
+              </div>
+            ` : stats.activities.map(act => `
+              <div class="theme-card-alt rounded-xl p-2.5 border text-xs space-y-1">
+                <div class="flex items-center justify-between gap-2 flex-wrap">
+                  <div class="font-extrabold text-emerald-300">
+                    🌱 ${escapeGuideHtml(isEn ? act.plantEn : act.plantUr)}
+                    <span class="font-bold" style="color:var(--text-main);"> — ${escapeGuideHtml(isEn ? act.actionEn : act.actionUr)}</span>
+                  </div>
+                  <span class="text-[10px] theme-badge px-2 py-0.5 rounded-md font-latin-num whitespace-nowrap">${escapeGuideHtml(isEn ? act.dateDispEn : act.dateDispUr)}</span>
+                </div>
+                ${(isEn ? act.noteEn : act.noteUr) ? `<div class="font-bold leading-relaxed" style="color:var(--text-main);">${escapeGuideHtml(isEn ? act.noteEn : act.noteUr)}</div>` : ''}
+                ${(isEn ? act.methodEn : act.methodUr) ? `<div class="text-[11px] theme-muted">🛠️ <strong>${isEn ? 'Method:' : 'طریقہ:'}</strong> ${escapeGuideHtml(isEn ? act.methodEn : act.methodUr)}</div>` : ''}
+                ${(isEn ? act.resultEn : act.resultUr) ? `<div class="text-[11px] text-amber-300 font-bold">📊 <strong>${isEn ? 'Result:' : 'رزلٹ:'}</strong> ${escapeGuideHtml(isEn ? act.resultEn : act.resultUr)}</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildGardenReportPlainText(period = _gardenReportPeriod) {
+      const isEn = gState.lang === 'en';
+      const stats = computeGardenAnalyticsData(period);
+      const periodNameEn = period === 'week' ? 'This Week (7 Days)' : (period === 'month' ? 'This Month (30 Days)' : 'All Time');
+      const periodNameUr = period === 'week' ? 'اس ہفتے (7 دن)' : (period === 'month' ? 'اس مہینے (30 دن)' : 'تمام ریکارڈ');
+      const lines = [];
+
+      if (isEn) {
+        lines.push(`🌹 GULZAR SMART GARDEN — ANALYTICS & CARE REPORT (${stats.generatedDateIso})`);
+        lines.push(`══════════════════════════════════════════`);
+        lines.push(`🩺 HEALTH & CARE SUMMARY:`);
+        lines.push(`• Total Plants: ${stats.totalPlants} | Healthy/On-Schedule: ${stats.healthyOnSchedule}`);
+        lines.push(`• Due Now — Water: ${stats.waterDue} | Hoeing: ${stats.tillDue} | Feed: ${stats.feedDue} | Spray: ${stats.sprayDue} | Pruning Window: ${stats.pruneDue}`);
+        lines.push(``);
+        lines.push(`📍 LOCATION-WISE PLANT BREAKDOWN (${stats.locationGroups.length} Locations):`);
+        stats.locationGroups.forEach(lg => {
+          lines.push(`▸ ${lg.locEn} (${lg.plants.length}):`);
+          lg.plants.forEach(pl => {
+            lines.push(`   - ${pl.nameEn} [${pl.potEn} • Age: ${pl.ageText}]`);
+          });
+        });
+        lines.push(``);
+        lines.push(`📋 CARE ACTIVITY LOG (${periodNameEn} — ${stats.activities.length} entries):`);
+        if (stats.activities.length === 0) {
+          lines.push(`   (No actions recorded in this period)`);
+        } else {
+          stats.activities.slice(0, 60).forEach(a => {
+            const meth = a.methodEn ? ` | Method: ${a.methodEn}` : '';
+            const res = a.resultEn ? ` | Result: ${a.resultEn}` : '';
+            lines.push(`• [${a.dateDispEn}] ${a.plantEn} — ${a.actionEn}: ${a.noteEn}${meth}${res}`);
+          });
+        }
+      } else {
+        lines.push(`🌹 گلزار سمارٹ ہوم گارڈن — تجزیاتی و نگہداشت رپورٹ (${stats.generatedDateIso})`);
+        lines.push(`══════════════════════════════════════════`);
+        lines.push(`🩺 صحت اور نگہداشت کا خلاصہ:`);
+        lines.push(`• کل پودے: ${stats.totalPlants} | صحت مند / شیڈول کے مطابق: ${stats.healthyOnSchedule}`);
+        lines.push(`• فوری توجہ طلب — پانی: ${stats.waterDue} | گوڈی: ${stats.tillDue} | کھاد: ${stats.feedDue} | اسپرے: ${stats.sprayDue} | کٹائی سیزن: ${stats.pruneDue}`);
+        lines.push(``);
+        lines.push(`📍 لوکیشن کے لحاظ سے پودے (${stats.locationGroups.length} جگہیں):`);
+        stats.locationGroups.forEach(lg => {
+          lines.push(`▸ ${lg.locUr} (${lg.plants.length} پودے):`);
+          lg.plants.forEach(pl => {
+            lines.push(`   - ${pl.nameUr} [${pl.potUr} • عمر: ${pl.ageText}]`);
+          });
+        });
+        lines.push(``);
+        lines.push(`📋 نگہداشت ریکارڈ (${periodNameUr} — ${stats.activities.length} اندراجات):`);
+        if (stats.activities.length === 0) {
+          lines.push(`   (اس مدت میں کوئی اندراج موجود نہیں)`);
+        } else {
+          stats.activities.slice(0, 60).forEach(a => {
+            const meth = a.methodUr ? ` | طریقہ: ${a.methodUr}` : '';
+            const res = a.resultUr ? ` | رزلٹ: ${a.resultUr}` : '';
+            lines.push(`• [${a.dateDispUr}] ${a.plantUr} — ${a.actionUr}: ${a.noteUr}${meth}${res}`);
+          });
+        }
+      }
+      return lines.join('\n');
+    }
+
+    async function copyGardenReportText() {
+      const isEn = gState.lang === 'en';
+      const txt = buildGardenReportPlainText(_gardenReportPeriod);
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(txt);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = txt;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        notify(isEn ? '📋 Garden Report copied to clipboard!' : '📋 گارڈن رپورٹ کلپ بورڈ میں کاپی ہو گئی!', '📋');
+      } catch (e) {
+        notify(isEn ? 'Could not copy automatically.' : 'کاپی کرنے میں دشواری پیش آئی۔', '⚠️');
+      }
+      return txt;
+    }
+
+    async function shareGardenReportText() {
+      const isEn = gState.lang === 'en';
+      const txt = buildGardenReportPlainText(_gardenReportPeriod);
+      const title = isEn ? 'GULZAR Garden Analytics & Care Report' : 'گلزار گارڈن تجزیاتی رپورٹ';
+      try {
+        const capShare = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Share;
+        if (capShare && typeof capShare.share === 'function') {
+          await capShare.share({ title, text: txt, dialogTitle: title });
+          return;
+        }
+        if (navigator.share) {
+          await navigator.share({ title, text: txt });
+          return;
+        }
+      } catch (e) {
+        if (e && /abort|cancel/i.test(String(e.message || e))) return;
+      }
+      await copyGardenReportText();
+    }
+
+    // =========================================================================
+    // SPECIES CARE PRINCIPLES & PAST SUCCESS MEMORY ENGINE (v39.0)
     // =========================================================================
     function getSpeciesMemoryKey(nameStr) {
       const cleaned = normalizeSearchText(String(nameStr || '').replace(/\s+\d+$/, '').split('(')[0]);
@@ -15522,6 +17150,8 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       'unifiedConfirmModal',
       'photoLightboxModal',
       'liveCameraModal',
+      'potManagerModal',
+      'gardenReportsModal',
       'aiDoctorLiveModal',
       'geminiLiveSyncModal',
       'careSupplyPickerModal',
@@ -15697,10 +17327,11 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
       const dsUrl = gState.driveScriptUrl || localStorage.getItem('gulzar_drive_script_url') || '';
       const dsEl = document.getElementById('driveScriptUrlInput');
       if (dsEl && dsUrl) dsEl.value = dsUrl;
-      document.documentElement.setAttribute('data-palette', gState.palette || 'emerald');
-      document.documentElement.setAttribute('data-theme', gState.theme || 'dark');
-      const icon = document.getElementById('themeModeIcon');
-      if (icon) icon.textContent = gState.theme === 'dark' ? '🌙' : '☀️';
+      // Normalize legacy 'dark'/'light' → named scheme and paint <html> (no persist on boot)
+      gState.theme = normalizeThemeSchemeKey(gState.theme);
+      const schemeMeta = applyThemeSchemeToDom(gState.theme);
+      gState.palette = schemeMeta.palette;
+      renderThemeSchemeMenus();
     }
 
     let gulzarAppBooted = false;
@@ -15744,7 +17375,9 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
                   idbState.plants.length > (gState.plants?.length || 0)
                 )) {
                   const keepKey = getActiveGeminiKey() || idbState.aiApiKey || '';
-                  gState = Object.assign({}, DEFAULT_STATE, idbState, { lang: gState.lang || 'en' });
+                  gState = Object.assign({}, DEFAULT_STATE, idbState, { lang: gState.lang || 'en', version: 39 });
+                  if (!Array.isArray(gState.customPots)) gState.customPots = [];
+                  if (!Array.isArray(gState.customCareSupplies)) gState.customCareSupplies = [];
                   if (keepKey) gState.aiApiKey = keepKey;
                   if (gState.learnedPlants && typeof gState.learnedPlants === 'object') {
                     for (const [lk, lp] of Object.entries(gState.learnedPlants)) {
@@ -15756,6 +17389,7 @@ Give a concise, practical diagnosis & treatment in ${isEn ? 'English' : 'Urdu'} 
                 syncSavedInputsAndThemeFromState();
                 sanitizeExistingGardenPlants();
                 hydrateSpeciesMemoryFromExistingGarden();
+                populatePotSizeDropdown();
                 renderPlantsList();
                 renderStockList();
                 renderRecipesList();

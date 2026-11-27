@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gulzar-mouj-sync-v38.0';
+const CACHE_NAME = 'gulzar-mouj-sync-v39.0';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 const API_HOST_DENYLIST = [

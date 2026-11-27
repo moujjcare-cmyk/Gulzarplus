@@ -2,7 +2,7 @@
   "id": "./",
   "name": "GULZAR — گلزار Smart Home Garden",
   "short_name": "Gulzar",
-  "description": "Bilingual Urdu & English Smart Home Garden Manager v38.0 — Powered & Controlled by MOUJ SYNC",
+  "description": "Bilingual Urdu & English Smart Home Garden Manager v39.0 — Powered & Controlled by MOUJ SYNC",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
